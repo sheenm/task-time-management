@@ -1,0 +1,101 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-react-a11y"
+  ],
+  "rules": {
+    "newline-before-return": true,
+    "no-null-keyword": true,
+    "object-literal-sort-keys": false,
+    "jsx-boolean-value": false,
+    "curly": false,
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "no-consecutive-blank-lines": true,
+    "no-any": true,
+    "no-empty-interface": false,
+    "no-magic-numbers": true,
+    "no-non-null-assertion": true,
+    "no-unnecessary-type-assertion": true,
+    "no-var-requires": true,
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
+    ],
+    "typedef": [
+      true,
+      "property-declaration"
+    ],
+    "function-constructor": true,
+    "import-blacklist": [
+      true,
+      "rxjs",
+      "lodash"
+    ],
+    "no-arg": true,
+    "no-debugger": true,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": true,
+    "no-duplicate-imports": true,
+    "no-dynamic-delete": true,
+    "no-eval": true,
+    "no-floating-promises": false,
+    "no-for-in-array": true,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": true,
+    "no-misused-new": true,
+    "no-object-literal-type-assertion": true,
+    "no-return-await": true,
+    "no-sparse-arrays": true,
+    "no-unused-expression": true,
+    "prefer-object-spread": true,
+    "restrict-plus-operands": true,
+    "cyclomatic-complexity": [
+      true,
+      6
+    ],
+    "deprecation": true,
+    "max-file-line-count": [
+      true,
+      300
+    ],
+    "no-default-export": true,
+    "prefer-readonly": true,
+    "arrow-return-shorthand": true,
+    "class-name": true,
+    "encoding": true,
+    "file-name-casing": [
+      true,
+      {
+        "index.tsx": "camel-case",
+        ".tsx": "pascal-case",
+        "Styles.ts": "pascal-case",
+        ".ts": "camel-case"
+      }
+    ],
+    "interface-over-type-literal": true,
+    "no-parameter-properties": true,
+    "no-unnecessary-callback-wrapper": true,
+    "no-unnecessary-initializer": true,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case"
+    ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js",
+      "src/serviceWorker.ts"
+    ]
+  }
+}
