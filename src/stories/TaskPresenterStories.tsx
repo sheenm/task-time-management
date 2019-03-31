@@ -9,11 +9,11 @@ storiesOf('TaskPresenter', module)
   .add('folded', () => {
     return <TaskPresenter
       isOpen={false}
-      onOpenChanged={linkTo('TaskPresenter', 'unfolded')}
+      toggleOpen={linkTo('TaskPresenter', 'unfolded')}
       isStarted={false}
       toggleTaskStart={linkTo('TaskPresenter', 'folded started')}
       title='23451 - Create presenter components for this app'
-      onTitleChanged={action('new title: ')}
+      changeTitle={action('new title: ')}
     />
   },
     {
@@ -30,11 +30,11 @@ storiesOf('TaskPresenter', module)
   .add('folded started', () => {
     return <TaskPresenter
       isOpen={false}
-      onOpenChanged={linkTo('TaskPresenter', 'unfolded started')}
+      toggleOpen={linkTo('TaskPresenter', 'unfolded started')}
       isStarted
       toggleTaskStart={linkTo('TaskPresenter', 'folded')}
       title='23451 - Create presenter components for this app'
-      onTitleChanged={action('new title: ')}
+      changeTitle={action('new title: ')}
     />
   },
     {
@@ -51,26 +51,26 @@ storiesOf('TaskPresenter', module)
   .add('unfolded', () => {
     return <TaskPresenter
       isOpen
-      onOpenChanged={linkTo('TaskPresenter', 'folded')}
+      toggleOpen={linkTo('TaskPresenter', 'folded')}
       isStarted={false}
       toggleTaskStart={linkTo('TaskPresenter', 'unfolded started')}
       title='23451 - Create presenter components for this app'
-      onTitleChanged={action('new title: ')}
+      changeTitle={action('new title: ')}
     >
       <TimeStampPresenter
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Created Task Presenter'
-        onCommentChanged={action('comment changed')}
-        onEdit={action('edit action')}
-        onRemove={action('remove Timestamp action')}
+        changeComment={action('comment changed')}
+        edit={action('edit action')}
+        remove={action('remove Timestamp action')}
       />
 
       <TimeStampPresenter
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Modified Grid for better layout'
-        onCommentChanged={action('comment changed')}
-        onEdit={action('edit action')}
-        onRemove={action('remove Timestamp action')}
+        changeComment={action('comment changed')}
+        edit={action('edit action')}
+        remove={action('remove Timestamp action')}
       />
     </TaskPresenter>
   },
@@ -89,25 +89,25 @@ storiesOf('TaskPresenter', module)
     return (
       <TaskPresenter
         isOpen
-        onOpenChanged={linkTo('TaskPresenter', 'folded started')}
+        toggleOpen={linkTo('TaskPresenter', 'folded started')}
         isStarted
         toggleTaskStart={linkTo('TaskPresenter', 'unfolded')}
         title='23451 - Create presenter components for this app'
-        onTitleChanged={action('new title: ')}>
+        changeTitle={action('new title: ')}>
         <TimeStampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Created Task Presenter'
-          onCommentChanged={action('comment changed')}
-          onEdit={action('edit action')}
-          onRemove={action('remove Timestamp action')}
+          changeComment={action('comment changed')}
+          edit={action('edit action')}
+          remove={action('remove Timestamp action')}
         />
 
         <TimeStampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Modified Grid for better layout'
-          onCommentChanged={action('comment changed')}
-          onEdit={action('edit action')}
-          onRemove={action('remove Timestamp action')}
+          changeComment={action('comment changed')}
+          edit={action('edit action')}
+          remove={action('remove Timestamp action')}
         />
       </TaskPresenter>
     )

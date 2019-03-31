@@ -39,26 +39,26 @@ storiesOf('ProjectPresenter', module)
 
       <TaskPresenter
         isOpen
-        onOpenChanged={linkTo('TaskPresenter', 'folded')}
+        toggleOpen={linkTo('TaskPresenter', 'folded')}
         isStarted={false}
         toggleTaskStart={linkTo('TaskPresenter', 'unfolded started')}
         title='23451 - Create presenter components for this app'
-        onTitleChanged={action('new title: ')}
+        changeTitle={action('new title: ')}
       >
         <TimeStampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Created Task Presenter'
-          onCommentChanged={action('comment changed')}
-          onEdit={action('edit action')}
-          onRemove={action('remove Timestamp action')}
+          changeComment={action('comment changed')}
+          edit={action('edit action')}
+          remove={action('remove Timestamp action')}
         />
 
         <TimeStampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Modified Grid for better layout'
-          onCommentChanged={action('comment changed')}
-          onEdit={action('edit action')}
-          onRemove={action('remove Timestamp action')}
+          changeComment={action('comment changed')}
+          edit={action('edit action')}
+          remove={action('remove Timestamp action')}
         />
       </TaskPresenter>
     </ProjectPresenter>

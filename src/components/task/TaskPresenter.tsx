@@ -32,9 +32,9 @@ const styles = {
 
 interface IProps extends WithSheet<typeof styles, {}> {
   title: string
-  onTitleChanged: (newTitle: string) => void
+  changeTitle: (newTitle: string) => void
   isOpen: boolean
-  onOpenChanged: () => void
+  toggleOpen: () => void
   isStarted: boolean
   toggleTaskStart: () => void
   children?: Array<React.ReactElement<ITimeStampPresenterProps>> | React.ReactElement<ITimeStampPresenterProps>
@@ -44,9 +44,9 @@ const TaskPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
 
   return (
     <Card elevation={Elevation.ZERO} className={classes.card}>
-      <EditableText confirmOnEnterKey onConfirm={props.onTitleChanged} defaultValue={props.title} className={classes.text} />
+      <EditableText confirmOnEnterKey onConfirm={props.changeTitle} defaultValue={props.title} className={classes.text} />
       <ButtonGroup className={classes.actions} minimal>
-        <ToggleOpenPresenter isOpen={props.isOpen} onFoldChanged={props.onOpenChanged} contentTitle='timestamps' />
+        <ToggleOpenPresenter isOpen={props.isOpen} onFoldChanged={props.toggleOpen} contentTitle='timestamps' />
         <ToggleTaskStartPresenter isStarted={props.isStarted} toggleTaskStart={props.toggleTaskStart} />
       </ButtonGroup>
       <Collapse isOpen={props.isOpen} className={classes.timeStamps}>

@@ -8,9 +8,9 @@ storiesOf('TimeStampPresenter', module)
     return <TimeStampPresenter
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project'
-      onCommentChanged={action('comment changed')}
-      onEdit={action('edit action')}
-      onRemove={action('remove Timestamp action')}
+      changeComment={action('comment changed')}
+      edit={action('edit action')}
+      remove={action('remove Timestamp action')}
     />
   },
     {
@@ -27,9 +27,9 @@ storiesOf('TimeStampPresenter', module)
     return <TimeStampPresenter
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project and I worked hard to bring this to this site. And now it is awesome to see how this will help me! That comment was not enough for me so I will write something else to make this comment very big. I want to make this comment the biggest comment I ever will make in this app in production'
-      onCommentChanged={action('comment changed')}
-      onEdit={action('edit action')}
-      onRemove={action('remove Timestamp action')}
+      changeComment={action('comment changed')}
+      edit={action('edit action')}
+      remove={action('remove Timestamp action')}
     />
   },
     {

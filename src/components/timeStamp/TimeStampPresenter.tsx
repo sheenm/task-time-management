@@ -29,19 +29,19 @@ const styles = {
 export interface ITimeStampPresenterProps extends WithSheet<typeof styles, {}> {
   dateTime: string
   comment: string
-  onRemove: () => void
-  onEdit: () => void
-  onCommentChanged: () => void
+  remove: () => void
+  edit: () => void
+  changeComment: (newComment: string) => void
 }
 
 const TimeStampPresenterInner: React.FC<ITimeStampPresenterProps> = ({ classes, ...props }) => {
 
   return <Card elevation={Elevation.ZERO} className={classes.card}>
     <p className={classes.date}>{props.dateTime}</p>
-    <EditableText confirmOnEnterKey onConfirm={props.onCommentChanged} defaultValue={props.comment} />
+    <EditableText confirmOnEnterKey onConfirm={props.changeComment} defaultValue={props.comment} />
     <ButtonGroup className={classes.actions} minimal>
-      <Button icon='edit' onClick={props.onEdit} title='Edit timestamp' />
-      <Button icon='remove' onClick={props.onRemove} title='Remove timestamp' />
+      <Button icon='edit' onClick={props.edit} title='Edit timestamp' />
+      <Button icon='remove' onClick={props.remove} title='Remove timestamp' />
     </ButtonGroup>
   </Card>
 }
