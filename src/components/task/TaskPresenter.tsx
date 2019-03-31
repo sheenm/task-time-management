@@ -2,8 +2,8 @@ import { ButtonGroup, Card, Collapse, EditableText, Elevation } from '@blueprint
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
 import { ITimeStampPresenterProps } from '../timeStamp/TimeStampPresenter'
+import { ToggleOpenPresenter } from '../toggles/ToggleOpenPresenter'
 import { ToggleTaskStartPresenter } from './ToggleTaskStartPresenter'
-import { ToggleTimeStampsPresenter } from './ToggleTimeStampsPresenter'
 
 const styles = {
   card: {
@@ -41,7 +41,7 @@ const TaskPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
     <Card elevation={Elevation.ZERO} className={classes.card}>
       <EditableText confirmOnEnterKey onConfirm={props.onTitleChanged} defaultValue={props.title} className={classes.text} />
       <ButtonGroup className={classes.actions} minimal>
-        <ToggleTimeStampsPresenter isOpen={props.isOpen} onFoldChanged={props.onOpenChanged} />
+        <ToggleOpenPresenter isOpen={props.isOpen} onFoldChanged={props.onOpenChanged} contentTitle='timestamps' />
         <ToggleTaskStartPresenter isStarted={props.isStarted} toggleTaskStart={props.toggleTaskStart} />
       </ButtonGroup>
       <Collapse isOpen={props.isOpen} className={classes.timeStamps} >
