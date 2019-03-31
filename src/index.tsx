@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
-const App: React.FunctionComponent = () => {
+const App: React.FC = () => {
   return <h1>Hello world</h1>
 }
 
