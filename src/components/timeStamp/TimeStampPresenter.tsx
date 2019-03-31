@@ -4,11 +4,15 @@ import injectSheet, { WithSheet } from 'react-jss'
 
 const styles = {
   card: {
-    display: 'grid',
-    gridTemplateColumns: '[date] minmax(200px, auto) [text] minmax(100px, 1fr) [actions] minmax(70px, auto)',
-    alignItems: 'center',
-    gridColumnGap: '1rem',
-    padding: '.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    '@media (min-width: 520px)': {
+      display: 'grid',
+      gridTemplateColumns: '[date] minmax(200px, auto) [text] minmax(100px, 1fr) [actions] minmax(4rem, auto)',
+      alignItems: 'center',
+      gridColumnGap: '1rem',
+      padding: '0 .4rem',
+    }
   },
   date: {
     gridColumn: 'date',
