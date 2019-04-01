@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Header } from './components/layout/Header'
+import { PageContent } from './components/layout/PageContent'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
 const App: React.FC = () => {
-  return <h1>Hello world</h1>
+  return <>
+    <Header />
+    <PageContent />
+  </>
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
