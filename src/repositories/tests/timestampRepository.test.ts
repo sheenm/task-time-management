@@ -1,11 +1,11 @@
-import { TimeStampsRepository } from "./timestampRepository"
+import { TimestampsRepository } from "../timestampRepository"
 /**
  * TimestampRepository tests.
  * ! Note that while it uses not mocked localStorage you should provide unique taskId for each test
  */
 
 it('when repository is empty returns empty, not null', async () => {
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
   const timestamps = await repository.getTimestamps(1)
 
   expect(timestamps).toEqual([])
@@ -14,7 +14,7 @@ it('when repository is empty returns empty, not null', async () => {
 it('can add item', async () => {
   expect.assertions(1)
 
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
   const taskId = 1
 
   const addResult = await repository.addTimeStamp({
@@ -33,7 +33,7 @@ it('can add item and change it', async () => {
   expect.assertions(assertionsCount)
   const taskId = 2
 
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
 
   await repository.addTimeStamp({
     comment: 'some comment',
@@ -55,7 +55,7 @@ it('can add item and change it', async () => {
 it('will delete timeStamp', async () => {
   expect.assertions(1)
 
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
   const taskId = 3
 
   await repository.addTimeStamp({
@@ -76,7 +76,7 @@ it('will delete timeStamp', async () => {
 it('will not delete if did not find timestamp', async () => {
   expect.assertions(1)
 
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
   const taskId = 4
   const someRandomTimeStampId = 10
 
@@ -99,7 +99,7 @@ it('if item not found will not save it', async () => {
   expect.assertions(1)
   const taskId = 5
 
-  const repository = new TimeStampsRepository()
+  const repository = new TimestampsRepository()
 
   await repository.saveTimestamp({
     id: 1,
