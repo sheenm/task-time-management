@@ -8,12 +8,12 @@ export class TimestampRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
-  public getTimestamps(taskId: number): Promise<ITimestamp[]> {
+  public get(taskId: number): Promise<ITimestamp[]> {
     return this.getAll()
       .then(timestamps => timestamps.filter(x => x.taskId === taskId))
   }
 
-  public addTimeStamp(timestamp: WithoutId<ITimestamp>): Promise<number> {
+  public add(timestamp: WithoutId<ITimestamp>): Promise<number> {
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())
       .then(index => {
@@ -30,7 +30,7 @@ export class TimestampRepository {
       })
   }
 
-  public saveTimestamp(timestamp: ITimestamp): Promise<void> {
+  public save(timestamp: ITimestamp): Promise<void> {
     return this.getAll()
       .then(timestamps => {
         const index = timestamps.findIndex(x => x.id === timestamp.id)
@@ -42,7 +42,7 @@ export class TimestampRepository {
       })
   }
 
-  public deleteTimestamp(timestampId: number): Promise<void> {
+  public delete(timestampId: number): Promise<void> {
     return this.getAll()
       .then(timestamps => {
         const index = timestamps.findIndex(x => x.id === timestampId)

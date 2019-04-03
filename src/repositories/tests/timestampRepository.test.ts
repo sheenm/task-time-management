@@ -8,7 +8,7 @@ describe('timestamp repository get() tests', () => {
 
   it('when repository is empty returns empty, not null', async () => {
     const repository = new TimestampRepository()
-    const timestamps = await repository.getTimestamps(1)
+    const timestamps = await repository.get(1)
 
     expect(timestamps).toEqual([])
   })
@@ -22,14 +22,14 @@ describe('timestamp repository add tests', () => {
     const repository = new TimestampRepository()
     const taskId = 1
 
-    const addResult = await repository.addTimeStamp({
+    const addResult = await repository.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: '',
       datetimeStart: ''
     })
 
-    const timestamps = await repository.getTimestamps(taskId)
+    const timestamps = await repository.get(taskId)
     expect(timestamps.length).toBe(1)
   })
 })
@@ -43,18 +43,18 @@ describe('timestamp repository save() tests', () => {
 
     const repository = new TimestampRepository()
 
-    await repository.addTimeStamp({
+    await repository.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: '',
       datetimeStart: ''
     })
 
-    const timestamp = (await repository.getTimestamps(taskId))[0]
+    const timestamp = (await repository.get(taskId))[0]
     timestamp.comment = 'new comment'
-    await repository.saveTimestamp(timestamp)
+    await repository.save(timestamp)
 
-    const timeStampFromRepository = (await repository.getTimestamps(taskId))[0]
+    const timeStampFromRepository = (await repository.get(taskId))[0]
 
     expect(timestamp.comment).toBe(timeStampFromRepository.comment)
     expect(timestamp).not.toBe(timeStampFromRepository)
@@ -66,7 +66,7 @@ describe('timestamp repository save() tests', () => {
 
     const repository = new TimestampRepository()
 
-    await repository.saveTimestamp({
+    await repository.save({
       id: 1,
       comment: 'some comment',
       taskId,
@@ -74,7 +74,7 @@ describe('timestamp repository save() tests', () => {
       datetimeStart: ''
     })
 
-    const timestamps = await repository.getTimestamps(taskId)
+    const timestamps = await repository.get(taskId)
 
     expect(timestamps.length).toEqual(0)
   })
@@ -88,17 +88,17 @@ describe('timestamp repository delete() tests', () => {
     const repository = new TimestampRepository()
     const taskId = 3
 
-    await repository.addTimeStamp({
+    await repository.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: '',
       datetimeStart: ''
     })
 
-    const timestamp = (await repository.getTimestamps(taskId))[0]
-    await repository.deleteTimestamp(timestamp.id)
+    const timestamp = (await repository.get(taskId))[0]
+    await repository.delete(timestamp.id)
 
-    const timestamps = await repository.getTimestamps(taskId)
+    const timestamps = await repository.get(taskId)
 
     expect(timestamps.length).toEqual(0)
   })
@@ -110,16 +110,16 @@ describe('timestamp repository delete() tests', () => {
     const taskId = 4
     const someRandomTimeStampId = 10
 
-    await repository.addTimeStamp({
+    await repository.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: '',
       datetimeStart: ''
     })
 
-    await repository.deleteTimestamp(someRandomTimeStampId)
+    await repository.delete(someRandomTimeStampId)
 
-    const timestampsLength = (await repository.getTimestamps(taskId)).length
+    const timestampsLength = (await repository.get(taskId)).length
 
     expect(timestampsLength).toEqual(1)
 
