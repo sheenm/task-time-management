@@ -1,12 +1,13 @@
-import { TasksRepository } from "../taskRepository"
+import { TaskRepository } from "../taskRepository"
 
 beforeEach(() => {
   window.localStorage.clear()
 })
 
 describe('task repository get() tests', () => {
+
   it('when repository is empty returns empty, not null', async () => {
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 1
     const tasks = await repository.get(projectId)
 
@@ -15,9 +16,10 @@ describe('task repository get() tests', () => {
 })
 
 describe('task repository add() tests', () => {
+
   it('can add item', async () => {
     expect.assertions(1)
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 2
 
     const addResult = await repository.add({
@@ -32,11 +34,12 @@ describe('task repository add() tests', () => {
 })
 
 describe('task repository save() tests', () => {
+
   it('can save existing item', async () => {
     const assertionsCount = 3
 
     expect.assertions(assertionsCount)
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 3
 
     const addResult = await repository.add({
@@ -59,7 +62,7 @@ describe('task repository save() tests', () => {
 
   it('when item is not found it will not be saved', async () => {
     expect.assertions(1)
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 4
 
     await repository.save({
@@ -70,14 +73,14 @@ describe('task repository save() tests', () => {
 
     const tasks = await repository.get(projectId)
     expect(tasks.length).toBe(0)
-
   })
 })
 
 describe('tasks repository delete() tests', () => {
+
   it('when item is not found it will not delete', async () => {
     expect.assertions(1)
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 5
 
     const addResult = await repository.add({
@@ -93,7 +96,7 @@ describe('tasks repository delete() tests', () => {
 
   it('will delete task', async () => {
     expect.assertions(1)
-    const repository = new TasksRepository()
+    const repository = new TaskRepository()
     const projectId = 6
 
     const addResult = await repository.add({

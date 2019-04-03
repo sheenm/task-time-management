@@ -4,7 +4,7 @@ import { LocalStorageRepository } from "./localStorageRepository"
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'
 
-export class TasksRepository {
+export class TaskRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
