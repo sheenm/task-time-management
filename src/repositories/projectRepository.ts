@@ -12,6 +12,9 @@ export class ProjectRepository {
     return this.localStorage.getItems<IProject>(projectsKey)
   }
 
+  /**
+   * @returns id of added project
+   */
   public add(project: WithoutId<IProject>): Promise<number> {
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())

@@ -13,6 +13,9 @@ export class TimestampRepository {
       .then(timestamps => timestamps.filter(x => x.taskId === taskId))
   }
 
+  /**
+   * @returns id of added timestamp
+   */
   public add(timestamp: WithoutId<ITimestamp>): Promise<number> {
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())

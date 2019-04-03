@@ -13,6 +13,9 @@ export class TaskRepository {
       .then(tasks => tasks.filter(x => x.projectId === projectId))
   }
 
+  /**
+   * id of added task
+   */
   public add(task: WithoutId<ITask>): Promise<number> {
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())
