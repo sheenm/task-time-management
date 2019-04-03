@@ -19,4 +19,9 @@ declare module 'app/dto' {
     projectId: number
     title: string
   }
+
+  interface IProject extends IBusinessObject {
+    id: number
+    title: string
+  }
 }
