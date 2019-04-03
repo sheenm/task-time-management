@@ -3,7 +3,7 @@ import { LocalStorageRepository } from "./localStorageRepository"
 
 const timestampsKey = 'TIMESTAMPS'
 
-export class TimeStampsRepository {
+export class TimestampsRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
