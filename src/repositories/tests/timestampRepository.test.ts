@@ -1,8 +1,8 @@
 import { TimestampsRepository } from "../timestampRepository"
-/**
- * TimestampRepository tests.
- * ! Note that while it uses not mocked localStorage you should provide unique taskId for each test
- */
+
+beforeEach(() => {
+  window.localStorage.clear()
+})
 
 it('when repository is empty returns empty, not null', async () => {
   const repository = new TimestampsRepository()
@@ -66,7 +66,7 @@ it('will delete timeStamp', async () => {
   })
 
   const timestamp = (await repository.getTimestamps(taskId))[0]
-  await repository.deleteTimestamp(timestamp.taskId, timestamp.id)
+  await repository.deleteTimestamp(timestamp.id)
 
   const timestamps = await repository.getTimestamps(taskId)
 
@@ -87,7 +87,7 @@ it('will not delete if did not find timestamp', async () => {
     datetimeStart: ''
   })
 
-  await repository.deleteTimestamp(taskId, someRandomTimeStampId)
+  await repository.deleteTimestamp(someRandomTimeStampId)
 
   const timestampsLength = (await repository.getTimestamps(taskId)).length
 
