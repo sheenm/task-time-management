@@ -1,4 +1,4 @@
-import { TimeStampsRepository } from "./timeStampsRepository"
+import { TimeStampsRepository } from "./timestampRepository"
 /**
  * TimestampRepository tests.
  * ! Note that while it uses not mocked localStorage you should provide unique taskId for each test
