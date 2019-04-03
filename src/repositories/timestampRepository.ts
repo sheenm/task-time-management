@@ -13,7 +13,7 @@ export class TimestampRepository {
       .then(timestamps => timestamps.filter(x => x.taskId === taskId))
   }
 
-  public addTimeStamp(timestamp: WithoutId<ITimestamp>) {
+  public addTimeStamp(timestamp: WithoutId<ITimestamp>): Promise<number> {
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())
       .then(index => {
@@ -30,7 +30,7 @@ export class TimestampRepository {
       })
   }
 
-  public saveTimestamp(timestamp: ITimestamp) {
+  public saveTimestamp(timestamp: ITimestamp): Promise<void> {
     return this.getAll()
       .then(timestamps => {
         const index = timestamps.findIndex(x => x.id === timestamp.id)
@@ -42,7 +42,7 @@ export class TimestampRepository {
       })
   }
 
-  public deleteTimestamp(timestampId: number) {
+  public deleteTimestamp(timestampId: number): Promise<void> {
     return this.getAll()
       .then(timestamps => {
         const index = timestamps.findIndex(x => x.id === timestampId)
