@@ -13,4 +13,10 @@ declare module 'app/dto' {
     datetimeEnd: string
     comment: string
   }
+
+  interface ITask extends IBusinessObject {
+    id: number
+    projectId: number
+    title: string
+  }
 }
