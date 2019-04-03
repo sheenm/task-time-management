@@ -14,7 +14,6 @@ export class TaskRepository {
   }
 
   public add(task: WithoutId<ITask>): Promise<number> {
-
     return this.incrementCurrentIndex()
       .then(() => this.getCurrentIndex())
       .then(index => {

@@ -31,7 +31,6 @@ export class TimestampRepository {
   }
 
   public saveTimestamp(timestamp: ITimestamp) {
-
     return this.getAll()
       .then(timestamps => {
         const index = timestamps.findIndex(x => x.id === timestamp.id)
