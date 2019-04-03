@@ -1,12 +1,13 @@
-import { TimestampsRepository } from "../timestampRepository"
+import { TimestampRepository } from "../timestampRepository"
 
 beforeEach(() => {
   window.localStorage.clear()
 })
 
 describe('timestamp repository get() tests', () => {
+
   it('when repository is empty returns empty, not null', async () => {
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
     const timestamps = await repository.getTimestamps(1)
 
     expect(timestamps).toEqual([])
@@ -14,10 +15,11 @@ describe('timestamp repository get() tests', () => {
 })
 
 describe('timestamp repository add tests', () => {
+
   it('can add item', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
     const taskId = 1
 
     const addResult = await repository.addTimeStamp({
@@ -33,12 +35,13 @@ describe('timestamp repository add tests', () => {
 })
 
 describe('timestamp repository save() tests', () => {
+
   it('can add item and change it', async () => {
     const assertionsCount = 2
     expect.assertions(assertionsCount)
     const taskId = 2
 
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
 
     await repository.addTimeStamp({
       comment: 'some comment',
@@ -61,7 +64,7 @@ describe('timestamp repository save() tests', () => {
     expect.assertions(1)
     const taskId = 5
 
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
 
     await repository.saveTimestamp({
       id: 1,
@@ -78,10 +81,11 @@ describe('timestamp repository save() tests', () => {
 })
 
 describe('timestamp repository delete() tests', () => {
+
   it('will delete timeStamp', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
     const taskId = 3
 
     await repository.addTimeStamp({
@@ -102,7 +106,7 @@ describe('timestamp repository delete() tests', () => {
   it('will not delete if did not find timestamp', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampsRepository()
+    const repository = new TimestampRepository()
     const taskId = 4
     const someRandomTimeStampId = 10
 

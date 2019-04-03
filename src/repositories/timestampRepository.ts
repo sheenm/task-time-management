@@ -4,7 +4,7 @@ import { LocalStorageRepository } from "./localStorageRepository"
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'
 
-export class TimestampsRepository {
+export class TimestampRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
