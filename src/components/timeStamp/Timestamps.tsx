@@ -1,5 +1,6 @@
 import { ITimestamp } from 'app/dto'
 import React, { useReducer } from 'react'
+import { useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Timestamp } from './Timestamp'
@@ -50,24 +51,9 @@ interface IProps {
 
 export const Timestamps: React.FC<IProps> = ({ taskId }) => {
   const [stateTimestamps, dispatch] = useReducer(reducer, [])
-  const [isLoading, setIsLoading] = React.useState(false)
   const { timestampsRepo } = React.useContext(RepositoryContext)
-
-  React.useEffect(() => {
-    let didCancel = false
-
-    setIsLoading(true)
-    timestampsRepo.get(taskId)
-      .then(timestamps => {
-        if (didCancel)
-          return
-
-        setIsLoading(false)
-        dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
-      })
-
-    return () => { didCancel = true }
-  }, [])
+  const isLoading = useLoading(() => timestampsRepo.get(taskId),
+    timestamps => dispatch({ type: 'LOAD_TIMESTAMPS', timestamps }))
 
   const createChangeCommentFn = (id: number) =>
     (newComment: string) => dispatch({ type: 'CHANGE_TIMESTAMP_COMMENT', id, newComment })

@@ -1,5 +1,6 @@
 import { ITask } from 'app/dto'
 import React, { useReducer } from 'react'
+import { useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Task } from './Task'
@@ -39,24 +40,9 @@ interface IProps {
 
 export const Tasks: React.FC<IProps> = ({ projectId }) => {
   const [stateTasks, dispatch] = useReducer(reducer, [])
-  const [isLoading, setIsLoading] = React.useState(false)
   const { tasksRepo } = React.useContext(RepositoryContext)
-
-  React.useEffect(() => {
-    let didCancel = false
-
-    setIsLoading(true)
-    tasksRepo.get(projectId)
-      .then(tasks => {
-        if (didCancel)
-          return
-
-        setIsLoading(false)
-        dispatch({ type: 'LOAD_TASKS', tasks })
-      })
-
-    return () => { didCancel = true }
-  }, [])
+  const isLoading = useLoading(() => tasksRepo.get(projectId),
+    tasks => dispatch({ type: 'LOAD_TASKS', tasks }))
 
   const createRenameFn = (id: number) =>
     (newTitle: string) => dispatch({ type: 'RENAME_TASK', id, newTitle })

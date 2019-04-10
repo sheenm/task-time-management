@@ -1,5 +1,6 @@
 import { IProject } from 'app/dto'
 import React, { useReducer } from 'react'
+import { useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
@@ -40,24 +41,9 @@ const reducer = (state: IProject[], action: ActionTypes) => {
 
 export const Projects: React.FC = () => {
   const [stateProjects, dispatch] = useReducer(reducer, [])
-  const [isLoading, setIsLoading] = React.useState(false)
   const { projectRepo } = React.useContext(RepositoryContext)
-
-  React.useEffect(() => {
-    let didCancel = false
-
-    setIsLoading(true)
-    projectRepo.get()
-      .then(projects => {
-        if (didCancel)
-          return
-
-        setIsLoading(false)
-        dispatch({ type: 'LOAD_PROJECTS', projects })
-      })
-
-    return () => { didCancel = true }
-  }, [])
+  const isLoading = useLoading(() => projectRepo.get(),
+    (projects) => dispatch({ type: 'LOAD_PROJECTS', projects }))
 
   const createRenameFn = (id: number) =>
     (newTitle: string) => dispatch({ type: 'RENAME_PROJECT', id, newTitle })
