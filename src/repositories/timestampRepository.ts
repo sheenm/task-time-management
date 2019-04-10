@@ -1,10 +1,11 @@
 import { ITimestamp, WithoutId } from "app/dto"
+import { ITimestampRepository } from "app/repositories"
 import { LocalStorageRepository } from "./localStorageRepository"
 
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'
 
-export class TimestampRepository {
+export class TimestampRepository implements ITimestampRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 

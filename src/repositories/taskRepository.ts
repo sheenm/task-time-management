@@ -1,10 +1,11 @@
 import { ITask, WithoutId } from "app/dto"
+import { ITaskRepository } from "app/repositories"
 import { LocalStorageRepository } from "./localStorageRepository"
 
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'
 
-export class TaskRepository {
+export class TaskRepository implements ITaskRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 

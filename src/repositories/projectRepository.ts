@@ -1,10 +1,11 @@
 import { IProject, WithoutId } from "app/dto"
+import { IProjectRepository } from "app/repositories"
 import { LocalStorageRepository } from "./localStorageRepository"
 
 const projectsKey = 'projects'
 const projectIndexKey = 'projects.index'
 
-export class ProjectRepository {
+export class ProjectRepository implements IProjectRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
