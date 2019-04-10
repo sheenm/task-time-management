@@ -14,8 +14,7 @@ describe('timestamp tests', () => {
       changeComment={callback}
       remove={callback}
       timestamp={{ id: 1, datetimeStart: '111', datetimeEnd: '222', taskId: 2, comment: 'some comment' }}
-    />,
-      div)
+    />, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 })
