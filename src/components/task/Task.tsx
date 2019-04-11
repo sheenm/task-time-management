@@ -1,5 +1,6 @@
 import { ITask } from 'app/dto'
 import React from 'react'
+import { useToggle } from '../../hooks/useToggle'
 import { Timestamps } from '../timeStamp/Timestamps'
 import { TaskPresenter } from './TaskPresenter'
 
@@ -9,8 +10,7 @@ interface IProps {
 }
 
 export const Task: React.FC<IProps> = ({ task, rename }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+  const [isOpen, toggleOpen] = useToggle(false)
   const toggleTaskStart = React.useCallback(() =>
     console.log('todo 2: Can Start and Stop tasks'), [])
 

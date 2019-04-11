@@ -1,5 +1,6 @@
 import { IProject } from 'app/dto'
 import React from 'react'
+import { useToggle } from '../../hooks/useToggle'
 import { Tasks } from '../task/Tasks'
 import { ProjectPresenter } from './ProjectPresenter'
 
@@ -11,14 +12,13 @@ interface IProps {
 }
 
 export const Project: React.FC<IProps> = ({ project, rename, addProject, addTask }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+  const [isOpen, toggle] = useToggle(false)
 
   return <ProjectPresenter
     title={project.title}
     onTitleChanged={rename}
     isOpen={isOpen}
-    toggleOpen={toggleOpen}
+    toggleOpen={toggle}
     addProject={addProject}
     addTask={addTask}
   >
