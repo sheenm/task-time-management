@@ -8,7 +8,7 @@ import { Timestamp } from '../Timestamp'
 describe('timestamp tests', () => {
   it('should render without crashing', () => {
     const div = document.createElement('div')
-    const callback = () => { return }
+    const callback = jest.fn()
 
     ReactDOM.render(<Timestamp
       changeComment={callback}
