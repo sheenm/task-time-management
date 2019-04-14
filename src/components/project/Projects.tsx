@@ -1,6 +1,6 @@
 import { IProject } from 'app/dto'
 import React, { useReducer } from 'react'
-import { useLoading } from '../../hooks/useLoading'
+import { LoadingStastes, useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
@@ -42,13 +42,13 @@ const reducer = (state: IProject[], action: ActionTypes) => {
 export const Projects: React.FC = () => {
   const [stateProjects, dispatch] = useReducer(reducer, [])
   const { projectRepo } = React.useContext(RepositoryContext)
-  const isLoading = useLoading(() => projectRepo.get(),
-    (projects) => dispatch({ type: 'LOAD_PROJECTS', projects }))
+  const loadingState = useLoading(() => projectRepo.get())
+    (projects => dispatch({ type: 'LOAD_PROJECTS', projects }))
 
   const createRenameFn = (id: number) =>
     (newTitle: string) => dispatch({ type: 'RENAME_PROJECT', id, newTitle })
 
-  if (isLoading)
+  if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>

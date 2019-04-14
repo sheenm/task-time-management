@@ -1,6 +1,6 @@
 import { ITask } from 'app/dto'
 import React, { useReducer } from 'react'
-import { useLoading } from '../../hooks/useLoading'
+import { LoadingStastes, useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Task } from './Task'
@@ -41,13 +41,13 @@ interface IProps {
 export const Tasks: React.FC<IProps> = ({ projectId }) => {
   const [stateTasks, dispatch] = useReducer(reducer, [])
   const { tasksRepo } = React.useContext(RepositoryContext)
-  const isLoading = useLoading(() => tasksRepo.get(projectId),
-    tasks => dispatch({ type: 'LOAD_TASKS', tasks }))
+  const loadingState = useLoading(() => tasksRepo.get(projectId))
+    (tasks => dispatch({ type: 'LOAD_TASKS', tasks }))
 
   const createRenameFn = (id: number) =>
     (newTitle: string) => dispatch({ type: 'RENAME_TASK', id, newTitle })
 
-  if (isLoading)
+  if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
