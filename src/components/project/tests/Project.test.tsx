@@ -8,8 +8,6 @@ describe('Project.test', () => {
     const callback = () => { return }
 
     ReactDOM.render(<Project
-      addProject={callback}
-      addTask={callback}
       project={{ id: 1, title: 'some title' }}
       rename={callback}
     />, div)
