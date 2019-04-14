@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import { TimestampPresenter } from '../components/timeStamp/TimestampPresenter'
+import { TimestampPresenter } from '../components/timestamp/TimestampPresenter'
 
 storiesOf('TimestampPresenter', module)
   .add('simple', () => {

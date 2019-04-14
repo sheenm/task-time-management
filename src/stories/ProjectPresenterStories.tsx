@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import React from 'react'
 import { ProjectPresenter } from '../components/project/ProjectPresenter'
 import { TaskPresenter } from '../components/task/TaskPresenter'
-import { TimestampPresenter } from '../components/timeStamp/TimestampPresenter'
+import { TimestampPresenter } from '../components/timestamp/TimestampPresenter'
 
 storiesOf('ProjectPresenter', module)
   .add('folded', () => {

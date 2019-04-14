@@ -1,7 +1,7 @@
 import { ITask } from 'app/dto'
 import React from 'react'
 import { useToggle } from '../../hooks/useToggle'
-import { Timestamps } from '../timeStamp/Timestamps'
+import { Timestamps } from '../timestamp/Timestamps'
 import { TaskPresenter } from './TaskPresenter'
 
 interface IProps {
