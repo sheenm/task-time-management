@@ -15,12 +15,12 @@ interface IRenameProjectAction {
   newTitle: string
 }
 
-interface IAddProject {
+interface IAddProjectAction {
   type: 'ADD_PROJECT',
   project: IProject
 }
 
-type ActionTypes = ILoadProjectsAction | IRenameProjectAction | IAddProject
+type ActionTypes = ILoadProjectsAction | IRenameProjectAction | IAddProjectAction
 
 const reducer = (state: IProject[], action: ActionTypes) => {
   switch (action.type) {
@@ -61,8 +61,6 @@ export const Projects: React.FC = () => {
         key={x.id}
         project={x}
         rename={createRenameFn(x)}
-        addProject={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
-        addTask={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
       />
     )}
   </>

@@ -77,6 +77,6 @@ export class TimestampRepository implements ITimestampRepository {
 
   private incrementCurrentIndex() {
     return this.getCurrentIndex()
-      .then(index => this.localStorage.setNumber(timestampIndexKey, index++))
+      .then(index => this.localStorage.setNumber(timestampIndexKey, ++index))
   }
 }

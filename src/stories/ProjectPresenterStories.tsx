@@ -13,7 +13,6 @@ storiesOf('ProjectPresenter', module)
       toggleOpen={linkTo('ProjectPresenter', 'unfolded')}
       title='Task time management'
       onTitleChanged={action('title changed')}
-      addProject={action('project added')}
       addTask={action('task added')}
     />
   },
@@ -33,7 +32,6 @@ storiesOf('ProjectPresenter', module)
       toggleOpen={linkTo('ProjectPresenter', 'folded')}
       title='Task time management'
       onTitleChanged={action('title changed')}
-      addProject={action('project added')}
       addTask={action('task added')}
     >
 
