@@ -44,15 +44,19 @@ export const Tasks: React.FC<IProps> = ({ projectId }) => {
   const loadingState = useLoading(() => tasksRepo.get(projectId))
     (tasks => dispatch({ type: 'LOAD_TASKS', tasks }))
 
-  const createRenameFn = (id: number) =>
-    (newTitle: string) => dispatch({ type: 'RENAME_TASK', id, newTitle })
+  const createRenameFn = (task: ITask) =>
+    (newTitle: string) => {
+      const changedTask: ITask = { ...task, title: newTitle }
+      tasksRepo.save(changedTask)
+        .then(() => dispatch({ type: 'RENAME_TASK', id: task.id, newTitle }))
+    }
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
     {stateTasks.map(x =>
-      <Task key={x.id} task={x} rename={createRenameFn(x.id)} />
+      <Task key={x.id} task={x} rename={createRenameFn(x)} />
     )}
   </>
 }

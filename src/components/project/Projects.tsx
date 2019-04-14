@@ -45,8 +45,12 @@ export const Projects: React.FC = () => {
   const loadingState = useLoading(() => projectRepo.get())
     (projects => dispatch({ type: 'LOAD_PROJECTS', projects }))
 
-  const createRenameFn = (id: number) =>
-    (newTitle: string) => dispatch({ type: 'RENAME_PROJECT', id, newTitle })
+  const createRenameFn = (project: IProject) =>
+    (newTitle: string) => {
+      const changedProject: IProject = { ...project, title: newTitle }
+      projectRepo.save(changedProject)
+        .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
+    }
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
@@ -56,7 +60,7 @@ export const Projects: React.FC = () => {
       <Project
         key={x.id}
         project={x}
-        rename={createRenameFn(x.id)}
+        rename={createRenameFn(x)}
         addProject={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
         addTask={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
       />

@@ -55,10 +55,16 @@ export const Timestamps: React.FC<IProps> = ({ taskId }) => {
   const loadingState = useLoading(() => timestampsRepo.get(taskId))
     (timestamps => dispatch({ type: 'LOAD_TIMESTAMPS', timestamps }))
 
-  const createChangeCommentFn = (id: number) =>
-    (newComment: string) => dispatch({ type: 'CHANGE_TIMESTAMP_COMMENT', id, newComment })
+  const createChangeCommentFn = (timestamp: ITimestamp) =>
+    (newComment: string) => {
+      const changedTimestamp: ITimestamp = { ...timestamp, comment: newComment }
+      timestampsRepo.save(changedTimestamp)
+        .then(() => dispatch({ type: 'CHANGE_TIMESTAMP_COMMENT', id: timestamp.id, newComment }))
+    }
+
   const createRemoveFn = (id: number) =>
-    () => dispatch({ type: 'REMOVE_TIMESTAMP', id })
+    () => timestampsRepo.delete(id)
+      .then(() => dispatch({ type: 'REMOVE_TIMESTAMP', id }))
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
@@ -68,7 +74,7 @@ export const Timestamps: React.FC<IProps> = ({ taskId }) => {
       <Timestamp
         key={x.id}
         timestamp={x}
-        changeComment={createChangeCommentFn(x.id)}
+        changeComment={createChangeCommentFn(x)}
         remove={createRemoveFn(x.id)} />
     )}
   </>
