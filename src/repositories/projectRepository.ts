@@ -71,6 +71,6 @@ export class ProjectRepository implements IProjectRepository {
 
   private incrementCurrentIndex() {
     return this.getCurrentIndex()
-      .then(index => this.localStorage.setNumber(projectIndexKey, index++))
+      .then(index => this.localStorage.setNumber(projectIndexKey, ++index))
   }
 }

@@ -76,7 +76,7 @@ export class TaskRepository implements ITaskRepository {
 
   private incrementCurrentIndex() {
     return this.getCurrentIndex()
-      .then(index => this.localStorage.setNumber(taskIndexKey, index++))
+      .then(index => this.localStorage.setNumber(taskIndexKey, ++index))
   }
 
 }
