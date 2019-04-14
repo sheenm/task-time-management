@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import React from 'react'
 import { ProjectPresenter } from '../components/project/ProjectPresenter'
 import { TaskPresenter } from '../components/task/TaskPresenter'
-import { TimeStampPresenter } from '../components/timeStamp/TimeStampPresenter'
+import { TimestampPresenter } from '../components/timeStamp/TimestampPresenter'
 
 storiesOf('ProjectPresenter', module)
   .add('folded', () => {
@@ -45,7 +45,7 @@ storiesOf('ProjectPresenter', module)
         title='23451 - Create presenter components for this app'
         changeTitle={action('new title: ')}
       >
-        <TimeStampPresenter
+        <TimestampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Created Task Presenter'
           changeComment={action('comment changed')}
@@ -53,7 +53,7 @@ storiesOf('ProjectPresenter', module)
           remove={action('remove Timestamp action')}
         />
 
-        <TimeStampPresenter
+        <TimestampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Modified Grid for better layout'
           changeComment={action('comment changed')}

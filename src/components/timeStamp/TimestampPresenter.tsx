@@ -26,7 +26,7 @@ const styles = {
   }
 }
 
-export interface ITimeStampPresenterProps extends WithSheet<typeof styles, {}> {
+export interface ITimestampPresenterProps extends WithSheet<typeof styles, {}> {
   dateTime: string
   comment: string
   remove: () => void
@@ -34,7 +34,7 @@ export interface ITimeStampPresenterProps extends WithSheet<typeof styles, {}> {
   changeComment: (newComment: string) => void
 }
 
-const TimeStampPresenterInner: React.FC<ITimeStampPresenterProps> = ({ classes, ...props }) => {
+const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, ...props }) => {
 
   return <Card elevation={Elevation.ZERO} className={classes.card}>
     <p className={classes.date}>{props.dateTime}</p>
@@ -46,4 +46,4 @@ const TimeStampPresenterInner: React.FC<ITimeStampPresenterProps> = ({ classes, 
   </Card>
 }
 
-export const TimeStampPresenter = injectSheet(styles)(TimeStampPresenterInner)
+export const TimestampPresenter = injectSheet(styles)(TimestampPresenterInner)

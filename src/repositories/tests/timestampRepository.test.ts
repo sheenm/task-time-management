@@ -54,10 +54,10 @@ describe('timestamp repository save() tests', () => {
     timestamp.comment = 'new comment'
     await repository.save(timestamp)
 
-    const timeStampFromRepository = (await repository.get(taskId))[0]
+    const timestampFromRepository = (await repository.get(taskId))[0]
 
-    expect(timestamp.comment).toBe(timeStampFromRepository.comment)
-    expect(timestamp).not.toBe(timeStampFromRepository)
+    expect(timestamp.comment).toBe(timestampFromRepository.comment)
+    expect(timestamp).not.toBe(timestampFromRepository)
   })
 
   it('if item not found will not save it', async () => {
@@ -82,7 +82,7 @@ describe('timestamp repository save() tests', () => {
 
 describe('timestamp repository delete() tests', () => {
 
-  it('will delete timeStamp', async () => {
+  it('will delete timestamp', async () => {
     expect.assertions(1)
 
     const repository = new TimestampRepository()
@@ -108,7 +108,7 @@ describe('timestamp repository delete() tests', () => {
 
     const repository = new TimestampRepository()
     const taskId = 4
-    const someRandomTimeStampId = 10
+    const someRandomTimestampId = 10
 
     await repository.add({
       comment: 'some comment',
@@ -117,7 +117,7 @@ describe('timestamp repository delete() tests', () => {
       datetimeStart: ''
     })
 
-    await repository.delete(someRandomTimeStampId)
+    await repository.delete(someRandomTimestampId)
 
     const timestampsLength = (await repository.get(taskId)).length
 

@@ -1,6 +1,6 @@
 import { ITimestamp } from 'app/dto'
 import React from 'react'
-import { TimeStampPresenter } from './TimeStampPresenter'
+import { TimestampPresenter } from './TimestampPresenter'
 
 interface IProps {
   remove: () => void
@@ -11,7 +11,7 @@ interface IProps {
 export const Timestamp: React.FC<IProps> = ({ remove, timestamp, changeComment }) => {
   const edit = () => console.log('todo 5: Can change every time stamp')
 
-  return <TimeStampPresenter
+  return <TimestampPresenter
     comment={timestamp.comment}
     dateTime={timestamp.datetimeStart + ' ' + timestamp.datetimeEnd}
     edit={edit}

@@ -3,7 +3,7 @@ import { linkTo } from '@storybook/addon-links'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
 import { TaskPresenter } from '../components/task/TaskPresenter'
-import { TimeStampPresenter } from '../components/timeStamp/TimeStampPresenter'
+import { TimestampPresenter } from '../components/timeStamp/TimestampPresenter'
 
 storiesOf('TaskPresenter', module)
   .add('folded', () => {
@@ -57,7 +57,7 @@ storiesOf('TaskPresenter', module)
       title='23451 - Create presenter components for this app'
       changeTitle={action('new title: ')}
     >
-      <TimeStampPresenter
+      <TimestampPresenter
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Created Task Presenter'
         changeComment={action('comment changed')}
@@ -65,7 +65,7 @@ storiesOf('TaskPresenter', module)
         remove={action('remove Timestamp action')}
       />
 
-      <TimeStampPresenter
+      <TimestampPresenter
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Modified Grid for better layout'
         changeComment={action('comment changed')}
@@ -94,7 +94,7 @@ storiesOf('TaskPresenter', module)
         toggleTaskStart={linkTo('TaskPresenter', 'unfolded')}
         title='23451 - Create presenter components for this app'
         changeTitle={action('new title: ')}>
-        <TimeStampPresenter
+        <TimestampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Created Task Presenter'
           changeComment={action('comment changed')}
@@ -102,7 +102,7 @@ storiesOf('TaskPresenter', module)
           remove={action('remove Timestamp action')}
         />
 
-        <TimeStampPresenter
+        <TimestampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Modified Grid for better layout'
           changeComment={action('comment changed')}

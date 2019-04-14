@@ -1,11 +1,11 @@
 import { action } from '@storybook/addon-actions'
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import { TimeStampPresenter } from '../components/timeStamp/TimeStampPresenter'
+import { TimestampPresenter } from '../components/timeStamp/TimestampPresenter'
 
-storiesOf('TimeStampPresenter', module)
+storiesOf('TimestampPresenter', module)
   .add('simple', () => {
-    return <TimeStampPresenter
+    return <TimestampPresenter
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project'
       changeComment={action('comment changed')}
@@ -24,7 +24,7 @@ storiesOf('TimeStampPresenter', module)
     }
   )
   .add('very long comment', () => {
-    return <TimeStampPresenter
+    return <TimestampPresenter
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project and I worked hard to bring this to this site. And now it is awesome to see how this will help me! That comment was not enough for me so I will write something else to make this comment very big. I want to make this comment the biggest comment I ever will make in this app in production'
       changeComment={action('comment changed')}
