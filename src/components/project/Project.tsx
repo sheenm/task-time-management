@@ -7,11 +7,10 @@ import { ProjectPresenter } from './ProjectPresenter'
 interface IProps {
   project: IProject
   rename: (newTitle: string) => void
-  addProject: () => void
   addTask: () => void
 }
 
-export const Project: React.FC<IProps> = ({ project, rename, addProject, addTask }) => {
+export const Project: React.FC<IProps> = ({ project, rename, addTask }) => {
   const [isOpen, toggle] = useToggle(false)
 
   return <ProjectPresenter
@@ -19,7 +18,6 @@ export const Project: React.FC<IProps> = ({ project, rename, addProject, addTask
     onTitleChanged={rename}
     isOpen={isOpen}
     toggleOpen={toggle}
-    addProject={addProject}
     addTask={addTask}
   >
     <Tasks projectId={project.id} />

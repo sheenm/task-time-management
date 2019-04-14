@@ -61,7 +61,6 @@ export const Projects: React.FC = () => {
         key={x.id}
         project={x}
         rename={createRenameFn(x)}
-        addProject={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
         addTask={() => console.log('todo 1: Projects: Can create subprojects and tasks in projects')}
       />
     )}

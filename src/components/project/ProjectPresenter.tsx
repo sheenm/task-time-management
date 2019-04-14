@@ -32,7 +32,6 @@ interface IProps extends WithSheet<typeof styles, {}> {
   title: string
   onTitleChanged: (title: string) => void
 
-  addProject: () => void
   addTask: () => void
 }
 
@@ -44,7 +43,6 @@ const ProjectPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
     <ButtonGroup className={classes.actions} minimal>
       <ToggleOpenPresenter isOpen={props.isOpen} onFoldChanged={props.toggleOpen} contentTitle='tasks' />
       <Button icon='plus' title='add task' onClick={props.addTask} />
-      <Button icon='folder-new' title='add subproject' onClick={props.addProject} />
     </ButtonGroup>
     <Collapse isOpen={props.isOpen} className={classes.entries}>
       {props.children || <p>This project has no entries yet</p>}
