@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Documentation
+
+- [Glossary](https://github.com/sheenm/task-time-management/blob/dev/Glossary.md)
+- [Code conventions](https://github.com/sheenm/task-time-management/blob/dev/Conventions.md)
 
 ## Available Scripts
 
