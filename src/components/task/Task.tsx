@@ -65,9 +65,14 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
   const [isOpen, toggleOpen] = useToggle(false)
   const [stateTimestamps, dispatch] = useReducer(reducer, [])
   const { timestampsRepo } = React.useContext(RepositoryContext)
+  const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
 
   const loadingState = useLoading(() => timestampsRepo.get(task.id))
-    (timestamps => dispatch({ type: 'LOAD_TIMESTAMPS', timestamps }))
+    (timestamps => {
+      dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
+      const activetimestamp = timestamps.find(x => x.datetimeEnd === undefined)
+      setStartedTimestamp(activetimestamp)
+    })
 
   const createChangeCommentFn = React.useCallback((timestamp: ITimestamp) => {
     return (newComment: string) => {
@@ -76,8 +81,6 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         .then(() => dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp }))
     }
   }, [])
-
-  const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
 
   const createRemoveFn = React.useCallback((id: number) => {
     return () => {
