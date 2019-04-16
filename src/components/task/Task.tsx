@@ -69,19 +69,24 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
   const loadingState = useLoading(() => timestampsRepo.get(task.id))
     (timestamps => dispatch({ type: 'LOAD_TIMESTAMPS', timestamps }))
 
-  const createChangeCommentFn = (timestamp: ITimestamp) =>
-    (newComment: string) => {
+  const createChangeCommentFn = React.useCallback((timestamp: ITimestamp) => {
+    return (newComment: string) => {
       const changedTimestamp: ITimestamp = { ...timestamp, comment: newComment }
       timestampsRepo.save(changedTimestamp)
         .then(() => dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp }))
     }
+  }, [])
 
-  const createRemoveFn = (id: number) =>
-    () => timestampsRepo.delete(id)
-      .then(() => dispatch({ type: 'REMOVE_TIMESTAMP', id }))
+  const createRemoveFn = React.useCallback((id: number) => {
+    return () => {
+      timestampsRepo.delete(id)
+        .then(() => dispatch({ type: 'REMOVE_TIMESTAMP', id }))
+    }
+  }, [])
 
-  const toggleTaskStart = React.useCallback(() =>
-    console.log('todo 2: Can Start and Stop tasks'), [])
+  const toggleTaskStart = React.useCallback(() => {
+    console.log('todo 2: Can Start and Stop tasks')
+  }, [])
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
