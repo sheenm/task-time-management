@@ -13,9 +13,21 @@ export const Timestamp: React.FC<IProps> = ({ remove, timestamp, changeComment }
 
   return <TimestampPresenter
     comment={timestamp.comment}
-    dateTime={timestamp.datetimeStart + ' ' + timestamp.datetimeEnd}
+    dateTime={getTimestampDatetime(timestamp.datetimeStart, timestamp.datetimeEnd)}
     edit={edit}
     remove={remove}
     changeComment={changeComment}
   />
+}
+
+function getTimestampDatetime(start: Date, end?: Date) {
+  const timeStart = start.toLocaleString()
+
+  if (end === undefined)
+    return timeStart
+
+  if (start.getDate() === end.getDate())
+    return timeStart + ' - ' + end.toLocaleTimeString()
+  else
+    return timeStart + ' - ' + end.toLocaleString()
 }
