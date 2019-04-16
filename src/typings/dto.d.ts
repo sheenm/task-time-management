@@ -6,11 +6,19 @@ declare module 'app/dto' {
   type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
   type WithoutId<T extends IBusinessObject> = Omit<T, keyof IBusinessObject>
 
-  interface ITimestamp extends IBusinessObject {
+  interface ITimestampDto extends IBusinessObject {
     id: number
     taskId: number
     datetimeStart: string
-    datetimeEnd: string
+    datetimeEnd?: string
+    comment: string
+  }
+
+  interface ITimestamp extends IBusinessObject {
+    id: number
+    taskId: number
+    datetimeStart: Date
+    datetimeEnd?: Date
     comment: string
   }
 

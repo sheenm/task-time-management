@@ -1,4 +1,4 @@
-import { ITimestamp, WithoutId } from "app/dto"
+import { ITimestamp, ITimestampDto, WithoutId } from "app/dto"
 import { ITimestampRepository } from "app/repositories"
 import { LocalStorageRepository } from "./localStorageRepository"
 
@@ -59,7 +59,8 @@ export class TimestampRepository implements ITimestampRepository {
   }
 
   private getAll(): Promise<ITimestamp[]> {
-    return this.localStorage.getItems<ITimestamp>(timestampsKey)
+    return this.localStorage.getItems<ITimestampDto>(timestampsKey)
+      .then(dtos => dtos.map<ITimestamp>(dto => this.convertFromDto(dto)))
   }
 
   private getCurrentIndex(): Promise<number> {
@@ -78,5 +79,19 @@ export class TimestampRepository implements ITimestampRepository {
   private incrementCurrentIndex() {
     return this.getCurrentIndex()
       .then(index => this.localStorage.setNumber(timestampIndexKey, ++index))
+  }
+
+  private convertFromDto(dto: ITimestampDto): ITimestamp {
+    const datetimeEnd = dto.datetimeEnd === undefined
+      ? undefined
+      : new Date(dto.datetimeEnd)
+
+    return {
+      id: dto.id,
+      comment: dto.comment,
+      taskId: dto.taskId,
+      datetimeStart: new Date(dto.datetimeStart),
+      datetimeEnd
+    }
   }
 }

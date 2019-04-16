@@ -97,8 +97,8 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
 
     const withoutId: WithoutId<ITimestamp> = {
       comment: '',
-      datetimeEnd: '',
-      datetimeStart: new Date().toDateString(),
+      datetimeEnd: undefined,
+      datetimeStart: new Date(),
       taskId: task.id
     }
 
@@ -114,12 +114,12 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     if (startedTimestamp === undefined)
       return
 
-    startedTimestamp.datetimeEnd = new Date().toDateString(),
-      timestampsRepo.save(startedTimestamp)
-        .then(() => {
-          dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp: startedTimestamp })
-          setStartedTimestamp(undefined)
-        })
+    startedTimestamp.datetimeEnd = new Date()
+    timestampsRepo.save(startedTimestamp)
+      .then(() => {
+        dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp: startedTimestamp })
+        setStartedTimestamp(undefined)
+      })
   }, [startedTimestamp])
 
   const toggleTaskStart = startedTimestamp === undefined
