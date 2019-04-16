@@ -17,10 +17,9 @@ interface IRemoveTimestampAction {
   id: number
 }
 
-interface IRenameTimestampAction {
-  type: 'CHANGE_TIMESTAMP_COMMENT'
-  id: number
-  newComment: string
+interface IChangeTimestampAction {
+  type: 'CHANGE_TIMESTAMP'
+  changedTimestamp: ITimestamp
 }
 
 interface ICreateTimestampAction {
@@ -30,7 +29,7 @@ interface ICreateTimestampAction {
 
 type ActionTypes = ILoadTimestampsAction |
   IRemoveTimestampAction |
-  IRenameTimestampAction |
+  IChangeTimestampAction |
   ICreateTimestampAction
 
 const reducer = (state: ITimestamp[], action: ActionTypes) => {
@@ -44,12 +43,12 @@ const reducer = (state: ITimestamp[], action: ActionTypes) => {
       removedState.splice(removedIndex, 1)
 
       return removedState
-    case 'CHANGE_TIMESTAMP_COMMENT':
-      const renamedState = [...state]
-      const renamedIndex = state.findIndex(x => x.id === action.id)
-      renamedState[renamedIndex].comment = action.newComment
+    case 'CHANGE_TIMESTAMP':
+      const changedState = [...state]
+      const changedIndex = state.findIndex(x => x.id === action.changedTimestamp.id)
+      changedState.splice(changedIndex, 1, action.changedTimestamp)
 
-      return renamedState
+      return changedState
     case 'CREATE_TIMESTAMP':
       return [...state, action.timestamp]
     default:
@@ -74,7 +73,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     (newComment: string) => {
       const changedTimestamp: ITimestamp = { ...timestamp, comment: newComment }
       timestampsRepo.save(changedTimestamp)
-        .then(() => dispatch({ type: 'CHANGE_TIMESTAMP_COMMENT', id: timestamp.id, newComment }))
+        .then(() => dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp }))
     }
 
   const createRemoveFn = (id: number) =>
