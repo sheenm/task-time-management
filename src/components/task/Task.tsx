@@ -1,4 +1,4 @@
-import { ITask, ITimestamp } from 'app/dto'
+import { ITask, ITimestamp, WithoutId } from 'app/dto'
 import React, { useReducer } from 'react'
 import { LoadingStastes, useLoading } from '../../hooks/useLoading'
 import { useToggle } from '../../hooks/useToggle'
@@ -77,16 +77,54 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     }
   }, [])
 
+  const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
+
   const createRemoveFn = React.useCallback((id: number) => {
     return () => {
       timestampsRepo.delete(id)
-        .then(() => dispatch({ type: 'REMOVE_TIMESTAMP', id }))
-    }
-  }, [])
+        .then(() => {
+          dispatch({ type: 'REMOVE_TIMESTAMP', id })
+          if (startedTimestamp !== undefined && startedTimestamp.id === id)
+            setStartedTimestamp(undefined)
+        })
 
-  const toggleTaskStart = React.useCallback(() => {
-    console.log('todo 2: Can Start and Stop tasks')
-  }, [])
+    }
+  }, [startedTimestamp])
+
+  const startTimestamp = React.useCallback(() => {
+    if (startedTimestamp !== undefined)
+      return
+
+    const withoutId: WithoutId<ITimestamp> = {
+      comment: '',
+      datetimeEnd: '',
+      datetimeStart: new Date().toDateString(),
+      taskId: task.id
+    }
+
+    timestampsRepo.add(withoutId)
+      .then((id) => {
+        const timestamp = { ...withoutId, id }
+        dispatch({ type: 'CREATE_TIMESTAMP', timestamp })
+        setStartedTimestamp(timestamp)
+      })
+  }, [startedTimestamp])
+
+  const stopTimestamp = React.useCallback(() => {
+    if (startedTimestamp === undefined)
+      return
+
+    startedTimestamp.datetimeEnd = new Date().toDateString(),
+      timestampsRepo.save(startedTimestamp)
+        .then(() => {
+          dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp: startedTimestamp })
+          setStartedTimestamp(undefined)
+        })
+  }, [startedTimestamp])
+
+  const toggleTaskStart = startedTimestamp === undefined
+    ? startTimestamp
+    : stopTimestamp
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
@@ -96,7 +134,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     changeTitle={rename}
     isOpen={isOpen}
     toggleOpen={toggleOpen}
-    isStarted={false}
+    isStarted={startedTimestamp !== undefined}
     toggleTaskStart={toggleTaskStart}
   >
     {stateTimestamps.map(x =>
