@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom'
 import { Header } from './components/layout/Header'
 import { Wrapper } from './components/layout/Wrapper'
 import { NotFoundPage } from './components/pages/NotFoundPage'
-import { TrackerPage } from './components/pages/TrackerPage'
+import { ReportPage, reportPageRoute } from './components/pages/ReportPage'
+import { TrackerPage, trackerPageRoute } from './components/pages/TrackerPage'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
@@ -13,7 +14,8 @@ const App: React.FC = () => {
     <Header />
     <Wrapper marginTop='1rem'>
       <Router>
-        <TrackerPage path='/' />
+        <TrackerPage path={trackerPageRoute.template} />
+        <ReportPage path={reportPageRoute.template} />
         <NotFoundPage default />
       </Router>
     </Wrapper>
@@ -26,3 +28,4 @@ ReactDOM.render(<App />, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
+
