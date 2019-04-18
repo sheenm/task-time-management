@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Header } from './components/layout/Header'
 import { Wrapper } from './components/layout/Wrapper'
 import { NotFoundPage } from './components/pages/NotFoundPage'
-import { ReportPage, reportPageRoute } from './components/pages/ReportPage'
+import { ReportsPage, reportsPageRoute } from './components/pages/ReportsPage'
 import { TrackerPage, trackerPageRoute } from './components/pages/TrackerPage'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
@@ -15,7 +15,7 @@ const App: React.FC = () => {
     <Wrapper marginTop='1rem'>
       <Router>
         <TrackerPage path={trackerPageRoute.template} />
-        <ReportPage path={reportPageRoute.template} />
+        <ReportsPage path={reportsPageRoute.template} />
         <NotFoundPage default />
       </Router>
     </Wrapper>

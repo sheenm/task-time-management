@@ -1,8 +1,8 @@
-import { Button, Navbar, NavbarGroup, NavbarHeading } from '@blueprintjs/core'
+import { Button, Navbar, NavbarDivider, NavbarGroup, NavbarHeading } from '@blueprintjs/core'
 import { Link } from '@reach/router'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { reportPageRoute } from '../pages/ReportPage'
+import { reportsPageRoute } from '../pages/ReportsPage'
 import { trackerPageRoute } from '../pages/TrackerPage'
 import { Wrapper } from './Wrapper'
 
@@ -22,10 +22,11 @@ const HeaderInner: React.FC<IProps> = ({ classes }) => {
         <Link to={trackerPageRoute.getUrl()}>
           <NavbarHeading>Yup!</NavbarHeading>
         </Link>
+        <NavbarDivider />
         <Link to={trackerPageRoute.getUrl()}>
           <Button minimal tabIndex={-1} icon='time'>Tracker</Button>
         </Link>
-        <Link to={reportPageRoute.getUrl()}>
+        <Link to={reportsPageRoute.getUrl()}>
           <Button minimal tabIndex={-1} icon='document'>Report</Button>
         </Link>
 

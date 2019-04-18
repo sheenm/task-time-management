@@ -1,16 +1,17 @@
-import { H1 } from '@blueprintjs/core'
 import { RouteComponentProps } from '@reach/router'
 import { IRoute } from 'app/routes'
 import React from 'react'
 
-export const reportPageRoute: IRoute = {
-  template: 'report',
-  getUrl: () => 'report'
+export const reportPageRoute: IRoute<string> = {
+  template: ':period',
+  getUrl: (period) => period || ''
 }
 
-export const ReportPage: React.FC<RouteComponentProps> = () => {
+interface IProps {
+  period: string
+}
 
-  return <div>
-    <H1>Here we go! daily report page</H1>
-  </div>
+export const ReportPage: React.FC<RouteComponentProps<IProps>> = ({ period }) => {
+
+  return <>period</>
 }
