@@ -9,7 +9,7 @@ export const reportsPageRoute: IRoute = {
   getUrl: () => 'reports'
 }
 
-export const ReportsPage: React.FC<RouteComponentProps> = () => {
+export const ReportsPage: React.FC<RouteComponentProps> = ({ navigate }) => {
 
   return <div>
     <ReportSettingsPicker />

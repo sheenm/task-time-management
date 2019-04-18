@@ -1,13 +1,17 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core'
+import { navigate } from '@reach/router'
 import React from 'react'
+import { reportPageRoute } from '../../pages/ReportPage'
 
 interface IStandardPeriod {
-  [index: string]: {
-    title: string
-  }
+  title: string
 }
 
-const standardPeriods: IStandardPeriod = {
+interface IStandardPeriods {
+  [index: string]: IStandardPeriod
+}
+
+const standardPeriods: IStandardPeriods = {
   today: {
     title: 'Today',
   },
@@ -19,21 +23,19 @@ const standardPeriods: IStandardPeriod = {
   },
 }
 
-interface IProps {
-  redirect: (route: string) => void
-}
-
-export const CurrentPeriodPicker: React.FC<IProps> = ({ redirect }) => {
+export const CurrentPeriodPicker: React.FC = () => {
 
   const [currentPeriod, setCurrentPeriod] = React.useState(standardPeriods.today)
 
   const menuItems = React.useMemo(() =>
     Object.keys(standardPeriods)
       .map(key => {
-        const onClick = () => setCurrentPeriod(standardPeriods[key])
+        const onClick = () => {
+          setCurrentPeriod(standardPeriods[key])
+          navigate(reportPageRoute.getUrl(standardPeriods[key].title))
+        }
 
-        return <MenuItem
-          key={key}
+        return <MenuItem key={key}
           text={standardPeriods[key].title}
           onClick={onClick}
         />
