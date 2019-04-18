@@ -1,14 +1,22 @@
+import { Router } from '@reach/router'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Header } from './components/layout/Header'
-import { PageContent } from './components/layout/PageContent'
+import { Wrapper } from './components/layout/Wrapper'
+import { NotFoundPage } from './components/pages/NotFoundPage'
+import { TrackerPage } from './components/pages/TrackerPage'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
 const App: React.FC = () => {
   return <>
     <Header />
-    <PageContent />
+    <Wrapper marginTop='1rem'>
+      <Router>
+        <TrackerPage path='/' />
+        <NotFoundPage default />
+      </Router>
+    </Wrapper>
   </>
 }
 
