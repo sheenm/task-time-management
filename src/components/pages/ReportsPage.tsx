@@ -5,7 +5,7 @@ import { ReportSettingsPicker } from '../report/ReportSettingsPicker'
 import { ReportPage, reportPageRoute } from './ReportPage'
 
 export const reportsPageRoute: IRoute = {
-  template: 'reports',
+  template: 'reports/*',
   getUrl: () => 'reports'
 }
 
