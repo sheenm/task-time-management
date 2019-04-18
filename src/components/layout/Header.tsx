@@ -19,12 +19,14 @@ const HeaderInner: React.FC<IProps> = ({ classes }) => {
   return <Navbar className={classes.navbar}>
     <Wrapper>
       <NavbarGroup>
-        <NavbarHeading>Task time management</NavbarHeading>
         <Link to={trackerPageRoute.getUrl()}>
-          <Button minimal tabIndex={-1}>Tracker</Button>
+          <NavbarHeading>Yup!</NavbarHeading>
+        </Link>
+        <Link to={trackerPageRoute.getUrl()}>
+          <Button minimal tabIndex={-1} icon='time'>Tracker</Button>
         </Link>
         <Link to={reportPageRoute.getUrl()}>
-          <Button minimal tabIndex={-1}>Report</Button>
+          <Button minimal tabIndex={-1} icon='document'>Report</Button>
         </Link>
 
       </NavbarGroup>
