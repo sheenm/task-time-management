@@ -35,6 +35,15 @@ describe('StandardPeriod.test', () => {
     taskTitle: 'bbb'
   }
 
+  const yesterdaysDidnotEnd: IReportTimestamp = {
+    comment: '',
+    datetimeEnd: undefined,
+    datetimeStart: yesterday,
+    id: 1,
+    projectTitle: 'aaa',
+    taskTitle: 'bbb'
+  }
+
   it.each(
     [
       [[todayTimestamp, yesterdaysTimestamp], [todayTimestamp]],
@@ -66,7 +75,8 @@ describe('StandardPeriod.test', () => {
       [[todayTimestamp], []],
       [[yesterdaysTimestamp], [yesterdaysTimestamp]],
       [[twoDaysAgoEndedYesterday], [twoDaysAgoEndedYesterday]],
-      [[twoDaysAgoEndedYesterday, yesterdaysTimestamp], [twoDaysAgoEndedYesterday, yesterdaysTimestamp]]
+      [[twoDaysAgoEndedYesterday, yesterdaysTimestamp], [twoDaysAgoEndedYesterday, yesterdaysTimestamp]],
+      [[yesterdaysTimestamp, yesterdaysDidnotEnd, todayTimestamp], [yesterdaysTimestamp, yesterdaysDidnotEnd]]
     ]
   )('should return only timestamps that are last worked day', (timestamps, expected) => {
     const { filterFunction } = standardPeriods.lastWorkingDay
