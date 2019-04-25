@@ -14,6 +14,20 @@ export class TaskRepository implements ITaskRepository {
       .then(tasks => tasks.filter(x => x.projectId === projectId))
   }
 
+  public async getByIds(ids: number[]) {
+    const allTasks = await this.getAll()
+    const selectedTasks: Record<number, ITask> = {}
+
+    for (const task of allTasks) {
+      if (ids.every(id => id !== task.id))
+        continue
+
+      selectedTasks[task.id] = task
+    }
+
+    return selectedTasks
+  }
+
   /**
    * @returns id of added task
    */

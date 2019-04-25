@@ -1,4 +1,5 @@
-import { IReportTimestamp, IStandardPeriods } from "app/report"
+import { ITimestamp } from "app/dto"
+import { IStandardPeriods } from "app/report"
 import { Datetime } from "../../../utils/datetime"
 
 export const standardPeriods: IStandardPeriods = {
@@ -18,7 +19,7 @@ export const standardPeriods: IStandardPeriods = {
     title: 'LastWorkingDay',
     filterFunction: (timestamps) => {
 
-      let lastTimestampBesideTodays: IReportTimestamp | undefined
+      let lastTimestampBesideTodays: ITimestamp | undefined
       const today = new Datetime()
 
       for (const timestamp of timestamps) {
@@ -45,12 +46,12 @@ export const standardPeriods: IStandardPeriods = {
   },
 }
 
-function filterByDay(day: Datetime, timestamps: IReportTimestamp[]) {
+function filterByDay(day: Datetime, timestamps: ITimestamp[]) {
   return timestamps
     .filter(x => filter(day, x))
 }
 
-function filter(day: Datetime, timestamp: IReportTimestamp) {
+function filter(day: Datetime, timestamp: ITimestamp) {
   const dateStart = new Datetime(timestamp.datetimeStart)
     .discardTime()
   // if datetimeEnd is undefined it will give you now

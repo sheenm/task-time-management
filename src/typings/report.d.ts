@@ -1,8 +1,9 @@
 declare module 'app/report' {
+  import { ITimestamp } from "app/dto"
 
   interface IStandardPeriod {
     title: string
-    filterFunction: (timestamps: IReportTimestamp[]) => IReportTimestamp[]
+    filterFunction: (timestamps: ITimestamp[]) => ITimestamp[]
   }
 
   type StandardPeriodNames = 'today' | 'yesterday' | 'lastWorkingDay'
@@ -16,6 +17,5 @@ declare module 'app/report' {
     datetimeEnd?: Date
     comment: string
     taskTitle: string
-    projectTitle: string
   }
 }
