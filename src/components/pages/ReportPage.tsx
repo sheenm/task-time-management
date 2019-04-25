@@ -1,7 +1,10 @@
 import { RouteComponentProps } from '@reach/router'
+import { StandardPeriodNames } from 'app/report'
 import { IRoute } from 'app/routes'
 import React from 'react'
 import { Report } from '../report/Report'
+import { standardPeriods } from '../report/ReportSettingsPicker/standardPeriods'
+import { NotFoundPage } from './NotFoundPage'
 import { reportsPageRoute } from './ReportsPage'
 
 export const reportPageRoute: IRoute<string> = {
@@ -20,5 +23,11 @@ interface IProps {
 
 export const ReportPage: React.FC<RouteComponentProps<IProps>> = ({ period }) => {
 
-  return <Report period={period} />
+  if (period === undefined)
+    return <div>Choose Period</div>
+
+  if (!(period in standardPeriods))
+    return <NotFoundPage />
+
+  return <Report period={period as StandardPeriodNames} />
 }

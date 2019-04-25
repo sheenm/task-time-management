@@ -15,6 +15,7 @@ export const ReportsPage: React.FC<RouteComponentProps> = ({ }) => {
     <ReportSettingsPicker />
 
     <Router>
+      <ReportPage period='today' default />
       <ReportPage path={reportPageRoute.template} />
     </Router>
   </div>
