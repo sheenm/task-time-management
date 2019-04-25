@@ -14,7 +14,7 @@ export const CurrentPeriodPicker: React.FC = () => {
       .map(key => {
         const onClick = () => {
           setCurrentPeriod(standardPeriods[key])
-          navigate(reportPageRoute.getUrl(standardPeriods[key].title))
+          navigate(reportPageRoute.getUrl(key))
         }
 
         return <MenuItem key={key}
