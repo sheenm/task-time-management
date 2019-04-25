@@ -10,9 +10,9 @@ export enum LoadingStastes {
 /**
  * React hook which loads data and provides isLoading state value
  * @param load what to await before component is loaded
- * @param then what to do when the component is loaded
+ * @param dependencies will only activate if item from dependencies changes
  */
-export function useLoading<T>(load: () => Promise<T>) {
+export function useLoading<T>(load: () => Promise<T>, dependencies: ReadonlyArray<unknown> = []) {
   return (then: (info: T) => void, error?: (message: string) => void) => {
 
     const [loadingState, setState] = React.useState(LoadingStastes.Initial)
@@ -37,7 +37,7 @@ export function useLoading<T>(load: () => Promise<T>) {
         )
 
       return () => { didCancel = true }
-    }, [])
+    }, dependencies)
 
     return loadingState
   }
