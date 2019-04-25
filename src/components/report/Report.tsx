@@ -2,7 +2,7 @@ import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import React from 'react'
 import { LoadingStastes, useLoading } from '../../hooks/useLoading'
 import { RepositoryContext } from '../repositories/RepositoryContext'
-import { ReportTimestampPresenter } from './ReportTimestampPresenter'
+import { ReportTimestampsGroup } from './ReportTimestampsGroup'
 
 interface IProps {
   period: StandardPeriodNames
@@ -18,11 +18,8 @@ export const Report: React.FC<IProps> = ({ period }) => {
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
 
-  return <>
-    {timestamps.map(timestamp => <ReportTimestampPresenter
-      key={timestamp.id}
-      dateTime='1:10'
-      comment={timestamp.comment}
-    />)}
-  </>
+  return <ReportTimestampsGroup
+    taskName={'task name... todo'}
+    timestamps={timestamps.map(x => ({ id: x.id, dateTime: '1111', comment: x.comment }))}
+  />
 }

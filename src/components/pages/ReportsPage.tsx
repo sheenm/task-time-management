@@ -11,12 +11,12 @@ export const reportsPageRoute: IRoute = {
 
 export const ReportsPage: React.FC<RouteComponentProps> = ({ }) => {
 
-  return <div>
+  return <>
     <ReportSettingsPicker />
 
     <Router>
       <ReportPage period='today' default />
       <ReportPage path={reportPageRoute.template} />
     </Router>
-  </div>
+  </>
 }
