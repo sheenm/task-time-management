@@ -8,6 +8,7 @@ import { ReportsPage, reportsPageRoute } from './components/pages/ReportsPage'
 import { TrackerPage, trackerPageRoute } from './components/pages/TrackerPage'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
+import './utils/jsAuguments'
 
 const App: React.FC = () => {
   return <>
