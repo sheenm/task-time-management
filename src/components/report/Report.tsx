@@ -1,5 +1,6 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import React from 'react'
+import '../../extensions/arrays/groupBy'
 import { LoadingStastes, useLoading } from '../../hooks/useLoading'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { ReportTimestampsGroup } from './ReportTimestampsGroup'
