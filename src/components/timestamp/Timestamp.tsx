@@ -26,7 +26,7 @@ function getTimestampDatetime(start: Date, end?: Date) {
   if (end === undefined)
     return timeStart
 
-  if (start.toDateString() === end.toDateString())
+  if (start.extIsDayEqual(end))
     return timeStart + ' - ' + end.toLocaleTimeString()
   else
     return timeStart + ' - ' + end.toLocaleString()
