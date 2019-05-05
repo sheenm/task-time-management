@@ -18,7 +18,7 @@ export const Report: React.FC<IProps> = ({ period }) => {
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
 
-  const groupedBy = timestamps.myGroupBy(x => x.taskTitle)
+  const groupedBy = timestamps.extGroupBy(x => x.taskTitle)
 
   return <>
     {Object.keys(groupedBy).map(y => <ReportTimestampsGroup key={y}
