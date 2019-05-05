@@ -9,6 +9,9 @@ const styles = {
   caption: {
     textAlign: 'left',
     fontSize: '1.3rem'
+  },
+  commentColumn: {
+    width: '100%'
   }
 }
 
@@ -29,13 +32,13 @@ const ReportTimestampsGroupInner: React.FC<IProps> = ({ classes, timestamps, tas
     <caption className={classes.caption}>{taskName}</caption>
     <thead>
       <tr>
-        <th>comment</th>
+        <th className={classes.commentColumn}>comment</th>
         <th>time</th>
       </tr>
     </thead>
     <tbody>
       {timestamps.map(x => <tr key={x.id}>
-        <td>{x.comment}</td>
+        <td className={classes.commentColumn}>{x.comment}</td>
         <td>{x.dateTime}</td>
       </tr>)}
     </tbody>

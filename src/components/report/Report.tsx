@@ -24,7 +24,26 @@ export const Report: React.FC<IProps> = ({ period }) => {
   return <>
     {Object.keys(groupedBy).map(y => <ReportTimestampsGroup key={y}
       taskName={y}
-      timestamps={groupedBy[y].map(x => ({ id: x.id, dateTime: '1111', comment: x.comment }))}
+      timestamps={groupedBy[y].map(x => ({
+        id: x.id,
+        dateTime: getDateTimeDiff(x.datetimeStart, x.datetimeEnd),
+        comment: x.comment
+      }))}
     />)}
   </>
+}
+
+function getDateTimeDiff(start: Date, end?: Date) {
+  if (end === undefined || !start.extIsDayEqualOrGreater(end)) {
+    end = new Date(start)
+    // tslint:disable-next-line: no-magic-numbers
+    end.setHours(23, 59, 59)
+  }
+
+  const diff = new Date(end.getTime() - start.getTime())
+  const millisecondsInHour = 3600000
+  const hours = diff.getTime() / millisecondsInHour
+  const precisionDigits = 2
+
+  return hours.toFixed(precisionDigits).toString()
 }
