@@ -1,9 +1,14 @@
+import { StandardPeriodNames } from 'app/report'
 import React from 'react'
 import { CurrentPeriodPicker } from './ReportSettingsPicker/CurrentPeriodPicker'
 
-export const ReportSettingsPicker: React.FC = ({ }) => {
+interface IProps {
+  period: StandardPeriodNames
+}
+
+export const ReportSettingsPicker: React.FC<IProps> = ({ period }) => {
 
   return <>
-    <CurrentPeriodPicker />
+    <CurrentPeriodPicker period={period} />
   </>
 }

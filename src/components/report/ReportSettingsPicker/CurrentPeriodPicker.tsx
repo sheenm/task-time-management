@@ -1,12 +1,17 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core'
 import { navigate } from '@reach/router'
+import { StandardPeriodNames } from 'app/report'
 import React from 'react'
 import { reportPageRoute } from '../../pages/ReportPage'
 import { standardPeriods } from './standardPeriods'
 
-export const CurrentPeriodPicker: React.FC = () => {
+interface IProps {
+  period: StandardPeriodNames
+}
 
-  const [currentPeriod, setCurrentPeriod] = React.useState(standardPeriods.today)
+export const CurrentPeriodPicker: React.FC<IProps> = ({ period }) => {
+
+  const [currentPeriod, setCurrentPeriod] = React.useState(standardPeriods[period])
 
   const menuItems = React.useMemo(() =>
 

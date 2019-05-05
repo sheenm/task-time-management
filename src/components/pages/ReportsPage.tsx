@@ -1,7 +1,6 @@
 import { RouteComponentProps, Router } from '@reach/router'
 import { IRoute } from 'app/routes'
 import React from 'react'
-import { ReportSettingsPicker } from '../report/ReportSettingsPicker'
 import { ReportPage, reportPageRoute } from './ReportPage'
 
 export const reportsPageRoute: IRoute = {
@@ -11,12 +10,8 @@ export const reportsPageRoute: IRoute = {
 
 export const ReportsPage: React.FC<RouteComponentProps> = ({ }) => {
 
-  return <>
-    <ReportSettingsPicker />
-
-    <Router>
-      <ReportPage period='today' default />
-      <ReportPage path={reportPageRoute.template} />
-    </Router>
-  </>
+  return <Router>
+    <ReportPage period='today' default />
+    <ReportPage path={reportPageRoute.template} />
+  </Router>
 }
