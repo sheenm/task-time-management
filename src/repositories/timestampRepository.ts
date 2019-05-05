@@ -1,5 +1,7 @@
 import { ITimestamp, ITimestampDto, WithoutId } from "app/dto"
+import { StandardPeriodNames } from "app/report"
 import { ITimestampRepository } from "app/repositories"
+import { standardPeriods } from "../components/report/ReportSettingsPicker/standardPeriods"
 import { LocalStorageRepository } from "./localStorageRepository"
 
 const timestampsKey = 'timestamps'
@@ -12,6 +14,13 @@ export class TimestampRepository implements ITimestampRepository {
   public get(taskId: number): Promise<ITimestamp[]> {
     return this.getAll()
       .then(timestamps => timestamps.filter(x => x.taskId === taskId))
+  }
+
+  public getWithPeriod(period: StandardPeriodNames): Promise<ITimestamp[]> {
+    const { filterFunction } = standardPeriods[period]
+
+    return this.getAll()
+      .then(filterFunction)
   }
 
   /**
