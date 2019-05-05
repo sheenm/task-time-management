@@ -26,7 +26,8 @@ describe('GroupBy.test', () => {
     [
       [{ items: [item1], groupsCount: 1 }],
       [{ items: [item1, item2], groupsCount: 1 }],
-      [{ items: [item1, item2, item3], groupsCount: 2 }]
+      [{ items: [item1, item2, item3], groupsCount: 2 }],
+      [{ items: [], groupsCount: 0 }]
     ]
   )('should correctly group by id', ({ items, groupsCount }) => {
     const groupByResult = items.extGroupBy(x => x.id)

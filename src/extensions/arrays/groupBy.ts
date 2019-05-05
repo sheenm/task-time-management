@@ -5,9 +5,11 @@ declare global {
   }
 }
 
-Array.prototype.extGroupBy = function (predicate) {
-  // tslint:disable-next-line: no-invalid-this
-  return groupBy(this)(predicate)
+if (Array.prototype.extGroupBy === undefined) {
+  Array.prototype.extGroupBy = function (predicate) {
+    // tslint:disable-next-line: no-invalid-this
+    return groupBy(this)(predicate)
+  }
 }
 
 function groupBy<TArrayElement, TKey extends string | number>(array: TArrayElement[]) {
@@ -30,4 +32,3 @@ function groupBy<TArrayElement, TKey extends string | number>(array: TArrayEleme
 }
 
 export { }
-

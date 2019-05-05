@@ -1,4 +1,4 @@
-import { IReportTimestamp } from "app/report"
+import { ITimestamp } from "app/dto"
 import { standardPeriods } from "../standardPeriods"
 
 describe('StandardPeriod.test', () => {
@@ -6,42 +6,39 @@ describe('StandardPeriod.test', () => {
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
   const twoDaysAgo = new Date()
+  // tslint:disable-next-line: no-magic-numbers
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
 
-  const todayTimestamp: IReportTimestamp = {
+  const todayTimestamp: ITimestamp = {
     comment: '',
     datetimeEnd: undefined,
     datetimeStart: today,
     id: 1,
-    projectTitle: 'aaa',
-    taskTitle: 'bbb'
+    taskId: 1
   }
 
-  const yesterdaysTimestamp: IReportTimestamp = {
+  const yesterdaysTimestamp: ITimestamp = {
     comment: '',
     datetimeEnd: yesterday,
     datetimeStart: yesterday,
     id: 1,
-    projectTitle: 'aaa',
-    taskTitle: 'bbb'
+    taskId: 1
   }
 
-  const twoDaysAgoEndedYesterday: IReportTimestamp = {
+  const twoDaysAgoEndedYesterday: ITimestamp = {
     comment: '',
     datetimeEnd: yesterday,
     datetimeStart: twoDaysAgo,
     id: 1,
-    projectTitle: 'aa',
-    taskTitle: 'bbb'
+    taskId: 1
   }
 
-  const yesterdaysDidnotEnd: IReportTimestamp = {
+  const yesterdaysDidnotEnd: ITimestamp = {
     comment: '',
     datetimeEnd: undefined,
     datetimeStart: yesterday,
     id: 1,
-    projectTitle: 'aaa',
-    taskTitle: 'bbb'
+    taskId: 1
   }
 
   it.each(
