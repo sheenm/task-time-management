@@ -51,8 +51,8 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
 
     <section className={Classes.DIALOG_FOOTER}>
       <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-        <Button onClick={closeModal}>Close</Button>
-        <Button intent={Intent.PRIMARY} onClick={createProject} >
+        <Button onClick={closeModal} title='Close dialog'>Close</Button>
+        <Button intent={Intent.PRIMARY} onClick={createProject} title='Add project'>
           Add project
         </Button>
       </div>
