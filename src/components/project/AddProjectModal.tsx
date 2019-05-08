@@ -28,6 +28,11 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
 
   }, [projectTitle, projectRepo])
 
+  const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter')
+      createProject()
+  }, [createProject])
+
   return <Dialog
     title='Adding a project'
     isOpen={true}
@@ -39,6 +44,7 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
           id='addProjectInput'
           onChange={onTitleChanged}
           value={projectTitle}
+          onKeyDown={onEnterPressed}
           autoFocus />
       </FormGroup>
     </section>
