@@ -24,7 +24,7 @@ export const TrackerPageInner: React.FC<IProps> = ({ classes }) => {
 
   return <ProjectsContextProvider>
     <Link to={addProjectModalPageRoute.getUrl()}>
-      <Button className={classes.link}>Add project</Button>
+      <Button tabIndex={-1} className={classes.link}>Add project</Button>
     </Link>
 
     <Projects />
