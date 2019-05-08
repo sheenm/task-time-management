@@ -1,7 +1,7 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import React from 'react'
 import '../../extensions/arrays/groupBy'
-import { LoadingStastes, useLoading } from '../../hooks/useLoading'
+import { useLoading } from '../../hooks/useLoading'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { ReportTimestampsGroup } from './ReportTimestampsGroup'
 
@@ -19,7 +19,7 @@ export const Report: React.FC<IProps> = ({ period }) => {
     then: setTimestamps
   })
 
-  if (loadingState === LoadingStastes.Loading)
+  if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   const groupedBy = timestamps.extGroupBy(x => x.taskTitle)

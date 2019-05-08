@@ -1,6 +1,6 @@
 import { IProject } from 'app/dto'
 import React, { useReducer } from 'react'
-import { LoadingStastes, useLoading } from '../../hooks/useLoading'
+import { useLoading } from '../../hooks/useLoading'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
@@ -54,7 +54,7 @@ export const Projects: React.FC = () => {
         .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
     }
 
-  if (loadingState === LoadingStastes.Loading)
+  if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>

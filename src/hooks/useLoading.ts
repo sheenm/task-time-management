@@ -1,11 +1,6 @@
 import React from 'react'
 
-export enum LoadingStastes {
-  Initial,
-  Loading,
-  Success,
-  Error
-}
+type LoadingStates = 'Initial' | 'Loading' | 'Success' | 'Error'
 
 interface IUseLoadingProps<T> {
   load: () => Promise<T>
@@ -21,22 +16,22 @@ interface IUseLoadingProps<T> {
  */
 export function useLoading<T>({ load, dependencies = [], then, error }: IUseLoadingProps<T>) {
 
-  const [loadingState, setState] = React.useState(LoadingStastes.Initial)
+  const [loadingState, setState] = React.useState<LoadingStates>('Initial')
 
   React.useEffect(() => {
     let didCancel = false
 
-    setState(LoadingStastes.Loading)
+    setState('Loading')
     load()
       .then(info => {
         if (didCancel)
           return
 
-        setState(LoadingStastes.Success)
+        setState('Success')
         then(info)
       })
       .catch((message: string) => {
-        setState(LoadingStastes.Error)
+        setState('Error')
         if (error !== undefined)
           error(message)
       }

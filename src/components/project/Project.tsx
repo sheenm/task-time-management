@@ -1,6 +1,6 @@
 import { IProject, ITask, WithoutId } from 'app/dto'
 import React, { useReducer } from 'react'
-import { LoadingStastes, useLoading } from '../../hooks/useLoading'
+import { useLoading } from '../../hooks/useLoading'
 import { useToggle } from '../../hooks/useToggle'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
@@ -76,7 +76,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       .then((id) => dispatch({ type: 'ADD_TASK', task: { ...task, id } }))
   }, [tasksRepo, project.id])
 
-  if (loadingState === LoadingStastes.Loading)
+  if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <ProjectPresenter

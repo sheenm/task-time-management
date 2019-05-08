@@ -1,6 +1,6 @@
 import { ITask, ITimestamp, WithoutId } from 'app/dto'
 import React, { useReducer } from 'react'
-import { LoadingStastes, useLoading } from '../../hooks/useLoading'
+import { useLoading } from '../../hooks/useLoading'
 import { useToggle } from '../../hooks/useToggle'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
@@ -131,7 +131,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     ? startTimestamp
     : stopTimestamp
 
-  if (loadingState === LoadingStastes.Loading)
+  if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <TaskPresenter
