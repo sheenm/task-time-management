@@ -1,46 +1,12 @@
 import { IProject } from 'app/dto'
-import React, { useReducer } from 'react'
+import React from 'react'
 import { useLoading } from '../../hooks/useLoading'
-import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
-
-interface ILoadProjectsAction {
-  type: 'LOAD_PROJECTS'
-  projects: IProject[]
-}
-interface IRenameProjectAction {
-  type: 'RENAME_PROJECT'
-  id: number
-  newTitle: string
-}
-
-interface IAddProjectAction {
-  type: 'ADD_PROJECT',
-  project: IProject
-}
-
-type ActionTypes = ILoadProjectsAction | IRenameProjectAction | IAddProjectAction
-
-const reducer = (state: IProject[], action: ActionTypes) => {
-  switch (action.type) {
-    case 'LOAD_PROJECTS':
-      return action.projects
-    case 'RENAME_PROJECT':
-      const renameIndex = state.findIndex(x => x.id === action.id)
-      const renamedState = [...state]
-      renamedState[renameIndex].title = action.newTitle
-
-      return renamedState
-    case 'ADD_PROJECT':
-      return [...state, action.project]
-    default:
-      return neverReached(action)
-  }
-}
+import { ProjectsContext } from './ProjectsContextProvider'
 
 export const Projects: React.FC = () => {
-  const [stateProjects, dispatch] = useReducer(reducer, [])
+  const { stateProjects, dispatch } = React.useContext(ProjectsContext)
   const { projectRepo } = React.useContext(RepositoryContext)
   const loadingState = useLoading({
     load: () => projectRepo.get(),
