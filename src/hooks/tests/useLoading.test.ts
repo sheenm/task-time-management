@@ -1,47 +1,57 @@
 import { renderHook } from 'react-hooks-testing-library'
-import { LoadingStastes, useLoading } from '../useLoading'
+import { useLoading } from '../useLoading'
 
 describe('UseLoading.test', () => {
-  test('should change state from false to true', async () => {
+  test('should change state from initial to success', async () => {
     const expected = 42
     const load = () => Promise.resolve(expected)
     let actual = 0
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useLoading(load)(given => actual = given)
+      useLoading({
+        load,
+        then: given => actual = given
+      })
     )
 
     await waitForNextUpdate()
     expect(actual).toEqual(expected)
-    expect(result.current).toBe(LoadingStastes.Success)
+    expect(result.current).toBe('Success')
   })
 
-  test('initial loading state is true', () => {
+  test('initial loading state is Loading', () => {
     const expected = 42
     const load = () => Promise.resolve(expected)
     let actual = 0
 
     const { result } = renderHook(() =>
-      useLoading(load)(given => actual = given)
+      useLoading({
+        load,
+        then: given => actual = given
+      })
     )
 
     expect(actual).not.toEqual(expected)
-    expect(result.current).toBe(LoadingStastes.Loading)
+    expect(result.current).toBe('Loading')
   })
 
   test('should change state to error', async () => {
     const message = 'some message'
     const load = () => Promise.reject(message)
-    const successFn = jest.fn()
-    const failFn = jest.fn()
+    const then = jest.fn()
+    const error = jest.fn()
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useLoading(load)(successFn, failFn)
+      useLoading({
+        load,
+        then,
+        error
+      })
     )
 
     await waitForNextUpdate()
-    expect(result.current).toBe(LoadingStastes.Error)
-    expect(failFn).toBeCalledTimes(1)
-    expect(successFn).not.toBeCalled()
+    expect(result.current).toBe('Error')
+    expect(error).toBeCalledTimes(1)
+    expect(then).not.toBeCalled()
   })
 })
