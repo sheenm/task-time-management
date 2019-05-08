@@ -42,8 +42,10 @@ const reducer = (state: IProject[], action: ActionTypes) => {
 export const Projects: React.FC = () => {
   const [stateProjects, dispatch] = useReducer(reducer, [])
   const { projectRepo } = React.useContext(RepositoryContext)
-  const loadingState = useLoading(() => projectRepo.get())
-    (projects => dispatch({ type: 'LOAD_PROJECTS', projects }))
+  const loadingState = useLoading({
+    load: () => projectRepo.get(),
+    then: projects => dispatch({ type: 'LOAD_PROJECTS', projects })
+  })
 
   const createRenameFn = (project: IProject) =>
     (newTitle: string) => {

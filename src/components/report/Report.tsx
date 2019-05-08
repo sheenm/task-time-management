@@ -13,8 +13,11 @@ export const Report: React.FC<IProps> = ({ period }) => {
 
   const [timestamps, setTimestamps] = React.useState<IReportTimestamp[]>([])
   const { reportRepo } = React.useContext(RepositoryContext)
-  const loadingState = useLoading(() => reportRepo.get(period), [period])
-    (setTimestamps)
+  const loadingState = useLoading({
+    load: () => reportRepo.get(period),
+    dependencies: [period],
+    then: setTimestamps
+  })
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>

@@ -67,12 +67,14 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
   const { timestampsRepo } = React.useContext(RepositoryContext)
   const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
 
-  const loadingState = useLoading(() => timestampsRepo.get(task.id))
-    (timestamps => {
+  const loadingState = useLoading({
+    load: () => timestampsRepo.get(task.id),
+    then: timestamps => {
       dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
       const activetimestamp = timestamps.find(x => x.datetimeEnd === undefined)
       setStartedTimestamp(activetimestamp)
-    })
+    }
+  })
 
   const createChangeCommentFn = React.useCallback((timestamp: ITimestamp) => {
     return (newComment: string) => {
@@ -80,7 +82,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
       timestampsRepo.save(changedTimestamp)
         .then(() => dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp }))
     }
-  }, [])
+  }, [timestampsRepo])
 
   const createRemoveFn = React.useCallback((id: number) => {
     return () => {
@@ -92,7 +94,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         })
 
     }
-  }, [startedTimestamp])
+  }, [startedTimestamp, timestampsRepo])
 
   const startTimestamp = React.useCallback(() => {
     if (startedTimestamp !== undefined)
@@ -111,7 +113,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         dispatch({ type: 'CREATE_TIMESTAMP', timestamp })
         setStartedTimestamp(timestamp)
       })
-  }, [startedTimestamp])
+  }, [startedTimestamp, timestampsRepo, task.id])
 
   const stopTimestamp = React.useCallback(() => {
     if (startedTimestamp === undefined)
@@ -123,7 +125,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp: startedTimestamp })
         setStartedTimestamp(undefined)
       })
-  }, [startedTimestamp])
+  }, [startedTimestamp, timestampsRepo])
 
   const toggleTaskStart = startedTimestamp === undefined
     ? startTimestamp

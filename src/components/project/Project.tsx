@@ -53,8 +53,10 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
   const [stateTasks, dispatch] = useReducer(reducer, [])
   const { tasksRepo } = React.useContext(RepositoryContext)
 
-  const loadingState = useLoading(() => tasksRepo.get(project.id))
-    (tasks => dispatch({ type: 'LOAD_TASKS', tasks }))
+  const loadingState = useLoading({
+    load: () => tasksRepo.get(project.id),
+    then: tasks => dispatch({ type: 'LOAD_TASKS', tasks })
+  })
 
   const createRenameFn = React.useCallback((task: ITask) => {
     return (newTitle: string) => {
@@ -62,7 +64,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       tasksRepo.save(changedTask)
         .then(() => dispatch({ type: 'RENAME_TASK', id: task.id, newTitle }))
     }
-  }, [])
+  }, [tasksRepo])
 
   const addTask = React.useCallback(() => {
     const task: WithoutId<ITask> = {
@@ -72,7 +74,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
 
     tasksRepo.add(task)
       .then((id) => dispatch({ type: 'ADD_TASK', task: { ...task, id } }))
-  }, [])
+  }, [tasksRepo, project.id])
 
   if (loadingState === LoadingStastes.Loading)
     return <h1>todo loading 10. Data loading trobber</h1>
