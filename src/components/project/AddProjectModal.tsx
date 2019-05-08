@@ -12,7 +12,8 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
   const { projectRepo } = React.useContext(RepositoryContext)
   const { dispatch } = React.useContext(ProjectsContext)
 
-  const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => setProjectTitle(e.target.value), [])
+  const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
+    setProjectTitle(e.target.value), [])
 
   const createProject = React.useCallback(() => {
     const project = {
@@ -34,7 +35,11 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
   >
     <section className={Classes.DIALOG_BODY}>
       <FormGroup label='Title:' labelFor='addProjectInput'>
-        <InputGroup id='addProjectInput' onChange={onTitleChanged} value={projectTitle} autoFocus />
+        <InputGroup
+          id='addProjectInput'
+          onChange={onTitleChanged}
+          value={projectTitle}
+          autoFocus />
       </FormGroup>
     </section>
 

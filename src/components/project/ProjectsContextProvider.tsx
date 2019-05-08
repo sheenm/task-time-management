@@ -42,7 +42,9 @@ interface IProjectsContext {
 }
 
 export const ProjectsContext = React.createContext<IProjectsContext>({
-  dispatch: action => { },
+  dispatch: () => {
+    throw new Error('Project context is not implemented')
+  },
   stateProjects: []
 })
 
