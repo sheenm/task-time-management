@@ -1,9 +1,6 @@
-import { Button } from '@blueprintjs/core'
-import { Link } from '@reach/router'
 import { IProject } from 'app/dto'
 import React from 'react'
 import { useLoading } from '../../hooks/useLoading'
-import { addProjectModalPageRoute } from '../pages/AddProjectModalPage'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
 import { ProjectsContext } from './ProjectsContextProvider'
@@ -27,10 +24,6 @@ export const Projects: React.FC = () => {
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
-    <Link to={addProjectModalPageRoute.getUrl()}>
-      <Button>Add project</Button>
-    </Link>
-
     {stateProjects.map(x =>
       <Project
         key={x.id}
