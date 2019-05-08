@@ -1,47 +1,15 @@
 import { Button } from '@blueprintjs/core'
+import { Link } from '@reach/router'
 import { IProject } from 'app/dto'
-import React, { useReducer } from 'react'
+import React from 'react'
 import { useLoading } from '../../hooks/useLoading'
-import { neverReached } from '../../utils/neverReached'
+import { addProjectModalPageRoute } from '../pages/AddProjectModalPage'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Project } from './Project'
-
-interface ILoadProjectsAction {
-  type: 'LOAD_PROJECTS'
-  projects: IProject[]
-}
-interface IRenameProjectAction {
-  type: 'RENAME_PROJECT'
-  id: number
-  newTitle: string
-}
-
-interface IAddProjectAction {
-  type: 'ADD_PROJECT',
-  project: IProject
-}
-
-type ActionTypes = ILoadProjectsAction | IRenameProjectAction | IAddProjectAction
-
-const reducer = (state: IProject[], action: ActionTypes) => {
-  switch (action.type) {
-    case 'LOAD_PROJECTS':
-      return action.projects
-    case 'RENAME_PROJECT':
-      const renameIndex = state.findIndex(x => x.id === action.id)
-      const renamedState = [...state]
-      renamedState[renameIndex].title = action.newTitle
-
-      return renamedState
-    case 'ADD_PROJECT':
-      return [...state, action.project]
-    default:
-      return neverReached(action)
-  }
-}
+import { ProjectsContext } from './ProjectsContextProvider'
 
 export const Projects: React.FC = () => {
-  const [stateProjects, dispatch] = useReducer(reducer, [])
+  const { stateProjects, dispatch } = React.useContext(ProjectsContext)
   const { projectRepo } = React.useContext(RepositoryContext)
   const loadingState = useLoading({
     load: () => projectRepo.get(),
@@ -55,20 +23,13 @@ export const Projects: React.FC = () => {
         .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
     }
 
-  const createProject = React.useCallback(() => {
-    const project = {
-      title: 'Unknown'
-    }
-
-    projectRepo.add(project)
-      .then(id => dispatch({ type: 'ADD_PROJECT', project: { ...project, id } }))
-  }, [projectRepo])
-
   if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
-    <Button onClick={createProject}>Add project</Button>
+    <Link to={addProjectModalPageRoute.getUrl()}>
+      <Button>Add project</Button>
+    </Link>
 
     {stateProjects.map(x =>
       <Project
