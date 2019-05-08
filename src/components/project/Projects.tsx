@@ -1,3 +1,4 @@
+import { Button } from '@blueprintjs/core'
 import { IProject } from 'app/dto'
 import React, { useReducer } from 'react'
 import { useLoading } from '../../hooks/useLoading'
@@ -54,10 +55,21 @@ export const Projects: React.FC = () => {
         .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
     }
 
+  const createProject = React.useCallback(() => {
+    const project = {
+      title: 'Unknown'
+    }
+
+    projectRepo.add(project)
+      .then(id => dispatch({ type: 'ADD_PROJECT', project: { ...project, id } }))
+  }, [projectRepo])
+
   if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
+    <Button onClick={createProject}>Add project</Button>
+
     {stateProjects.map(x =>
       <Project
         key={x.id}
