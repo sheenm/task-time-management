@@ -52,8 +52,5 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0",
     "tslint-react-a11y": "^1.0.0"
-  },
-  "resolutions": {
-    "babel-jest": "24.7.1"
   }
 }
