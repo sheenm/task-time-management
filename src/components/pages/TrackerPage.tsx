@@ -15,9 +15,11 @@ export const trackerPageRoute: IRoute = {
 
 const styles = {
   main: {
-    display: 'grid',
-    gridColumnGap: '1rem',
-    gridTemplateColumns: '300px 1fr'
+    '@media (min-width:600px)': {
+      display: 'grid',
+      gridColumnGap: '1rem',
+      gridTemplateColumns: '300px 1fr',
+    }
   },
   link: {
     marginBottom: '1rem'
