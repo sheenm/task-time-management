@@ -1,7 +1,6 @@
 import { IProject, ITask, WithoutId } from 'app/dto'
 import React, { useReducer } from 'react'
 import { useLoading } from '../../hooks/useLoading'
-import { useToggle } from '../../hooks/useToggle'
 import { neverReached } from '../../utils/neverReached'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { Task } from '../task/Task'
@@ -49,13 +48,13 @@ interface IProps {
 }
 
 export const Project: React.FC<IProps> = ({ project, rename }) => {
-  const [isOpen, toggle] = useToggle(false)
   const [stateTasks, dispatch] = useReducer(reducer, [])
   const { tasksRepo } = React.useContext(RepositoryContext)
 
   const loadingState = useLoading({
     load: () => tasksRepo.get(project.id),
-    then: tasks => dispatch({ type: 'LOAD_TASKS', tasks })
+    then: tasks => dispatch({ type: 'LOAD_TASKS', tasks }),
+    dependencies: [project]
   })
 
   const createRenameFn = React.useCallback((task: ITask) => {
@@ -79,15 +78,15 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
   if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
-  return <ProjectPresenter
-    title={project.title}
-    onTitleChanged={rename}
-    isOpen={isOpen}
-    toggleOpen={toggle}
-    addTask={addTask}
-  >
+  return <>
+    <ProjectPresenter
+      title={project.title}
+      onTitleChanged={rename}
+      addTask={addTask}
+    />
     {stateTasks.map(x =>
       <Task key={x.id} task={x} rename={createRenameFn(x)} />
     )}
-  </ProjectPresenter>
+  </>
+
 }

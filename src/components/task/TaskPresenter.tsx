@@ -1,4 +1,4 @@
-import { ButtonGroup, Card, Collapse, Colors, EditableText, Elevation } from '@blueprintjs/core'
+import { ButtonGroup, Card, Collapse, EditableText, Elevation } from '@blueprintjs/core'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
 import { ITimestampPresenterProps } from '../timestamp/TimestampPresenter'
@@ -12,8 +12,7 @@ const styles = {
     alignItems: 'center',
     gridColumnGap: '1rem',
     gridRowGap: '.5rem',
-    padding: '.5rem',
-    backgroundColor: Colors.LIGHT_GRAY3
+    padding: '.5rem'
   },
   text: {
     gridColumn: 'text',

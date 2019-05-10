@@ -1,11 +1,12 @@
-import { Button } from '@blueprintjs/core'
-import { Link, RouteComponentProps, Router } from '@reach/router'
+import { RouteComponentProps, Router } from '@reach/router'
 import { IRoute } from 'app/routes'
 import React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { Projects } from '../project/Projects'
 import { ProjectsContextProvider } from '../project/ProjectsContextProvider'
+import { ProjectsList } from '../project/ProjectsList'
 import { AddProjectModalPage, addProjectModalPageRoute } from './AddProjectModalPage'
+import { ProjectPage, projectPageRoute } from './ProjectPage'
+import { TrackerPageDefault } from './TrackerPageDefault'
 
 export const trackerPageRoute: IRoute = {
   template: '/*',
@@ -13,6 +14,11 @@ export const trackerPageRoute: IRoute = {
 }
 
 const styles = {
+  main: {
+    display: 'grid',
+    gridColumnGap: '1rem',
+    gridTemplateColumns: '300px 1fr'
+  },
   link: {
     marginBottom: '1rem'
   }
@@ -23,16 +29,19 @@ interface IProps extends RouteComponentProps, WithSheet<typeof styles, {}> { }
 export const TrackerPageInner: React.FC<IProps> = ({ classes }) => {
 
   return <ProjectsContextProvider>
-    <Link to={addProjectModalPageRoute.getUrl()}>
-      <Button tabIndex={-1} className={classes.link}>Add project</Button>
-    </Link>
-
-    <Projects />
-
-    <Router>
-      <AddProjectModalPage path={addProjectModalPageRoute.template} />
-    </Router>
-  </ProjectsContextProvider>
+    <main role='main' className={classes.main}>
+      <aside>
+        <ProjectsList />
+      </aside>
+      <section>
+        <Router>
+          <TrackerPageDefault default />
+          <ProjectPage path={projectPageRoute.template} />
+          <AddProjectModalPage path={addProjectModalPageRoute.template} />
+        </Router>
+      </section>
+    </main>
+  </ProjectsContextProvider >
 }
 
 export const TrackerPage = injectSheet(styles)(TrackerPageInner)
