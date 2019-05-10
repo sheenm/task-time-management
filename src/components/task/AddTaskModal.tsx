@@ -1,33 +1,35 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { ITask, WithoutId } from 'app/dto'
 import React from 'react'
 import { RepositoryContext } from '../repositories/RepositoryContext'
+import { TasksContext } from './TasksContextProvider'
 
 interface IProps {
   closeModal: () => void
   projectId: number
 }
 
-export const AddTaskModal: React.FC<IProps> = ({ closeModal }) => {
+export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
 
   const [taskTitle, setTaskTitle] = React.useState('')
   const { tasksRepo } = React.useContext(RepositoryContext)
-  // const { dispatch } = React.useContext(ProjectsContext)
+  const { dispatch } = React.useContext(TasksContext)
 
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
     setTaskTitle(e.target.value), [])
 
   const createTask = React.useCallback(() => {
-    // const project = {
-    //   title: taskTitle
-    // }
+    const task: WithoutId<ITask> = {
+      projectId,
+      title: taskTitle
+    }
 
-    // projectRepo.add(project)
-    //   .then(id => {
-    //     dispatch({ type: 'ADD_PROJECT', project: { ...project, id } })
-    //     closeModal()
-    //   })
-
-  }, [taskTitle]) // , projectRepo])
+    tasksRepo.add(task)
+      .then((id) => {
+        dispatch({ type: 'ADD_TASK', task: { ...task, id } })
+        closeModal()
+      })
+  }, [tasksRepo, projectId, taskTitle])
 
   const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter')

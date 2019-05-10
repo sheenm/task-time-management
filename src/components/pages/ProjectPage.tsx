@@ -6,6 +6,7 @@ import React from 'react'
 import { Project } from '../project/Project'
 import { ProjectsContext } from '../project/ProjectsContextProvider'
 import { RepositoryContext } from '../repositories/RepositoryContext'
+import { TasksContextProvider } from '../task/TasksContextProvider'
 import { AddProjectModalPage, addProjectModalPageRoute } from './AddProjectModalPage'
 import { AddTaskModalPage, addTaskModalPageRoute } from './AddTaskModalPage'
 
@@ -40,11 +41,11 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
       We're sorry. We couldn't find this project
      </Callout>
 
-  return <>
+  return <TasksContextProvider projectId={project.id}>
     <Project project={project} rename={rename} />
     <Router>
       <AddProjectModalPage path={addProjectModalPageRoute.template} />
       <AddTaskModalPage path={addTaskModalPageRoute.template} />
     </Router>
-  </>
+  </TasksContextProvider>
 }
