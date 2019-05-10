@@ -3,7 +3,7 @@ import { IRoute } from 'app/routes'
 import React from 'react'
 import { AddProjectModal } from '../project/AddProjectModal'
 
-export const addProjectModalPageRoute: IRoute<string> = {
+export const addProjectModalPageRoute: IRoute = {
   template: 'add-project',
   getUrl: () => '/add-project'
 }
@@ -17,7 +17,7 @@ export const AddProjectModalPage: React.FC<RouteComponentProps> = ({ navigate, l
     const backRoute = location.pathname.replace(addProjectModalPageRoute.template, '')
     navigate(backRoute)
 
-  }, [navigate])
+  }, [navigate, location])
 
   return <AddProjectModal closeModal={navigateBack} />
 }
