@@ -1,13 +1,13 @@
 import { Router } from '@reach/router'
+import { Header } from 'components/layout/Header'
+import { Wrapper } from 'components/layout/Wrapper'
+import { NotFoundPage } from 'components/pages/NotFoundPage'
+import { ReportsPage, reportsPageRoute } from 'components/pages/ReportsPage'
+import { TrackerPage, trackerPageRoute } from 'components/pages/TrackerPage'
+import 'index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Header } from './components/layout/Header'
-import { Wrapper } from './components/layout/Wrapper'
-import { NotFoundPage } from './components/pages/NotFoundPage'
-import { ReportsPage, reportsPageRoute } from './components/pages/ReportsPage'
-import { TrackerPage, trackerPageRoute } from './components/pages/TrackerPage'
-import './index.css'
-import * as serviceWorker from './serviceWorker'
+import * as serviceWorker from 'serviceWorker'
 
 const App: React.FC = () => {
   return <>

@@ -1,4 +1,4 @@
-import { ProjectRepository } from "../projectRepository"
+import { ProjectRepository } from "repositories/projectRepository"
 
 beforeEach(() => {
   window.localStorage.clear()

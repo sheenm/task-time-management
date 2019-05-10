@@ -1,9 +1,9 @@
 import { IRepositoryContext } from 'app/repositories'
 import React from 'react'
-import { ProjectRepository } from '../../repositories/projectRepository'
-import { ReportsRepository } from '../../repositories/reportsRepository'
-import { TaskRepository } from '../../repositories/taskRepository'
-import { TimestampRepository } from '../../repositories/timestampRepository'
+import { ProjectRepository } from 'repositories/projectRepository'
+import { ReportsRepository } from 'repositories/reportsRepository'
+import { TaskRepository } from 'repositories/taskRepository'
+import { TimestampRepository } from 'repositories/timestampRepository'
 
 /**
  * Context to inject repositories.

@@ -1,10 +1,10 @@
 import { IProject, ITask } from 'app/dto'
+import { ProjectPresenter } from 'components/project/ProjectPresenter'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { Task } from 'components/task/Task'
+import { TasksContext } from 'components/task/TasksContextProvider'
+import { useLoading } from 'hooks/useLoading'
 import React from 'react'
-import { useLoading } from '../../hooks/useLoading'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { Task } from '../task/Task'
-import { TasksContext } from '../task/TasksContextProvider'
-import { ProjectPresenter } from './ProjectPresenter'
 
 interface IProps {
   project: IProject

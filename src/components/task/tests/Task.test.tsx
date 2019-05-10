@@ -1,6 +1,6 @@
+import { Task } from 'components/task/Task'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Task } from '../Task'
 
 describe('Task.test', () => {
   it('should render without crashing', () => {

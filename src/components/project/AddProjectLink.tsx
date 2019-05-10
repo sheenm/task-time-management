@@ -1,6 +1,6 @@
 import { Link, Location } from '@reach/router'
+import { addProjectModalPageRoute } from 'components/pages/AddProjectModalPage'
 import React from 'react'
-import { addProjectModalPageRoute } from '../pages/AddProjectModalPage'
 
 export const AddProjectLink: React.FC = () => {
 

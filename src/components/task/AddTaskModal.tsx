@@ -1,8 +1,8 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { ITask, WithoutId } from 'app/dto'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { TasksContext } from 'components/task/TasksContextProvider'
 import React from 'react'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { TasksContext } from './TasksContextProvider'
 
 interface IProps {
   closeModal: () => void

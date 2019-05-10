@@ -1,4 +1,4 @@
-import { TimestampRepository } from "../timestampRepository"
+import { TimestampRepository } from "repositories/timestampRepository"
 
 beforeEach(() => {
   window.localStorage.clear()
@@ -25,8 +25,8 @@ describe('timestamp repository add tests', () => {
     const addResult = await repository.add({
       comment: 'some comment',
       taskId,
-      datetimeEnd: '',
-      datetimeStart: ''
+      datetimeEnd: undefined,
+      datetimeStart: new Date()
     })
 
     const timestamps = await repository.get(taskId)
@@ -46,8 +46,8 @@ describe('timestamp repository save() tests', () => {
     await repository.add({
       comment: 'some comment',
       taskId,
-      datetimeEnd: '',
-      datetimeStart: ''
+      datetimeEnd: undefined,
+      datetimeStart: new Date()
     })
 
     const timestamp = (await repository.get(taskId))[0]
@@ -70,8 +70,8 @@ describe('timestamp repository save() tests', () => {
       id: 1,
       comment: 'some comment',
       taskId,
-      datetimeEnd: '',
-      datetimeStart: ''
+      datetimeEnd: undefined,
+      datetimeStart: new Date()
     })
 
     const timestamps = await repository.get(taskId)
@@ -91,8 +91,8 @@ describe('timestamp repository delete() tests', () => {
     await repository.add({
       comment: 'some comment',
       taskId,
-      datetimeEnd: '',
-      datetimeStart: ''
+      datetimeEnd: undefined,
+      datetimeStart: new Date()
     })
 
     const timestamp = (await repository.get(taskId))[0]
@@ -113,8 +113,8 @@ describe('timestamp repository delete() tests', () => {
     await repository.add({
       comment: 'some comment',
       taskId,
-      datetimeEnd: '',
-      datetimeStart: ''
+      datetimeEnd: undefined,
+      datetimeStart: new Date()
     })
 
     await repository.delete(someRandomTimestampId)

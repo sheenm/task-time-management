@@ -1,12 +1,12 @@
 import { RouteComponentProps, Router } from '@reach/router'
 import { IRoute } from 'app/routes'
+import { AddProjectModalPage, addProjectModalPageRoute } from 'components/pages/AddProjectModalPage'
+import { ProjectPage, projectPageRoute } from 'components/pages/ProjectPage'
+import { TrackerPageDefault } from 'components/pages/TrackerPageDefault'
+import { ProjectsContextProvider } from 'components/project/ProjectsContextProvider'
+import { ProjectsList } from 'components/project/ProjectsList'
 import React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { ProjectsContextProvider } from '../project/ProjectsContextProvider'
-import { ProjectsList } from '../project/ProjectsList'
-import { AddProjectModalPage, addProjectModalPageRoute } from './AddProjectModalPage'
-import { ProjectPage, projectPageRoute } from './ProjectPage'
-import { TrackerPageDefault } from './TrackerPageDefault'
 
 export const trackerPageRoute: IRoute = {
   template: '/*',

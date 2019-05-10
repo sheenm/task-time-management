@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
 import { storiesOf } from '@storybook/react'
+import { TaskPresenter } from 'components/task/TaskPresenter'
+import { TimestampPresenter } from 'components/timestamp/TimestampPresenter'
 import React from 'react'
-import { TaskPresenter } from '../components/task/TaskPresenter'
-import { TimestampPresenter } from '../components/timestamp/TimestampPresenter'
 
 storiesOf('TaskPresenter', module)
   .add('folded', () => {

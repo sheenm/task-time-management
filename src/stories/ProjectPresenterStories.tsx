@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import { storiesOf } from '@storybook/react'
+import { ProjectPresenter } from 'components/project/ProjectPresenter'
 import React from 'react'
-import { ProjectPresenter } from '../components/project/ProjectPresenter'
 
 storiesOf('ProjectPresenter', module)
   .add('normal', () => {

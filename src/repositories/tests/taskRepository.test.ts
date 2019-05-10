@@ -1,4 +1,4 @@
-import { TaskRepository } from "../taskRepository"
+import { TaskRepository } from "repositories/taskRepository"
 
 beforeEach(() => {
   window.localStorage.clear()

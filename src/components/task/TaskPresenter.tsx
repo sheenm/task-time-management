@@ -1,9 +1,9 @@
 import { ButtonGroup, Card, Collapse, EditableText, Elevation } from '@blueprintjs/core'
+import { ToggleTaskStartPresenter } from 'components/task/ToggleTaskStartPresenter'
+import { ITimestampPresenterProps } from 'components/timestamp/TimestampPresenter'
+import { ToggleOpenPresenter } from 'components/toggles/ToggleOpenPresenter'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { ITimestampPresenterProps } from '../timestamp/TimestampPresenter'
-import { ToggleOpenPresenter } from '../toggles/ToggleOpenPresenter'
-import { ToggleTaskStartPresenter } from './ToggleTaskStartPresenter'
 
 const styles = {
   card: {

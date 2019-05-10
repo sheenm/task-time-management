@@ -1,11 +1,11 @@
 import { ITask, ITimestamp, WithoutId } from 'app/dto'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { TaskPresenter } from 'components/task/TaskPresenter'
+import { Timestamp } from 'components/timestamp/Timestamp'
+import { useLoading } from 'hooks/useLoading'
+import { useToggle } from 'hooks/useToggle'
 import React, { useReducer } from 'react'
-import { useLoading } from '../../hooks/useLoading'
-import { useToggle } from '../../hooks/useToggle'
-import { neverReached } from '../../utils/neverReached'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { Timestamp } from '../timestamp/Timestamp'
-import { TaskPresenter } from './TaskPresenter'
+import { neverReached } from 'utils/neverReached'
 
 interface ILoadTimestampsAction {
   type: 'LOAD_TIMESTAMPS'

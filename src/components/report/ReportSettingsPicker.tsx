@@ -1,6 +1,6 @@
 import { StandardPeriodNames } from 'app/report'
+import { CurrentPeriodPicker } from 'components/report/ReportSettingsPicker/CurrentPeriodPicker'
 import React from 'react'
-import { CurrentPeriodPicker } from './ReportSettingsPicker/CurrentPeriodPicker'
 
 interface IProps {
   period: StandardPeriodNames

@@ -1,7 +1,7 @@
 import { RouteComponentProps } from '@reach/router'
 import { IRoute } from 'app/routes'
+import { AddProjectModal } from 'components/project/AddProjectModal'
 import React from 'react'
-import { AddProjectModal } from '../project/AddProjectModal'
 
 export const addProjectModalPageRoute: IRoute = {
   template: 'add-project',

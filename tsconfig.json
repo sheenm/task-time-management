@@ -22,7 +22,8 @@
     "strictNullChecks": true,
     "alwaysStrict": true,
     "noImplicitReturns": true,
-    "removeComments": true
+    "removeComments": true,
+    "baseUrl": "src"
   },
   "include": [
     "src"

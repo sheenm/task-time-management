@@ -1,12 +1,12 @@
 import { MenuDivider, UL } from '@blueprintjs/core'
 import { Link } from '@reach/router'
+import { projectPageRoute } from 'components/pages/ProjectPage'
+import { AddProjectLink } from 'components/project/AddProjectLink'
+import { ProjectsContext } from 'components/project/ProjectsContextProvider'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { useLoading } from 'hooks/useLoading'
 import React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { useLoading } from '../../hooks/useLoading'
-import { projectPageRoute } from '../pages/ProjectPage'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { AddProjectLink } from './AddProjectLink'
-import { ProjectsContext } from './ProjectsContextProvider'
 
 const styles = {
   ul: {

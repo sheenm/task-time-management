@@ -1,6 +1,6 @@
+import { Project } from 'components/project/Project'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Project } from '../Project'
 
 describe('Project.test', () => {
   it('should render without crashing', () => {

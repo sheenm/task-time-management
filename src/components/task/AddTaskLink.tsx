@@ -1,6 +1,7 @@
 import { Link } from '@reach/router'
+import { addTaskModalPageRoute, IAddTaskRouteState } from 'components/pages/AddTaskModalPage'
 import React from 'react'
-import { addTaskModalPageRoute, IAddTaskRouteState } from '../pages/AddTaskModalPage'
+
 
 interface IProps {
   projectId: number

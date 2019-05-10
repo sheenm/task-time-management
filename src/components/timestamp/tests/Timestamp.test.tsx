@@ -1,6 +1,6 @@
+import { Timestamp } from 'components/timestamp/Timestamp'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Timestamp } from '../Timestamp'
 
 /**
  * * For now the component is simple and do not contains complex logic

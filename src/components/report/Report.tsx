@@ -1,9 +1,9 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
+import { ReportTimestampsGroup } from 'components/report/ReportTimestampsGroup'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import 'extensions/arrays/groupBy'
+import { useLoading } from 'hooks/useLoading'
 import React from 'react'
-import '../../extensions/arrays/groupBy'
-import { useLoading } from '../../hooks/useLoading'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { ReportTimestampsGroup } from './ReportTimestampsGroup'
 
 interface IProps {
   period: StandardPeriodNames

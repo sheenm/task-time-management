@@ -1,7 +1,7 @@
 import { RouteComponentProps } from '@reach/router'
 import { IRoute } from 'app/routes'
+import { AddTaskModal } from 'components/task/AddTaskModal'
 import React from 'react'
-import { AddTaskModal } from '../task/AddTaskModal'
 
 export const addTaskModalPageRoute: IRoute = {
   template: 'add-task',

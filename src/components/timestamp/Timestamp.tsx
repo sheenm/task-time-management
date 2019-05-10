@@ -1,6 +1,6 @@
 import { ITimestamp } from 'app/dto'
+import { TimestampPresenter } from 'components/timestamp/TimestampPresenter'
 import React from 'react'
-import { TimestampPresenter } from './TimestampPresenter'
 
 interface IProps {
   remove: () => void

@@ -1,9 +1,9 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core'
 import { navigate } from '@reach/router'
 import { StandardPeriodNames } from 'app/report'
+import { reportPageRoute } from 'components/pages/ReportPage'
+import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
 import React from 'react'
-import { reportPageRoute } from '../../pages/ReportPage'
-import { standardPeriods } from './standardPeriods'
 
 interface IProps {
   period: StandardPeriodNames

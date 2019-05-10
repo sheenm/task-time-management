@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react'
+import { ReportTimestampsGroup } from 'components/report/ReportTimestampsGroup'
 import React from 'react'
-import { ReportTimestampsGroup } from '../components/report/ReportTimestampsGroup'
 
 storiesOf('ReportTimestampPresenter', module)
   .add('simple', () => {

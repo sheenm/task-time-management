@@ -1,8 +1,9 @@
-import { ITimestamp } from "app/dto"
-import { IStandardPeriods } from "app/report"
-import '../../../extensions/datetime/addDays'
-import '../../../extensions/datetime/discardTime'
-import '../../../extensions/datetime/isEqual'
+
+import { ITimestamp } from 'app/dto'
+import { IStandardPeriods } from 'app/report'
+import 'extensions/datetime/addDays'
+import 'extensions/datetime/discardTime'
+import 'extensions/datetime/isEqual'
 
 export const standardPeriods: IStandardPeriods = {
   today: {

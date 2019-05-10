@@ -1,10 +1,10 @@
 import { Button, Navbar, NavbarDivider, NavbarGroup, NavbarHeading } from '@blueprintjs/core'
 import { Link } from '@reach/router'
+import { Wrapper } from 'components/layout/Wrapper'
+import { reportsPageRoute } from 'components/pages/ReportsPage'
+import { trackerPageRoute } from 'components/pages/TrackerPage'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
-import { reportsPageRoute } from '../pages/ReportsPage'
-import { trackerPageRoute } from '../pages/TrackerPage'
-import { Wrapper } from './Wrapper'
 
 const styles = {
   navbar: {

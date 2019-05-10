@@ -1,7 +1,7 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { ProjectsContext } from 'components/project/ProjectsContextProvider'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import React from 'react'
-import { RepositoryContext } from '../repositories/RepositoryContext'
-import { ProjectsContext } from './ProjectsContextProvider'
 
 interface IProps {
   closeModal: () => void

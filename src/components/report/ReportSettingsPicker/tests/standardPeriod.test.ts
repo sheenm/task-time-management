@@ -1,5 +1,5 @@
-import { ITimestamp } from "app/dto"
-import { standardPeriods } from "../standardPeriods"
+import { ITimestamp } from 'app/dto'
+import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
 
 describe('StandardPeriod.test', () => {
   const today = new Date()

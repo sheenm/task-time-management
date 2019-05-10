@@ -1,6 +1,6 @@
 import { IProject, WithoutId } from "app/dto"
 import { IProjectRepository } from "app/repositories"
-import { LocalStorageRepository } from "./localStorageRepository"
+import { LocalStorageRepository } from "repositories/localStorageRepository"
 
 const projectsKey = 'projects'
 const projectIndexKey = 'projects.index'

@@ -1,12 +1,12 @@
 import { RouteComponentProps } from '@reach/router'
 import { StandardPeriodNames } from 'app/report'
 import { IRoute } from 'app/routes'
+import { NotFoundPage } from 'components/pages/NotFoundPage'
+import { reportsPageRoute } from 'components/pages/ReportsPage'
+import { Report } from 'components/report/Report'
+import { ReportSettingsPicker } from 'components/report/ReportSettingsPicker'
+import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
 import React from 'react'
-import { Report } from '../report/Report'
-import { ReportSettingsPicker } from '../report/ReportSettingsPicker'
-import { standardPeriods } from '../report/ReportSettingsPicker/standardPeriods'
-import { NotFoundPage } from './NotFoundPage'
-import { reportsPageRoute } from './ReportsPage'
 
 export const reportPageRoute: IRoute<string> = {
   template: ':period',

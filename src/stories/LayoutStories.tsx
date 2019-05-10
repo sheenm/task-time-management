@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react'
+import { Wrapper } from 'components/layout/Wrapper'
 import React from 'react'
-import { Wrapper } from '../components/layout/Wrapper'
 
 storiesOf('Layout', module)
   .add('Wrapper', () => {

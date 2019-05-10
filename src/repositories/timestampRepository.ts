@@ -1,8 +1,8 @@
 import { ITimestamp, ITimestampDto, WithoutId } from "app/dto"
 import { StandardPeriodNames } from "app/report"
 import { ITimestampRepository } from "app/repositories"
-import { standardPeriods } from "../components/report/ReportSettingsPicker/standardPeriods"
-import { LocalStorageRepository } from "./localStorageRepository"
+import { standardPeriods } from "components/report/ReportSettingsPicker/standardPeriods"
+import { LocalStorageRepository } from "repositories/localStorageRepository"
 
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'

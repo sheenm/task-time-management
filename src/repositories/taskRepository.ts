@@ -1,6 +1,6 @@
 import { ITask, WithoutId } from "app/dto"
 import { ITaskRepository } from "app/repositories"
-import { LocalStorageRepository } from "./localStorageRepository"
+import { LocalStorageRepository } from "repositories/localStorageRepository"
 
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'

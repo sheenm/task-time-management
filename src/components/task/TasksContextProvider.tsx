@@ -1,6 +1,6 @@
 import { ITask } from 'app/dto'
 import React from 'react'
-import { neverReached } from '../../utils/neverReached'
+import { neverReached } from 'utils/neverReached'
 
 interface ILoadTasksAction {
   type: 'LOAD_TASKS'
