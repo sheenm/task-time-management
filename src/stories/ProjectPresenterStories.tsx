@@ -8,7 +8,7 @@ storiesOf('ProjectPresenter', module)
     return <ProjectPresenter
       title='Task time management'
       onTitleChanged={action('title changed')}
-      addTask={action('task added')}
+      projectId={1}
     />
   },
     {
@@ -25,7 +25,7 @@ storiesOf('ProjectPresenter', module)
     return <ProjectPresenter
       title='Task time management 28372 83728 32893 2893 28937 289 2893 72893 7289372893 72893 28937283 2903 jasdnasj dhasd jsaklas jdlask djsakldj saldjaslkd asjklsa'
       onTitleChanged={action('title changed')}
-      addTask={action('task added')}
+      projectId={1}
     />
   },
     {

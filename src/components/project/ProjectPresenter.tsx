@@ -1,6 +1,7 @@
 import { Button, EditableText, H2 } from '@blueprintjs/core'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
+import { AddTaskLink } from '../task/AddTaskLink'
 
 const styles = {
   container: {
@@ -15,24 +16,26 @@ const styles = {
 }
 
 interface IProps extends WithSheet<typeof styles, {}> {
+  projectId: number
   title: string
   onTitleChanged: (title: string) => void
-
-  addTask: () => void
 }
 
 const ProjectPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
+
   return <section className={classes.container}>
     <H2>
       <EditableText
         confirmOnEnterKey
         onConfirm={props.onTitleChanged}
         defaultValue={props.title}
-        multiline={true}
+        multiline
         className={classes.text}
       />
     </H2>
-    <Button icon='plus' title='add task' onClick={props.addTask} minimal />
+    <AddTaskLink projectId={props.projectId}>
+      <Button icon='plus' title='add task' minimal />
+    </AddTaskLink>
   </section>
 }
 

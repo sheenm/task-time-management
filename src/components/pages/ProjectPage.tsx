@@ -7,6 +7,7 @@ import { Project } from '../project/Project'
 import { ProjectsContext } from '../project/ProjectsContextProvider'
 import { RepositoryContext } from '../repositories/RepositoryContext'
 import { AddProjectModalPage, addProjectModalPageRoute } from './AddProjectModalPage'
+import { AddTaskModalPage, addTaskModalPageRoute } from './AddTaskModalPage'
 
 export const projectPageRoute: IRoute<number> = {
   template: ':projectId/*',
@@ -43,7 +44,7 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
     <Project project={project} rename={rename} />
     <Router>
       <AddProjectModalPage path={addProjectModalPageRoute.template} />
+      <AddTaskModalPage path={addTaskModalPageRoute.template} />
     </Router>
   </>
 }
-
