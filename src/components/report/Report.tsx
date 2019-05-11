@@ -38,9 +38,16 @@ export const Report: React.FC<IProps> = ({ period }) => {
 
 function getDateTimeDiff(start: Date, end?: Date) {
   if (end === undefined || !start.extIsDayEqualOrGreater(end)) {
-    end = new Date(start)
-    // tslint:disable-next-line: no-magic-numbers
-    end.setHours(23, 59, 59)
+    const now = new Date()
+    if (start.extIsDayEqual(now)) {
+      end = now
+    }
+    else {
+      end = new Date(start)
+      // tslint:disable-next-line: no-magic-numbers
+      end.setHours(23, 59, 59)
+    }
+
   }
 
   const diff = new Date(end.getTime() - start.getTime())
