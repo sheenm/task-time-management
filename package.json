@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^3.14.1",
+    "@blueprintjs/datetime": "^3.9.0",
     "@reach/router": "^1.2.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
