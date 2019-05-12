@@ -9,7 +9,7 @@ storiesOf('TimestampPresenter', module)
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project'
       changeComment={action('comment changed')}
-      edit={action('edit action')}
+      id={1}
       remove={action('remove Timestamp action')}
     />
   },
@@ -28,7 +28,7 @@ storiesOf('TimestampPresenter', module)
       dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
       comment='Added storybook to the project and I worked hard to bring this to this site. And now it is awesome to see how this will help me! That comment was not enough for me so I will write something else to make this comment very big. I want to make this comment the biggest comment I ever will make in this app in production'
       changeComment={action('comment changed')}
-      edit={action('edit action')}
+      id={1}
       remove={action('remove Timestamp action')}
     />
   },

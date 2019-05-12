@@ -9,6 +9,7 @@ import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TasksContextProvider } from 'components/task/TasksContextProvider'
 import React from 'react'
+import { EditTimestampModalPage, editTimestampModalPageRoute } from './EditTimestampModalPage'
 
 export const projectPageRoute: IRoute<number> = {
   template: ':projectId/*',
@@ -46,6 +47,7 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
     <Router>
       <AddProjectModalPage path={addProjectModalPageRoute.template} />
       <AddTaskModalPage path={addTaskModalPageRoute.template} />
+      <EditTimestampModalPage path={editTimestampModalPageRoute.template} />
     </Router>
   </TasksContextProvider>
 }

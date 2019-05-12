@@ -61,7 +61,7 @@ storiesOf('TaskPresenter', module)
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Created Task Presenter'
         changeComment={action('comment changed')}
-        edit={action('edit action')}
+        id={1}
         remove={action('remove Timestamp action')}
       />
 
@@ -69,7 +69,7 @@ storiesOf('TaskPresenter', module)
         dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
         comment='Modified Grid for better layout'
         changeComment={action('comment changed')}
-        edit={action('edit action')}
+        id={1}
         remove={action('remove Timestamp action')}
       />
     </TaskPresenter>
@@ -98,7 +98,7 @@ storiesOf('TaskPresenter', module)
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Created Task Presenter'
           changeComment={action('comment changed')}
-          edit={action('edit action')}
+          id={1}
           remove={action('remove Timestamp action')}
         />
 
@@ -106,7 +106,7 @@ storiesOf('TaskPresenter', module)
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'
           comment='Modified Grid for better layout'
           changeComment={action('comment changed')}
-          edit={action('edit action')}
+          id={1}
           remove={action('remove Timestamp action')}
         />
       </TaskPresenter>

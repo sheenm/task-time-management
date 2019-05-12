@@ -1,4 +1,6 @@
 import { Button, ButtonGroup, Card, EditableText, Elevation } from '@blueprintjs/core'
+import { Link } from '@reach/router'
+import { editTimestampModalPageRoute } from 'components/pages/EditTimestampModalPage'
 import * as React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
 
@@ -30,7 +32,7 @@ export interface ITimestampPresenterProps extends WithSheet<typeof styles, {}> {
   dateTime: string
   comment: string
   remove: () => void
-  edit: () => void
+  id: number
   changeComment: (newComment: string) => void
 }
 
@@ -40,7 +42,9 @@ const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, 
     <p className={classes.date}>{props.dateTime}</p>
     <EditableText confirmOnEnterKey onConfirm={props.changeComment} defaultValue={props.comment} />
     <ButtonGroup className={classes.actions} minimal>
-      <Button icon='edit' onClick={props.edit} title='Edit timestamp' />
+      <Link to={editTimestampModalPageRoute.getUrl({ timestampId: props.id })}>
+        <Button icon='edit' title='Edit timestamp' />
+      </Link>
       <Button icon='remove' onClick={props.remove} title='Remove timestamp' />
     </ButtonGroup>
   </Card>
