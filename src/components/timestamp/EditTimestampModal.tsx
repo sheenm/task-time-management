@@ -28,7 +28,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
       start: timestamp.datetimeStart,
       end: timestamp.datetimeEnd
     })
-  }, [timestamp])
+  }, [timestamp.comment])
 
   const [title, setTitle] = React.useState(timestamp.comment)
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
@@ -116,5 +116,4 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
 const dateFormatter = {
   formatDate: (date: Date | undefined) => (date === undefined ? "" : date.toLocaleDateString()),
   parseDate: (str: string) => new Date(Date.parse(str)),
-  placeholder: "JS Date",
 }
