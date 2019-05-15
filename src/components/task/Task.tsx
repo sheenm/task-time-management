@@ -2,59 +2,9 @@ import { ITask, ITimestamp, WithoutId } from 'app/dto'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TaskPresenter } from 'components/task/TaskPresenter'
 import { Timestamp } from 'components/timestamp/Timestamp'
-import { useLoading } from 'hooks/useLoading'
+import { TimestampsContext } from 'components/timestamp/TimestampsContextProvider'
 import { useToggle } from 'hooks/useToggle'
-import React, { useReducer } from 'react'
-import { neverReached } from 'utils/neverReached'
-
-interface ILoadTimestampsAction {
-  type: 'LOAD_TIMESTAMPS'
-  timestamps: ITimestamp[]
-}
-
-interface IRemoveTimestampAction {
-  type: 'REMOVE_TIMESTAMP'
-  id: number
-}
-
-interface IChangeTimestampAction {
-  type: 'CHANGE_TIMESTAMP'
-  changedTimestamp: ITimestamp
-}
-
-interface ICreateTimestampAction {
-  type: 'CREATE_TIMESTAMP',
-  timestamp: ITimestamp
-}
-
-type ActionTypes = ILoadTimestampsAction |
-  IRemoveTimestampAction |
-  IChangeTimestampAction |
-  ICreateTimestampAction
-
-const reducer = (state: ITimestamp[], action: ActionTypes) => {
-
-  switch (action.type) {
-    case 'LOAD_TIMESTAMPS':
-      return action.timestamps
-    case 'REMOVE_TIMESTAMP':
-      const removedIndex = state.findIndex(x => x.id === action.id)
-      const removedState = [...state]
-      removedState.splice(removedIndex, 1)
-
-      return removedState
-    case 'CHANGE_TIMESTAMP':
-      const changedState = [...state]
-      const changedIndex = state.findIndex(x => x.id === action.changedTimestamp.id)
-      changedState.splice(changedIndex, 1, action.changedTimestamp)
-
-      return changedState
-    case 'CREATE_TIMESTAMP':
-      return [...state, action.timestamp]
-    default:
-      return neverReached(action)
-  }
-}
+import React from 'react'
 
 interface IProps {
   task: ITask
@@ -63,18 +13,16 @@ interface IProps {
 
 export const Task: React.FC<IProps> = ({ task, rename }) => {
   const [isOpen, toggleOpen] = useToggle(false)
-  const [stateTimestamps, dispatch] = useReducer(reducer, [])
+  const { stateTimestamps, dispatch } = React.useContext(TimestampsContext)
   const { timestampsRepo } = React.useContext(RepositoryContext)
   const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
 
-  const loadingState = useLoading({
-    load: () => timestampsRepo.get(task.id),
-    then: timestamps => {
-      dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
-      const activetimestamp = timestamps.find(x => x.datetimeEnd === undefined)
-      setStartedTimestamp(activetimestamp)
-    }
-  })
+  const taskTimestamps = stateTimestamps.filter(x => x.taskId === task.id)
+
+  React.useEffect(() => {
+    const activetimestamp = taskTimestamps.find(x => x.datetimeEnd === undefined)
+    setStartedTimestamp(activetimestamp)
+  }, [taskTimestamps])
 
   const createChangeCommentFn = React.useCallback((timestamp: ITimestamp) => {
     return (newComment: string) => {
@@ -131,9 +79,6 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     ? startTimestamp
     : stopTimestamp
 
-  if (loadingState === 'Loading')
-    return <h1>todo loading 10. Data loading trobber</h1>
-
   return <TaskPresenter
     title={task.title}
     changeTitle={rename}
@@ -142,7 +87,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     isStarted={startedTimestamp !== undefined}
     toggleTaskStart={toggleTaskStart}
   >
-    {stateTimestamps.map(x =>
+    {taskTimestamps.map(x =>
       <Timestamp
         key={x.id}
         timestamp={x}
