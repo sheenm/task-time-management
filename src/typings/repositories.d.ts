@@ -12,7 +12,9 @@ declare module 'app/repositories' {
     delete: (itemId: number) => Promise<void>
   }
 
-  interface ITimestampRepository extends IRepository<ITimestamp> { }
+  interface ITimestampRepository extends IRepository<ITimestamp> {
+    public getAll(): Promise<ITimestamp[]>
+  }
   interface ITaskRepository extends IRepository<ITask> { }
   interface IProjectRepository extends IRepository<IProject> {
     get: () => Promise<IProject[]>
