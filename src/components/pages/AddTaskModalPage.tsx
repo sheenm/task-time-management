@@ -3,29 +3,37 @@ import { IRoute } from 'app/routes'
 import { AddTaskModal } from 'components/task/AddTaskModal'
 import React from 'react'
 
-export const addTaskModalPageRoute: IRoute = {
-  template: 'add-task',
-  getUrl: () => 'add-task'
+interface IRouteProps {
+  projectId: number | string
 }
 
-export interface IAddTaskRouteState {
-  projectId: number
+export const addTaskModalPageRoute: IRoute<IRouteProps> = {
+  template: 'add-task/:projectId',
+  getUrl: (props) => {
+    if (props === undefined)
+      return ''
+
+    return `add-task/${props.projectId}`
+
+  }
 }
 
-export const AddTaskModalPage: React.FC<RouteComponentProps> = ({ navigate, location }) => {
+interface IProps {
+  projectId: string
+}
+
+export const AddTaskModalPage: React.FC<RouteComponentProps<IProps>> = ({ navigate, location, projectId }) => {
   const navigateBack = React.useCallback(() => {
-    if (navigate === undefined || location === undefined)
+    if (navigate === undefined || location === undefined || projectId === undefined)
       return
 
-    const backRoute = location.pathname.replace(addTaskModalPageRoute.template, '')
+    const backRoute = location.pathname.replace(addTaskModalPageRoute.getUrl({ projectId }), '')
     navigate(backRoute)
 
   }, [navigate, location])
 
-  if (location === undefined)
+  if (location === undefined || projectId === undefined)
     return <div />
 
-  const { projectId } = location.state as IAddTaskRouteState
-
-  return <AddTaskModal closeModal={navigateBack} projectId={projectId} />
+  return <AddTaskModal closeModal={navigateBack} projectId={Number(projectId)} />
 }

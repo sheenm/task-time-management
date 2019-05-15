@@ -1,7 +1,6 @@
 import { Link } from '@reach/router'
-import { addTaskModalPageRoute, IAddTaskRouteState } from 'components/pages/AddTaskModalPage'
+import { addTaskModalPageRoute } from 'components/pages/AddTaskModalPage'
 import React from 'react'
-
 
 interface IProps {
   projectId: number
@@ -9,11 +8,7 @@ interface IProps {
 
 export const AddTaskLink: React.FC<IProps> = ({ children, projectId }) => {
 
-  const state: IAddTaskRouteState = {
-    projectId
-  }
-
-  return <Link to={addTaskModalPageRoute.getUrl()} state={state}>
+  return <Link to={addTaskModalPageRoute.getUrl({ projectId })}>
     {children}
   </Link>
 }
