@@ -37,10 +37,17 @@ export interface ITimestampPresenterProps extends WithSheet<typeof styles, {}> {
 }
 
 const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, ...props }) => {
+  const [comment, setComment] = React.useState(props.comment)
+
+  React.useEffect(() => {
+    setComment(props.comment)
+  }, [props.comment])
+
+  const onConfirm = () => props.changeComment(comment)
 
   return <Card elevation={Elevation.ZERO} className={classes.card}>
     <p className={classes.date}>{props.dateTime}</p>
-    <EditableText confirmOnEnterKey onConfirm={props.changeComment} defaultValue={props.comment} />
+    <EditableText confirmOnEnterKey onConfirm={onConfirm} value={comment} onChange={setComment} />
     <ButtonGroup className={classes.actions} minimal>
       <Link to={editTimestampModalPageRoute.getUrl({ timestampId: props.id })}>
         <Button icon='edit' title='Edit timestamp' />

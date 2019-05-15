@@ -1,7 +1,9 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 import { ITimestamp } from 'app/dto'
+import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import React from 'react'
+import { TimestampsContext } from './TimestampsContextProvider'
 
 interface IProps {
   timestampId: number
@@ -9,14 +11,24 @@ interface IProps {
 }
 
 export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }) => {
-  // todo get real timestamp
-  const timestamp: ITimestamp = {
-    comment: 'blablabla',
-    datetimeEnd: undefined,
+  const { stateTimestamps, dispatch } = React.useContext(TimestampsContext)
+  const { timestampsRepo } = React.useContext(RepositoryContext)
+
+  const timestamp = stateTimestamps.find(x => x.id === timestampId) || {
+    comment: '',
     datetimeStart: new Date(),
     id: timestampId,
-    taskId: 1
+    taskId: -1,
+    datetimeEnd: undefined
   }
+
+  React.useEffect(() => {
+    setTitle(timestamp.comment)
+    setDateState({
+      start: timestamp.datetimeStart,
+      end: timestamp.datetimeEnd
+    })
+  }, [timestamp])
 
   const [title, setTitle] = React.useState(timestamp.comment)
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,8 +50,21 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
   }, [setDateState])
 
   const confirm = React.useCallback(() => {
-    closeModal()
-  }, [])
+    const changedTimestamp: ITimestamp = {
+      id: timestamp.id,
+      taskId: timestamp.taskId,
+      comment: title,
+      datetimeStart: dateState.start,
+      datetimeEnd: dateState.end
+    }
+
+    timestampsRepo.save(changedTimestamp)
+      .then(() => {
+        dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp })
+
+        closeModal()
+      })
+  }, [timestamp, title, dateState, timestampsRepo])
 
   const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter')
@@ -80,7 +105,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
     <section className={Classes.DIALOG_FOOTER}>
       <div className={Classes.DIALOG_FOOTER_ACTIONS}>
         <Button onClick={closeModal} title='Close dialog'>Close</Button>
-        <Button intent={Intent.PRIMARY} onClick={confirm} title='Add task'>
+        <Button intent={Intent.PRIMARY} onClick={confirm} title='change timestamp'>
           Change timestamp
         </Button>
       </div>
