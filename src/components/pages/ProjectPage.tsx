@@ -14,9 +14,7 @@ import { EditTimestampModalPage, editTimestampModalPageRoute } from './EditTimes
 
 export const projectPageRoute: IRoute<number> = {
   template: ':projectId/*',
-  getUrl: (projectId) => {
-    return `/${projectId}`
-  }
+  getUrl: (projectId) => `/${projectId}`
 }
 
 interface IProps {

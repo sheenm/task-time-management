@@ -9,13 +9,7 @@ interface IRouteProps {
 
 export const addTaskModalPageRoute: IRoute<IRouteProps> = {
   template: 'add-task/:projectId',
-  getUrl: (props) => {
-    if (props === undefined)
-      return ''
-
-    return `add-task/${props.projectId}`
-
-  }
+  getUrl: ({ projectId }) => `add-task/${projectId}`
 }
 
 interface IProps {

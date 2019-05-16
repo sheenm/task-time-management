@@ -1,5 +1,5 @@
 import { RouteComponentProps, Router } from '@reach/router'
-import { IRoute } from 'app/routes'
+import { IStaticRoute } from 'app/routes'
 import { AddProjectModalPage, addProjectModalPageRoute } from 'components/pages/AddProjectModalPage'
 import { ProjectPage, projectPageRoute } from 'components/pages/ProjectPage'
 import { TrackerPageDefault } from 'components/pages/TrackerPageDefault'
@@ -8,7 +8,7 @@ import { ProjectsList } from 'components/project/ProjectsList'
 import React from 'react'
 import injectSheet, { WithSheet } from 'react-jss'
 
-export const trackerPageRoute: IRoute = {
+export const trackerPageRoute: IStaticRoute = {
   template: '/*',
   getUrl: () => '/'
 }

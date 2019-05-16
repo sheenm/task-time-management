@@ -9,12 +9,7 @@ interface IRouteProps {
 
 export const editTimestampModalPageRoute: IRoute<IRouteProps> = {
   template: 'edit-timestamp/:timestampId',
-  getUrl: (props) => {
-    if (props === undefined)
-      return ''
-
-    return `edit-timestamp/${props.timestampId}`
-  }
+  getUrl: ({ timestampId }) => `edit-timestamp/${timestampId}`
 }
 
 interface IProps {

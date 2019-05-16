@@ -1,9 +1,9 @@
 import { RouteComponentProps, Router } from '@reach/router'
-import { IRoute } from 'app/routes'
+import { IStaticRoute } from 'app/routes'
 import { ReportPage, reportPageRoute } from 'components/pages/ReportPage'
 import React from 'react'
 
-export const reportsPageRoute: IRoute = {
+export const reportsPageRoute: IStaticRoute = {
   template: 'reports/*',
   getUrl: () => 'reports'
 }
