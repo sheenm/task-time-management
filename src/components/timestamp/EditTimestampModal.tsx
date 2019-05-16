@@ -13,12 +13,13 @@ interface IProps {
 export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }) => {
   const { stateTimestamps, dispatch } = React.useContext(TimestampsContext)
   const { timestampsRepo } = React.useContext(RepositoryContext)
+  const defaultTaskId = -1
 
   const timestamp = stateTimestamps.find(x => x.id === timestampId) || {
     comment: '',
     datetimeStart: new Date(),
     id: timestampId,
-    taskId: -1,
+    taskId: defaultTaskId,
     datetimeEnd: undefined
   }
 
@@ -71,6 +72,10 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
       confirm()
   }, [confirm])
 
+  // not found or did not load
+  if (timestamp.taskId === defaultTaskId)
+    return <div />
+
   return <Dialog
     title='Changing timestamp'
     isOpen={true}
@@ -89,8 +94,8 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
         <DateRangeInput
           allowSingleDayRange
           closeOnSelection={false}
-          formatDate={dateFormatter.formatDate}
-          parseDate={dateFormatter.parseDate}
+          formatDate={formatDate}
+          parseDate={parseDate}
           timePickerProps={{
             selectAllOnFocus: true,
           }}
@@ -113,7 +118,5 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
   </Dialog>
 }
 
-const dateFormatter = {
-  formatDate: (date: Date | undefined) => (date === undefined ? "" : date.toLocaleDateString()),
-  parseDate: (str: string) => new Date(Date.parse(str)),
-}
+const formatDate = (date: Date | undefined) => (date === undefined ? "" : date.toLocaleString())
+const parseDate = (str: string) => new Date(Date.parse(str))
