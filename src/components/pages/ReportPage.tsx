@@ -10,12 +10,7 @@ import React from 'react'
 
 export const reportPageRoute: IRoute<string> = {
   template: ':period',
-  getUrl: (period) => {
-    if (period === undefined)
-      return reportsPageRoute.getUrl()
-
-    return '/' + reportsPageRoute.getUrl() + '/' + period
-  }
+  getUrl: (period) => `/${reportsPageRoute.getUrl()}/${period}`
 }
 
 interface IProps {

@@ -9,12 +9,10 @@ interface IProps {
 }
 
 export const Timestamp: React.FC<IProps> = ({ remove, timestamp, changeComment }) => {
-  const edit = () => console.log('todo 5: Can change every time stamp')
-
   return <TimestampPresenter
     comment={timestamp.comment}
     dateTime={getTimestampDatetime(timestamp.datetimeStart, timestamp.datetimeEnd)}
-    edit={edit}
+    id={timestamp.id}
     remove={remove}
     changeComment={changeComment}
   />

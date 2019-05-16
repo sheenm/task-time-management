@@ -8,13 +8,13 @@ import { Project } from 'components/project/Project'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TasksContextProvider } from 'components/task/TasksContextProvider'
+import { TimestampsContextProvider } from 'components/timestamp/TimestampsContextProvider'
 import React from 'react'
+import { EditTimestampModalPage, editTimestampModalPageRoute } from './EditTimestampModalPage'
 
 export const projectPageRoute: IRoute<number> = {
   template: ':projectId/*',
-  getUrl: (projectId) => {
-    return `/${projectId}`
-  }
+  getUrl: (projectId) => `/${projectId}`
 }
 
 interface IProps {
@@ -42,10 +42,13 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
      </Callout>
 
   return <TasksContextProvider projectId={project.id}>
-    <Project project={project} rename={rename} />
-    <Router>
-      <AddProjectModalPage path={addProjectModalPageRoute.template} />
-      <AddTaskModalPage path={addTaskModalPageRoute.template} />
-    </Router>
+    <TimestampsContextProvider>
+      <Project project={project} rename={rename} />
+      <Router>
+        <AddProjectModalPage path={addProjectModalPageRoute.template} />
+        <AddTaskModalPage path={addTaskModalPageRoute.template} />
+        <EditTimestampModalPage path={editTimestampModalPageRoute.template} />
+      </Router>
+    </TimestampsContextProvider>
   </TasksContextProvider>
 }

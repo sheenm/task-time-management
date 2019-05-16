@@ -67,7 +67,7 @@ export class TimestampRepository implements ITimestampRepository {
       })
   }
 
-  private getAll(): Promise<ITimestamp[]> {
+  public getAll(): Promise<ITimestamp[]> {
     return this.localStorage.getItems<ITimestampDto>(timestampsKey)
       .then(dtos => dtos.map<ITimestamp>(dto => this.convertFromDto(dto)))
   }

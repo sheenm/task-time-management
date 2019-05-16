@@ -1,9 +1,9 @@
 import { RouteComponentProps } from '@reach/router'
-import { IRoute } from 'app/routes'
+import { IStaticRoute } from 'app/routes'
 import { AddProjectModal } from 'components/project/AddProjectModal'
 import React from 'react'
 
-export const addProjectModalPageRoute: IRoute = {
+export const addProjectModalPageRoute: IStaticRoute = {
   template: 'add-project',
   getUrl: () => '/add-project'
 }

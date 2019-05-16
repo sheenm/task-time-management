@@ -3,6 +3,7 @@ import { ProjectPresenter } from 'components/project/ProjectPresenter'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { Task } from 'components/task/Task'
 import { TasksContext } from 'components/task/TasksContextProvider'
+import { TimestampsContext } from 'components/timestamp/TimestampsContextProvider'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
 
@@ -13,12 +14,18 @@ interface IProps {
 
 export const Project: React.FC<IProps> = ({ project, rename }) => {
   const { stateTasks, dispatch } = React.useContext(TasksContext)
-  const { tasksRepo } = React.useContext(RepositoryContext)
+  const timestampsContext = React.useContext(TimestampsContext)
+  const { tasksRepo, timestampsRepo } = React.useContext(RepositoryContext)
 
-  const loadingState = useLoading({
+  const loadingTasksState = useLoading({
     load: () => tasksRepo.get(project.id),
     then: tasks => dispatch({ type: 'LOAD_TASKS', tasks }),
     dependencies: [project]
+  })
+
+  const loadingTimestampsState = useLoading({
+    load: () => timestampsRepo.getAll(),
+    then: timestamps => timestampsContext.dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
   })
 
   const createRenameFn = React.useCallback((task: ITask) => {
@@ -29,7 +36,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
     }
   }, [tasksRepo])
 
-  if (loadingState === 'Loading')
+  if (loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
   return <>
@@ -42,5 +49,4 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       <Task key={x.id} task={x} rename={createRenameFn(x)} />
     )}
   </>
-
 }
