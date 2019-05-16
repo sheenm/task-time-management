@@ -77,9 +77,9 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
     onClose={closeModal}
   >
     <section className={Classes.DIALOG_BODY}>
-      <FormGroup label='Title:' labelFor='addTaskInput'>
+      <FormGroup label='Title:' labelFor='timestampTitle'>
         <InputGroup
-          id='addTaskInput'
+          id='timestampTitle'
           onChange={onTitleChanged}
           value={title}
           onKeyDown={onEnterPressed}
