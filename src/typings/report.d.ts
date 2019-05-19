@@ -1,5 +1,5 @@
 declare module 'app/report' {
-  import { ITimestamp } from "app/dto"
+  import { ITimestamp } from 'app/businessObjects'
 
   interface IStandardPeriod {
     title: string

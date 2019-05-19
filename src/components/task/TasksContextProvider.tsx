@@ -1,4 +1,4 @@
-import { Dictionary, ITask } from 'app/dto'
+import { Dictionary, ITask } from 'app/businessObjects'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
 

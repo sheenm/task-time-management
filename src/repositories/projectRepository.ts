@@ -1,6 +1,7 @@
-import { Dictionary, IProject, WithoutId } from "app/dto"
-import { IProjectRepository } from "app/repositories"
-import { LocalStorageRepository } from "repositories/localStorageRepository"
+import { Dictionary, IProject, WithoutId } from 'app/businessObjects'
+import { IProjectDto } from 'app/dto'
+import { IProjectRepository } from 'app/repositories'
+import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const projectsKey = 'projects'
 const projectIndexKey = 'projects.index'
@@ -10,7 +11,7 @@ export class ProjectRepository implements IProjectRepository {
   private readonly localStorage = new LocalStorageRepository()
 
   public get(): Promise<Dictionary<IProject>> {
-    return this.localStorage.getMap<IProject>(projectsKey)
+    return this.localStorage.getMap<IProjectDto>(projectsKey)
   }
 
   /**

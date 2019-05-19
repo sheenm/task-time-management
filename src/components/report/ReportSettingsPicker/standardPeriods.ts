@@ -1,5 +1,5 @@
 
-import { ITimestamp } from 'app/dto'
+import { ITimestamp } from 'app/businessObjects'
 import { IStandardPeriods } from 'app/report'
 import 'extensions/datetime/addDays'
 import 'extensions/datetime/discardTime'

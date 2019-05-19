@@ -1,6 +1,6 @@
 import { Callout, Intent } from '@blueprintjs/core'
 import { RouteComponentProps, Router } from '@reach/router'
-import { IProject } from 'app/dto'
+import { IProject } from 'app/businessObjects'
 import { IRoute } from 'app/routes'
 import { AddProjectModalPage, addProjectModalPageRoute } from 'components/pages/AddProjectModalPage'
 import { AddTaskModalPage, addTaskModalPageRoute } from 'components/pages/AddTaskModalPage'

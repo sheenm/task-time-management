@@ -1,4 +1,4 @@
-import { Dictionary, ITimestamp } from 'app/dto'
+import { Dictionary, ITimestamp } from 'app/businessObjects'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
 

@@ -1,5 +1,5 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
-import { ITask, WithoutId } from 'app/dto'
+import { ITask, WithoutId } from 'app/businessObjects'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TasksContext } from 'components/task/TasksContextProvider'

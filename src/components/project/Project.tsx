@@ -1,4 +1,4 @@
-import { IProject, ITask } from 'app/dto'
+import { IProject, ITask } from 'app/businessObjects'
 import { ProjectPresenter } from 'components/project/ProjectPresenter'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { Task } from 'components/task/Task'

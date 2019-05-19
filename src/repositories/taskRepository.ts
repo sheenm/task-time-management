@@ -1,6 +1,7 @@
-import { Dictionary, ITask, WithoutId } from "app/dto"
-import { ITaskRepository } from "app/repositories"
-import { LocalStorageRepository } from "repositories/localStorageRepository"
+import { Dictionary, ITask, WithoutId } from 'app/businessObjects'
+import { ITaskDto } from 'app/dto'
+import { ITaskRepository } from 'app/repositories'
+import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'
@@ -63,7 +64,7 @@ export class TaskRepository implements ITaskRepository {
   }
 
   private getAll(): Promise<Dictionary<ITask>> {
-    return this.localStorage.getMap<ITask>(tasksKey)
+    return this.localStorage.getMap<ITaskDto>(tasksKey)
   }
 
   private getCurrentIndex(): Promise<number> {
