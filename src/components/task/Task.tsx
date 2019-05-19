@@ -1,4 +1,4 @@
-import { ITask, ITimestamp, WithoutId } from 'app/dto'
+import { ITask, ITimestamp, WithoutId } from 'app/businessObjects'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TaskPresenter } from 'components/task/TaskPresenter'
 import { Timestamp } from 'components/timestamp/Timestamp'

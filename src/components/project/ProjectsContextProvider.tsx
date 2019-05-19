@@ -1,4 +1,4 @@
-import { Dictionary, IProject } from 'app/dto'
+import { Dictionary, IProject } from 'app/businessObjects'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
 

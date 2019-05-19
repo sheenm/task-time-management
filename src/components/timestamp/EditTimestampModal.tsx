@@ -1,6 +1,6 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
-import { ITimestamp } from 'app/dto'
+import { ITimestamp } from 'app/businessObjects'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import React from 'react'
 import { TimestampsContext } from './TimestampsContextProvider'

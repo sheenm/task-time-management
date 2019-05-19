@@ -1,4 +1,4 @@
-import { ITimestamp } from 'app/dto'
+import { ITimestamp } from 'app/businessObjects'
 import { TimestampPresenter } from 'components/timestamp/TimestampPresenter'
 import React from 'react'
 

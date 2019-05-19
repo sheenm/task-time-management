@@ -1,5 +1,5 @@
 declare module 'app/repositories' {
-  import { Dictionary, IProject, ITask, ITimestamp, WithoutId } from 'app/dto'
+  import { Dictionary, IProject, ITask, ITimestamp, WithoutId } from 'app/businessObjects'
   import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 
   interface IRepository<T> {

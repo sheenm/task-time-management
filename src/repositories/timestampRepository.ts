@@ -1,4 +1,5 @@
-import { Dictionary, ITimestamp, ITimestampDto, WithoutId } from 'app/dto'
+import { Dictionary, ITimestamp, WithoutId } from 'app/businessObjects'
+import { ITimestampDto } from 'app/dto'
 import { StandardPeriodNames } from 'app/report'
 import { ITimestampRepository } from 'app/repositories'
 import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'

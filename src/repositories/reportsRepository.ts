@@ -1,7 +1,7 @@
-import { Dictionary, ITask, ITimestamp } from "app/dto"
-import { IReportTimestamp, StandardPeriodNames } from "app/report"
-import { TaskRepository } from "repositories/taskRepository"
-import { TimestampRepository } from "repositories/timestampRepository"
+import { Dictionary, ITask, ITimestamp } from 'app/businessObjects'
+import { IReportTimestamp, StandardPeriodNames } from 'app/report'
+import { TaskRepository } from 'repositories/taskRepository'
+import { TimestampRepository } from 'repositories/timestampRepository'
 
 export class ReportsRepository {
 
