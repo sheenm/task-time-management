@@ -18,18 +18,10 @@ export class TaskRepository implements ITaskRepository {
   }
 
   public async getByIds(ids: number[]) {
-    // todo May be should optimize here and not use values()
-    const allTasks = (await this.getAll()).values()
-    const selectedTasks: Record<number, ITask> = {}
+    const allTasks = await this.getAll()
 
-    for (const task of allTasks) {
-      if (ids.every(id => id !== task.id))
-        continue
-
-      selectedTasks[task.id] = task
-    }
-
-    return selectedTasks
+    return new Map([...allTasks]
+      .filter(([, task]) => ids.some(id => id === task.id)))
   }
 
   /**

@@ -1,4 +1,4 @@
-import { ITask, ITimestamp } from "app/dto"
+import { Dictionary, ITask, ITimestamp } from "app/dto"
 import { IReportTimestamp, StandardPeriodNames } from "app/report"
 import { TaskRepository } from "repositories/taskRepository"
 import { TimestampRepository } from "repositories/timestampRepository"
@@ -15,8 +15,8 @@ export class ReportsRepository {
     return timestamps.map(x => this.mapToReportTimestamp(x, tasks))
   }
 
-  private mapToReportTimestamp(timestamp: ITimestamp, tasks: Record<number, ITask>): IReportTimestamp {
-    const task = tasks[timestamp.taskId]
+  private mapToReportTimestamp(timestamp: ITimestamp, tasks: Dictionary<ITask>): IReportTimestamp {
+    const task = tasks.get(timestamp.taskId)
     const taskTitle = task === undefined ? '' : task.title
 
     return {

@@ -24,7 +24,6 @@ export class TimestampRepository implements ITimestampRepository {
   public getWithPeriod(period: StandardPeriodNames): Promise<ITimestamp[]> {
     const { filterFunction } = standardPeriods[period]
 
-    // todo may be I should not convert to array here, should check
     return this.getAll()
       .then(timestamps => [...timestamps.values()])
       .then(filterFunction)
