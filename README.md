@@ -3,7 +3,7 @@ Does 1 thing and does it well. Helps you to track your time you spent on project
 
 While building this project I aim to maintain as much of accessebility as I can. The project can be navigated with keyboard only. Also, all dialogs has its own routes so you can safely reload your page or open it in a new tab and you will not lose your dialogs 😎
 
-Now this project doesn't have any server so it simply saves data to browser's local storage (temprary, and the code may not be optimized in repositories)
+Now this project doesn't have any server so it simply saves data to browser's local storage (temporary, and the code may not be optimized in repositories)
 
 ## Getting started
 
