@@ -1,8 +1,8 @@
-import { ITimestamp, ITimestampDto, WithoutId } from "app/dto"
-import { StandardPeriodNames } from "app/report"
-import { ITimestampRepository } from "app/repositories"
-import { standardPeriods } from "components/report/ReportSettingsPicker/standardPeriods"
-import { LocalStorageRepository } from "repositories/localStorageRepository"
+import { Dictionary, ITimestamp, ITimestampDto, WithoutId } from 'app/dto'
+import { StandardPeriodNames } from 'app/report'
+import { ITimestampRepository } from 'app/repositories'
+import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
+import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'
@@ -11,15 +11,22 @@ export class TimestampRepository implements ITimestampRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
-  public get(taskId: number): Promise<ITimestamp[]> {
+  public get(taskId: number): Promise<Dictionary<ITimestamp>> {
     return this.getAll()
-      .then(timestamps => timestamps.filter(x => x.taskId === taskId))
+      .then(timestamps => {
+        return new Map(
+          [...timestamps]
+            .filter(([, timestamp]) => timestamp.taskId === taskId)
+        )
+      })
   }
 
   public getWithPeriod(period: StandardPeriodNames): Promise<ITimestamp[]> {
     const { filterFunction } = standardPeriods[period]
 
+    // todo may be I should not convert to array here, should check
     return this.getAll()
+      .then(timestamps => [...timestamps.values()])
       .then(filterFunction)
   }
 
@@ -34,9 +41,8 @@ export class TimestampRepository implements ITimestampRepository {
 
         return this.getAll()
           .then(timestamps => {
-            timestamps.push(timestampToAdd)
-
-            this.localStorage.setItem(timestampsKey, timestamps)
+            timestamps.set(index, timestampToAdd)
+            this.localStorage.setMap(timestampsKey, timestamps)
 
             return timestampToAdd.id
           })
@@ -46,30 +52,29 @@ export class TimestampRepository implements ITimestampRepository {
   public save(timestamp: ITimestamp): Promise<void> {
     return this.getAll()
       .then(timestamps => {
-        const index = timestamps.findIndex(x => x.id === timestamp.id)
+        if (!timestamps.has(timestamp.id))
+          return
 
-        if (index !== -1)
-          timestamps.splice(index, 1, timestamp)
-
-        this.localStorage.setItem(timestampsKey, timestamps)
+        timestamps.set(timestamp.id, timestamp)
+        this.localStorage.setMap(timestampsKey, timestamps)
       })
   }
 
   public delete(timestampId: number): Promise<void> {
     return this.getAll()
       .then(timestamps => {
-        const index = timestamps.findIndex(x => x.id === timestampId)
-
-        if (index !== -1)
-          timestamps.splice(index, 1)
-
-        this.localStorage.setItem(timestampsKey, timestamps)
+        timestamps.delete(timestampId)
+        this.localStorage.setMap(timestampsKey, timestamps)
       })
   }
 
-  public getAll(): Promise<ITimestamp[]> {
-    return this.localStorage.getItems<ITimestampDto>(timestampsKey)
-      .then(dtos => dtos.map<ITimestamp>(dto => this.convertFromDto(dto)))
+  public getAll(): Promise<Dictionary<ITimestamp>> {
+    return this.localStorage.getMap<ITimestampDto>(timestampsKey)
+      .then(dtos => {
+        return new Map([...dtos]
+          .map(([key, dto]) => [key, this.convertFromDto(dto)])
+        )
+      })
   }
 
   private getCurrentIndex(): Promise<number> {

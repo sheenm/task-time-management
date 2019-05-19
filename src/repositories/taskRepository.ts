@@ -1,4 +1,4 @@
-import { ITask, WithoutId } from "app/dto"
+import { Dictionary, ITask, WithoutId } from "app/dto"
 import { ITaskRepository } from "app/repositories"
 import { LocalStorageRepository } from "repositories/localStorageRepository"
 
@@ -9,13 +9,17 @@ export class TaskRepository implements ITaskRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
-  public get(projectId: number): Promise<ITask[]> {
+  public get(projectId: number): Promise<Dictionary<ITask>> {
     return this.getAll()
-      .then(tasks => tasks.filter(x => x.projectId === projectId))
+      .then(tasks => {
+        return new Map([...tasks]
+          .filter(([, task]) => task.projectId === projectId))
+      })
   }
 
   public async getByIds(ids: number[]) {
-    const allTasks = await this.getAll()
+    // todo May be should optimize here and not use values()
+    const allTasks = (await this.getAll()).values()
     const selectedTasks: Record<number, ITask> = {}
 
     for (const task of allTasks) {
@@ -39,8 +43,8 @@ export class TaskRepository implements ITaskRepository {
 
         return this.getAll()
           .then(tasks => {
-            tasks.push(taskToAdd)
-            this.localStorage.setItem(tasksKey, tasks)
+            tasks.set(index, taskToAdd)
+            this.localStorage.setMap(tasksKey, tasks)
 
             return taskToAdd.id
           })
@@ -50,29 +54,24 @@ export class TaskRepository implements ITaskRepository {
   public save(task: ITask): Promise<void> {
     return this.getAll()
       .then(tasks => {
-        const index = tasks.findIndex(x => x.id === task.id)
+        if (!tasks.has(task.id))
+          return
 
-        if (index !== -1)
-          tasks.splice(index, 1, task)
-
-        this.localStorage.setItem(tasksKey, tasks)
+        tasks.set(task.id, task)
+        this.localStorage.setMap(tasksKey, tasks)
       })
   }
 
   public delete(taskId: number): Promise<void> {
     return this.getAll()
       .then(tasks => {
-        const index = tasks.findIndex(x => x.id === taskId)
-
-        if (index !== -1)
-          tasks.splice(index, 1)
-
-        this.localStorage.setItem(tasksKey, tasks)
+        tasks.delete(taskId)
+        this.localStorage.setMap(tasksKey, tasks)
       })
   }
 
-  private getAll(): Promise<ITask[]> {
-    return this.localStorage.getItems<ITask>(tasksKey)
+  private getAll(): Promise<Dictionary<ITask>> {
+    return this.localStorage.getMap<ITask>(tasksKey)
   }
 
   private getCurrentIndex(): Promise<number> {

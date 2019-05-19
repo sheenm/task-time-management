@@ -29,4 +29,17 @@ export class LocalStorageRepository {
   public setItem(key: string, item: object) {
     window.localStorage.setItem(key, JSON.stringify(item))
   }
+
+  public getMap<T>(key: string): Promise<Map<number, T>> {
+    const itemsJson = window.localStorage.getItem(key)
+
+    if (itemsJson === null)
+      return Promise.resolve(new Map())
+
+    return Promise.resolve(new Map(JSON.parse(itemsJson)))
+  }
+
+  public setMap<T>(key: string, items: Map<number, T>) {
+    window.localStorage.setItem(key, JSON.stringify([...items]))
+  }
 }

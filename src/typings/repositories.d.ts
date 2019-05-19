@@ -1,9 +1,9 @@
 declare module 'app/repositories' {
-  import { IProject, ITask, ITimestamp, WithoutId } from 'app/dto'
+  import { Dictionary, IProject, ITask, ITimestamp, WithoutId } from 'app/dto'
   import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 
   interface IRepository<T> {
-    get: (itemId: number) => Promise<T[]>
+    get: (itemId: number) => Promise<Dictionary<T>>
 
     add: (item: WithoutId<T>) => Promise<number>
 
@@ -13,11 +13,11 @@ declare module 'app/repositories' {
   }
 
   interface ITimestampRepository extends IRepository<ITimestamp> {
-    public getAll(): Promise<ITimestamp[]>
+    public getAll(): Promise<Dictionary<ITimestamp>>
   }
   interface ITaskRepository extends IRepository<ITask> { }
   interface IProjectRepository extends IRepository<IProject> {
-    get: () => Promise<IProject[]>
+    get: () => Promise<Dictionary<IProject>>
   }
 
   interface IReportRepository {

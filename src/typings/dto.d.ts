@@ -32,4 +32,6 @@ declare module 'app/dto' {
     id: number
     title: string
   }
+
+  type Dictionary<T> = Map<number, T>
 }

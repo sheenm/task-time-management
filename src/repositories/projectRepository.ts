@@ -1,4 +1,4 @@
-import { IProject, WithoutId } from "app/dto"
+import { Dictionary, IProject, WithoutId } from "app/dto"
 import { IProjectRepository } from "app/repositories"
 import { LocalStorageRepository } from "repositories/localStorageRepository"
 
@@ -9,8 +9,8 @@ export class ProjectRepository implements IProjectRepository {
 
   private readonly localStorage = new LocalStorageRepository()
 
-  public get(): Promise<IProject[]> {
-    return this.localStorage.getItems<IProject>(projectsKey)
+  public get(): Promise<Dictionary<IProject>> {
+    return this.localStorage.getMap<IProject>(projectsKey)
   }
 
   /**
@@ -24,8 +24,8 @@ export class ProjectRepository implements IProjectRepository {
 
         return this.get()
           .then(projects => {
-            projects.push(projectToAdd)
-            this.localStorage.setItem(projectsKey, projects)
+            projects.set(index, projectToAdd)
+            this.localStorage.setMap(projectsKey, projects)
 
             return projectToAdd.id
           })
@@ -35,24 +35,19 @@ export class ProjectRepository implements IProjectRepository {
   public save(project: IProject): Promise<void> {
     return this.get()
       .then(projects => {
-        const index = projects.findIndex(x => x.id === project.id)
+        if (!projects.has(project.id))
+          return
 
-        if (index !== -1)
-          projects.splice(index, 1, project)
-
-        this.localStorage.setItem(projectsKey, projects)
+        projects.set(project.id, project)
+        this.localStorage.setMap(projectsKey, projects)
       })
   }
 
   public delete(projectId: number): Promise<void> {
     return this.get()
       .then(projects => {
-        const index = projects.findIndex(x => x.id === projectId)
-
-        if (index !== -1)
-          projects.splice(index, 1)
-
-        this.localStorage.setItem(projectsKey, projects)
+        projects.delete(projectId)
+        this.localStorage.setMap(projectsKey, projects)
       })
   }
 
