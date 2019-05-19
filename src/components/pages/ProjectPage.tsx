@@ -24,7 +24,7 @@ interface IProps {
 export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }) => {
   const { stateProjects, dispatch } = React.useContext(ProjectsContext)
   const { projectRepo } = React.useContext(RepositoryContext)
-  const project = stateProjects.find(x => x.id === Number(projectId))
+  const project = stateProjects.get(Number(projectId))
 
   const rename = React.useCallback((newTitle: string) => {
     if (project === undefined)

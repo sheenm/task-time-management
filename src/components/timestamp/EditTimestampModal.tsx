@@ -15,7 +15,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
   const { timestampsRepo } = React.useContext(RepositoryContext)
   const defaultTaskId = -1
 
-  const timestamp = stateTimestamps.find(x => x.id === timestampId) || {
+  const timestamp = stateTimestamps.get(timestampId) || {
     comment: '',
     datetimeStart: new Date(),
     id: timestampId,

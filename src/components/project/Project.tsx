@@ -45,7 +45,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       onTitleChanged={rename}
       projectId={project.id}
     />
-    {stateTasks.map(x =>
+    {[...stateTasks.values()].map(x =>
       <Task key={x.id} task={x} rename={createRenameFn(x)} />
     )}
   </>
