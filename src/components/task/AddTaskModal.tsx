@@ -1,5 +1,6 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { ITask, WithoutId } from 'app/dto'
+import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { TasksContext } from 'components/task/TasksContextProvider'
 import React from 'react'
@@ -14,6 +15,7 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
   const [taskTitle, setTaskTitle] = React.useState('')
   const { tasksRepo } = React.useContext(RepositoryContext)
   const { dispatch } = React.useContext(TasksContext)
+  const { stateProjects } = React.useContext(ProjectsContext)
 
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
     setTaskTitle(e.target.value), [])
@@ -35,6 +37,11 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
     if (e.key === 'Enter')
       createTask()
   }, [createTask])
+
+  // not found or did not load yet
+  const project = stateProjects.get(projectId)
+  if (project === undefined)
+    return <div />
 
   return <Dialog
     title='Adding a task'
