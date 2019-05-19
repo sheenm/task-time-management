@@ -1,6 +1,6 @@
-import { Dictionary, IProject } from "app/dto"
+import { Dictionary, IProject } from 'app/dto'
 import React from 'react'
-import { neverReached } from "utils/neverReached"
+import { neverReached } from 'utils/neverReached'
 
 interface ILoadProjectsAction {
   type: 'LOAD_PROJECTS'
