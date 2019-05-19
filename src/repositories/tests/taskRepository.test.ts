@@ -1,3 +1,4 @@
+import { ITask } from "app/dto"
 import { TaskRepository } from "repositories/taskRepository"
 
 beforeEach(() => {
@@ -11,7 +12,7 @@ describe('task repository get() tests', () => {
     const projectId = 1
     const tasks = await repository.get(projectId)
 
-    expect(tasks).toEqual([])
+    expect([...tasks.values()]).toEqual([])
   })
 })
 
@@ -22,14 +23,14 @@ describe('task repository add() tests', () => {
     const repository = new TaskRepository()
     const projectId = 2
 
-    const addResult = await repository.add({
+    await repository.add({
       projectId,
       title: 'some title'
     })
 
     const tasks = await repository.get(projectId)
 
-    expect(tasks.length).toEqual(1)
+    expect(tasks.size).toEqual(1)
   })
 })
 
@@ -42,22 +43,25 @@ describe('task repository save() tests', () => {
     const repository = new TaskRepository()
     const projectId = 3
 
-    const addResult = await repository.add({
+    const id = await repository.add({
       projectId,
       title: 'some title'
     })
 
     const tasks = await repository.get(projectId)
-    const task = tasks[0]
+    // we're sure that it's not undefined or it will fail the test
+    const task = tasks.get(id) as ITask
     const newTitle = 'newTitle'
     task.title = newTitle
 
     await repository.save(task)
 
     const changedTasks = await repository.get(projectId)
-    expect(changedTasks.length).toBe(1)
-    expect(changedTasks[0].title).toBe(newTitle)
-    expect(changedTasks[0]).not.toBe(task)
+    expect(changedTasks.size).toBe(1)
+
+    const changedTask = changedTasks.get(id) as ITask
+    expect(changedTask.title).toBe(newTitle)
+    expect(changedTask).not.toBe(task)
   })
 
   it('when item is not found it will not be saved', async () => {
@@ -72,7 +76,7 @@ describe('task repository save() tests', () => {
     })
 
     const tasks = await repository.get(projectId)
-    expect(tasks.length).toBe(0)
+    expect(tasks.size).toBe(0)
   })
 })
 
@@ -91,7 +95,7 @@ describe('tasks repository delete() tests', () => {
     await repository.delete(addResult + 1)
     const tasks = await repository.get(projectId)
 
-    expect(tasks.length).toEqual(1)
+    expect(tasks.size).toEqual(1)
   })
 
   it('will delete task', async () => {
@@ -107,6 +111,6 @@ describe('tasks repository delete() tests', () => {
     await repository.delete(addResult)
     const tasks = await repository.get(projectId)
 
-    expect(tasks.length).toBe(0)
+    expect(tasks.size).toBe(0)
   })
 })

@@ -1,10 +1,10 @@
-import { ITask } from 'app/dto'
+import { Dictionary, ITask } from 'app/dto'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
 
 interface ILoadTasksAction {
   type: 'LOAD_TASKS'
-  tasks: ITask[]
+  tasks: Dictionary<ITask>
 }
 
 interface IRenameTaskAction {
@@ -20,19 +20,25 @@ interface IAddTaskAction {
 
 type ActionTypes = ILoadTasksAction | IRenameTaskAction | IAddTaskAction
 
-const reducer = (state: ITask[], action: ActionTypes) => {
+const reducer = (state: Dictionary<ITask>, action: ActionTypes) => {
 
   switch (action.type) {
     case 'LOAD_TASKS':
       return action.tasks
     case 'RENAME_TASK':
-      const renamedState = [...state]
-      const renamedIndex = state.findIndex(x => x.id === action.id)
-      renamedState[renamedIndex].title = action.newTitle
+      const renamedState = new Map(state)
+      const renamedItem = renamedState.get(action.id)
+      if (renamedItem === undefined)
+        return state
+
+      renamedItem.title = action.newTitle
 
       return renamedState
     case 'ADD_TASK':
-      return [...state, action.task]
+      const addedState = new Map(state)
+      addedState.set(action.task.id, action.task)
+
+      return addedState
     default:
       return neverReached(action)
   }
@@ -43,7 +49,7 @@ interface IProps {
 }
 
 interface ITasksContext {
-  stateTasks: ITask[]
+  stateTasks: Dictionary<ITask>
   dispatch: React.Dispatch<ActionTypes>
 }
 
@@ -51,11 +57,11 @@ export const TasksContext = React.createContext<ITasksContext>({
   dispatch: () => {
     throw new Error('Tasks context is not implemented')
   },
-  stateTasks: []
+  stateTasks: new Map()
 })
 
 export const TasksContextProvider: React.FC<IProps> = ({ children, projectId }) => {
-  const [stateTasks, dispatch] = React.useReducer(reducer, [])
+  const [stateTasks, dispatch] = React.useReducer(reducer, new Map())
 
   return <TasksContext.Provider value={{ stateTasks, dispatch }}>
     {children}

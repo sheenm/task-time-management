@@ -33,7 +33,7 @@ const ProjectsListInner: React.FC<IProps> = ({ classes }) => {
       <AddProjectLink />
     </li>
     <MenuDivider />
-    {stateProjects.map(x => <li key={x.id}>
+    {[...stateProjects.values()].map(x => <li key={x.id}>
       <Link to={projectPageRoute.getUrl(x.id)}>{x.title}</Link>
     </li>
     )}

@@ -16,17 +16,16 @@ export class LocalStorageRepository {
     window.localStorage.setItem(key, value.toString())
   }
 
-  public getItems<T>(key: string): Promise<T[]> {
+  public getMap<T>(key: string): Promise<Map<number, T>> {
     const itemsJson = window.localStorage.getItem(key)
+
     if (itemsJson === null)
-      return Promise.resolve([])
+      return Promise.resolve(new Map())
 
-    const items = JSON.parse(itemsJson) as T[]
-
-    return Promise.resolve(items)
+    return Promise.resolve(new Map(JSON.parse(itemsJson)))
   }
 
-  public setItem(key: string, item: object) {
-    window.localStorage.setItem(key, JSON.stringify(item))
+  public setMap<T>(key: string, items: Map<number, T>) {
+    window.localStorage.setItem(key, JSON.stringify([...items]))
   }
 }

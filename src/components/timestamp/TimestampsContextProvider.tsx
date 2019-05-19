@@ -1,10 +1,10 @@
-import { ITimestamp } from 'app/dto'
+import { Dictionary, ITimestamp } from 'app/dto'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
 
 interface ILoadTimestampsAction {
   type: 'LOAD_TIMESTAMPS'
-  timestamps: ITimestamp[]
+  timestamps: Dictionary<ITimestamp>
 }
 
 interface IRemoveTimestampAction {
@@ -27,32 +27,33 @@ type ActionTypes = ILoadTimestampsAction |
   IChangeTimestampAction |
   ICreateTimestampAction
 
-const reducer = (state: ITimestamp[], action: ActionTypes) => {
+const reducer = (state: Dictionary<ITimestamp>, action: ActionTypes) => {
 
   switch (action.type) {
     case 'LOAD_TIMESTAMPS':
       return action.timestamps
     case 'REMOVE_TIMESTAMP':
-      const removedIndex = state.findIndex(x => x.id === action.id)
-      const removedState = [...state]
-      removedState.splice(removedIndex, 1)
+      const removedState = new Map(state)
+      removedState.delete(action.id)
 
       return removedState
     case 'CHANGE_TIMESTAMP':
-      const changedState = [...state]
-      const changedIndex = state.findIndex(x => x.id === action.changedTimestamp.id)
-      changedState.splice(changedIndex, 1, action.changedTimestamp)
+      const changedState = new Map(state)
+      changedState.set(action.changedTimestamp.id, action.changedTimestamp)
 
       return changedState
     case 'CREATE_TIMESTAMP':
-      return [...state, action.timestamp]
+      const newState = new Map(state)
+      newState.set(action.timestamp.id, action.timestamp)
+
+      return newState
     default:
       return neverReached(action)
   }
 }
 
 interface ITimestampsContext {
-  stateTimestamps: ITimestamp[]
+  stateTimestamps: Dictionary<ITimestamp>
   dispatch: React.Dispatch<ActionTypes>
 }
 
@@ -60,11 +61,11 @@ export const TimestampsContext = React.createContext<ITimestampsContext>({
   dispatch: () => {
     throw new Error('Timestamps context is not implemented')
   },
-  stateTimestamps: []
+  stateTimestamps: new Map()
 })
 
 export const TimestampsContextProvider: React.FC = ({ children }) => {
-  const [stateTimestamps, dispatch] = React.useReducer(reducer, [])
+  const [stateTimestamps, dispatch] = React.useReducer(reducer, new Map())
 
   return <TimestampsContext.Provider value={{ stateTimestamps, dispatch }}>
     {children}

@@ -17,7 +17,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
   const { timestampsRepo } = React.useContext(RepositoryContext)
   const [startedTimestamp, setStartedTimestamp] = React.useState<ITimestamp | undefined>(undefined)
 
-  const taskTimestamps = stateTimestamps.filter(x => x.taskId === task.id)
+  const taskTimestamps = [...stateTimestamps.values()].filter(x => x.taskId === task.id)
 
   React.useEffect(() => {
     const activetimestamp = taskTimestamps.find(x => x.datetimeEnd === undefined)
