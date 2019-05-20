@@ -1,52 +1,47 @@
+## Simple time tracker (Todo app name 😉)
+Does 1 thing and does it well. Helps you to track your time you spent on projects. Currently in alpha.
+
+While building this project I aim to maintain as much of accessebility as I can. The project can be navigated with keyboard only. Also, all dialogs has its own routes so you can safely reload your page or open it in a new tab and you will not lose your dialogs 😎
+
+Now this project doesn't have any server so it simply saves data to browser's local storage (temporary, and the code may not be optimized in repositories)
+
+## Getting started
+
+1. Clone the repository
+2. Install packages with `yarn` command
+
+Congragulations! Now you can
+
+- Check storybook components with `yarn storybook` command
+- Launch project  with `yarn start` command
+- Launch tests with `yarn test` command
+- Build for production with `yarn build` command
+
+## Technologies/Libraries used in the project
+
+- [React](https://reactjs.org/) - amazing Javascript library for building user interfaces
+- [Reach Router](https://reach.tech/router) - Router for React built with accessibility in mind
+- [JSS](https://cssinjs.org/) - CSS in JS Library
+- [Typescript](http://www.typescriptlang.org/) - Typed superset of Javasript
+- [Storybook](https://storybook.js.org/) - development environment for UI components
+- [Jest](https://jestjs.io/) - Javascript testing framework
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - simple and complete React DOM testing utilities that encourage good testing practices
+- [TSLint](https://palantir.github.io/tslint/) - Typescript linter (should change to typescript-eslint)
+- [BlueprintJs](https://blueprintjs.com/) - React-based UI toolkit for the web.
+
+## Project navigator
+
+- `components` - React components
+- `extensions` - extension methods for built-in types
+- `hooks` - reusable React hooks
+- `repositories` - repositories with data for the app
+- `stories` - stories for storybook
+- `typings` - d.ts modules for typing app
+- `utils` - utility functions
+
+The `components` folder divided by business logic. The Exception is pages folder. It contains components used in page navigation. This way I can quickly see what pages exist in the project and also I can quickly switch to other router-library if needed
+
 ## Documentation
 
 - [Glossary](https://github.com/sheenm/task-time-management/blob/dev/Glossary.md)
 - [Code conventions](https://github.com/sheenm/task-time-management/blob/dev/Conventions.md)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn storybook`
-
-Runs the storybook
-Open [http://localhost:9009](http://localhost:9009) to view it in the browser.
-
-### `yarn start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
