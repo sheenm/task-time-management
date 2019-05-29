@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sheenm/task-time-management.svg?branch=dev)](https://travis-ci.org/sheenm/task-time-management)
+
 ## Simple time tracker (Todo app name 😉)
 Does 1 thing and does it well. Helps you to track your time you spent on projects. Currently in alpha.
 
