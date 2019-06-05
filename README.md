@@ -1,8 +1,6 @@
-[![Build Status](https://travis-ci.org/sheenm/task-time-management.svg?branch=dev)](https://travis-ci.org/sheenm/task-time-management)
+[![Greenkeeper badge](https://badges.greenkeeper.io/sheenm/task-time-management.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/sheenm/task-time-management.svg?branch=dev)](https://travis-ci.org/sheenm/task-time-management)
 
 ## Simple time tracker (Todo app name 😉)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/sheenm/task-time-management.svg)](https://greenkeeper.io/)
 
 Does 1 thing and does it well. Helps you to track your time you spent on projects. Currently in alpha.
 
