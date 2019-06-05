@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sheenm/task-time-management.svg?branch=dev)](https://travis-ci.org/sheenm/task-time-management)
+
 ## Simple time tracker (Todo app name 😉)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/sheenm/task-time-management.svg)](https://greenkeeper.io/)
