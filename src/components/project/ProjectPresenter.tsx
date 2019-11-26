@@ -1,7 +1,7 @@
 import { Button, EditableText, H2 } from '@blueprintjs/core'
 import { AddTaskLink } from 'components/task/AddTaskLink'
 import * as React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   container: {
@@ -15,7 +15,7 @@ const styles = {
   }
 }
 
-interface IProps extends WithSheet<typeof styles, {}> {
+interface IProps extends WithStyles<typeof styles> {
   projectId: number
   title: string
   onTitleChanged: (title: string) => void

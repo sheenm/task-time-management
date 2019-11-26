@@ -10,6 +10,7 @@ function loadStories() {
 configure(loadStories, module)
 
 addDecorator(
+  // @ts-ignore
   withInfo({
     styles: {
       header: {

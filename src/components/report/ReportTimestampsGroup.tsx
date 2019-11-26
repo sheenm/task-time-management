@@ -1,6 +1,6 @@
 import { HTMLTable } from '@blueprintjs/core'
 import React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   table: {
@@ -15,7 +15,7 @@ const styles = {
   }
 }
 
-interface IProps extends WithSheet<typeof styles, {}> {
+interface IProps extends WithStyles<typeof styles> {
   taskName: string
 
   timestamps: Array<{

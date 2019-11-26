@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Card, EditableText, Elevation } from '@blueprintjs
 import { Link } from '@reach/router'
 import { editTimestampModalPageRoute } from 'components/pages/EditTimestampModalPage'
 import * as React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   card: {
@@ -28,7 +28,7 @@ const styles = {
   }
 }
 
-export interface ITimestampPresenterProps extends WithSheet<typeof styles, {}> {
+export interface ITimestampPresenterProps extends WithStyles<typeof styles> {
   dateTime: string
   comment: string
   remove: () => void

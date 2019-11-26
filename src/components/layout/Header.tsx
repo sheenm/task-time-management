@@ -4,7 +4,7 @@ import { Wrapper } from 'components/layout/Wrapper'
 import { reportsPageRoute } from 'components/pages/ReportsPage'
 import { trackerPageRoute } from 'components/pages/TrackerPage'
 import * as React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   navbar: {
@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-interface IProps extends WithSheet<typeof styles, {}> {
+interface IProps extends WithStyles<typeof styles> {
 }
 
 const HeaderInner: React.FC<IProps> = ({ classes }) => {

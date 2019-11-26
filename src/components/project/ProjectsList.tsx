@@ -6,7 +6,7 @@ import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   ul: {
@@ -15,7 +15,7 @@ const styles = {
   }
 }
 
-interface IProps extends WithSheet<typeof styles, {}> { }
+interface IProps extends WithStyles<typeof styles> { }
 
 const ProjectsListInner: React.FC<IProps> = ({ classes }) => {
   const { stateProjects, dispatch } = React.useContext(ProjectsContext)

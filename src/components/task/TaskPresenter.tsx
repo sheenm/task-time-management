@@ -3,7 +3,7 @@ import { ToggleTaskStartPresenter } from 'components/task/ToggleTaskStartPresent
 import { ITimestampPresenterProps } from 'components/timestamp/TimestampPresenter'
 import { ToggleOpenPresenter } from 'components/toggles/ToggleOpenPresenter'
 import * as React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 const styles = {
   card: {
@@ -29,7 +29,7 @@ const styles = {
   }
 }
 
-interface IProps extends WithSheet<typeof styles, {}> {
+interface IProps extends WithStyles<typeof styles> {
   title: string
   changeTitle: (newTitle: string) => void
   isOpen: boolean

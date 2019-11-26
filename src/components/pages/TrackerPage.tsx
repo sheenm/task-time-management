@@ -6,7 +6,7 @@ import { TrackerPageDefault } from 'components/pages/TrackerPageDefault'
 import { ProjectsContextProvider } from 'components/project/ProjectsContextProvider'
 import { ProjectsList } from 'components/project/ProjectsList'
 import React from 'react'
-import injectSheet, { WithSheet } from 'react-jss'
+import injectSheet, { WithStyles } from 'react-jss'
 
 export const trackerPageRoute: IStaticRoute = {
   template: '/*',
@@ -26,7 +26,7 @@ const styles = {
   }
 }
 
-interface IProps extends RouteComponentProps, WithSheet<typeof styles, {}> { }
+interface IProps extends RouteComponentProps, WithStyles<typeof styles> { }
 
 export const TrackerPageInner: React.FC<IProps> = ({ classes }) => {
 
