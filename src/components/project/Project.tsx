@@ -34,7 +34,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       tasksRepo.save(changedTask)
         .then(() => dispatch({ type: 'RENAME_TASK', id: task.id, newTitle }))
     }
-  }, [tasksRepo])
+  }, [tasksRepo, dispatch])
 
   if (loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>

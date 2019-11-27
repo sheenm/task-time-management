@@ -29,7 +29,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
       start: timestamp.datetimeStart,
       end: timestamp.datetimeEnd
     })
-  }, [timestamp.comment])
+  }, [timestamp.comment, timestamp.datetimeEnd, timestamp.datetimeStart])
 
   const [title, setTitle] = React.useState(timestamp.comment)
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
@@ -50,7 +50,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
     })
   }, [setDateState])
 
-  const confirm = React.useCallback(() => {
+  const confirm = () => {
     const changedTimestamp: ITimestamp = {
       id: timestamp.id,
       taskId: timestamp.taskId,
@@ -65,12 +65,12 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
 
         closeModal()
       })
-  }, [timestamp, title, dateState, timestampsRepo])
+  }
 
-  const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter')
       confirm()
-  }, [confirm])
+  }
 
   // not found or did not load
   if (timestamp.taskId === defaultTaskId)

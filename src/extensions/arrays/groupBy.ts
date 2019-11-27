@@ -6,6 +6,7 @@ declare global {
 }
 
 if (Array.prototype.extGroupBy === undefined) {
+  // eslint-disable-next-line
   Array.prototype.extGroupBy = function (predicate) {
     // tslint:disable-next-line: no-invalid-this
     return groupBy(this)(predicate)

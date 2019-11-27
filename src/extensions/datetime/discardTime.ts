@@ -9,6 +9,7 @@ declare global {
 }
 
 if (Date.prototype.extDiscardTime === undefined) {
+  // eslint-disable-next-line
   Date.prototype.extDiscardTime = function () {
     // tslint:disable-next-line: no-invalid-this
     const date = new Date(this)

@@ -8,7 +8,7 @@ export const reportsPageRoute: IStaticRoute = {
   getUrl: () => 'reports'
 }
 
-export const ReportsPage: React.FC<RouteComponentProps> = ({ }) => {
+export const ReportsPage: React.FC<RouteComponentProps> = () => {
 
   return <Router>
     <ReportPage period='today' default />

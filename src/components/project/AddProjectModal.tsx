@@ -15,7 +15,7 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
     setProjectTitle(e.target.value), [])
 
-  const createProject = React.useCallback(() => {
+  const createProject = () => {
     const project = {
       title: projectTitle
     }
@@ -25,13 +25,12 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
         dispatch({ type: 'ADD_PROJECT', project: { ...project, id } })
         closeModal()
       })
+  }
 
-  }, [projectTitle, projectRepo])
-
-  const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter')
       createProject()
-  }, [createProject])
+  }
 
   return <Dialog
     title='Adding a project'

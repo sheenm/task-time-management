@@ -30,7 +30,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
       timestampsRepo.save(changedTimestamp)
         .then(() => dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp }))
     }
-  }, [timestampsRepo])
+  }, [timestampsRepo, dispatch])
 
   const createRemoveFn = React.useCallback((id: number) => {
     return () => {
@@ -42,7 +42,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         })
 
     }
-  }, [startedTimestamp, timestampsRepo])
+  }, [startedTimestamp, timestampsRepo, dispatch])
 
   const startTimestamp = React.useCallback(() => {
     if (startedTimestamp !== undefined)
@@ -61,7 +61,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         dispatch({ type: 'CREATE_TIMESTAMP', timestamp })
         setStartedTimestamp(timestamp)
       })
-  }, [startedTimestamp, timestampsRepo, task.id])
+  }, [startedTimestamp, timestampsRepo, task.id, dispatch])
 
   const stopTimestamp = React.useCallback(() => {
     if (startedTimestamp === undefined)
@@ -73,7 +73,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
         dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp: startedTimestamp })
         setStartedTimestamp(undefined)
       })
-  }, [startedTimestamp, timestampsRepo])
+  }, [startedTimestamp, timestampsRepo, dispatch])
 
   const toggleTaskStart = startedTimestamp === undefined
     ? startTimestamp

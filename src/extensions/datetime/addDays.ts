@@ -9,6 +9,7 @@ declare global {
 }
 
 if (Date.prototype.extAddDays === undefined) {
+  // eslint-disable-next-line
   Date.prototype.extAddDays = function (days) {
     // tslint:disable-next-line: no-invalid-this
     const date = new Date(this)
