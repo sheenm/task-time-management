@@ -22,7 +22,7 @@ describe('UseToggle.test', () => {
     expect(state).toBeFalsy()
   })
 
-  test('should hold the same state after 2 iterations', async () => {
+  test('should hold the same state after 2 iterations', () => {
     const { result } = renderHook(() => useToggle(true))
 
     const toggleFirstTime = result.current[1]

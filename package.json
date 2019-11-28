@@ -12,32 +12,6 @@
     "react-scripts": "^3.0.0",
     "typescript": "^3.4.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --modulePaths=src",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}'"
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "react-app"
-    ],
-    "rules": {}
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@storybook/addon-actions": "^5.0.5",
@@ -57,5 +31,20 @@
     "@typescript-eslint/parser": "^2.9.0",
     "babel-loader": "^8.0.5",
     "react-test-renderer": "^16.8.6"
-  }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --modulePaths=src",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
+    "lint:fix": "eslint './src/**/*.{ts,tsx}'"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
