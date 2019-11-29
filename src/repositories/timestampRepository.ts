@@ -7,6 +7,7 @@ import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'
+const startIndex = 1
 
 export class TimestampRepository implements ITimestampRepository {
 
@@ -81,9 +82,9 @@ export class TimestampRepository implements ITimestampRepository {
     return this.localStorage.getNumber(timestampIndexKey)
       .then(index => {
         if (index === undefined) {
-          this.localStorage.setNumber(timestampIndexKey, 1)
+          this.localStorage.setNumber(timestampIndexKey, startIndex)
 
-          return 1
+          return startIndex
         }
 
         return index

@@ -6,7 +6,7 @@ describe('StandardPeriod.test', () => {
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
   const twoDaysAgo = new Date()
-  // tslint:disable-next-line: no-magic-numbers
+  // eslint-disable-next-line
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
 
   const todayTimestamp: ITimestamp = {

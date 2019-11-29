@@ -20,7 +20,7 @@ export const Report: React.FC<IProps> = ({ period }) => {
   })
 
   if (loadingState === 'Loading')
-    return <h1>todo loading 10. Data loading trobber</h1>
+    return <h1>todo loading 10. Data loading throbber</h1>
 
   const groupedBy = timestamps.extGroupBy(x => x.taskTitle)
 
@@ -44,7 +44,7 @@ function getDateTimeDiff(start: Date, end?: Date) {
     }
     else {
       end = new Date(start)
-      // tslint:disable-next-line: no-magic-numbers
+      // eslint-disable-next-line
       end.setHours(23, 59, 59)
     }
 

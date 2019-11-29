@@ -24,7 +24,7 @@ export const AddTaskModalPage: React.FC<RouteComponentProps<IProps>> = ({ naviga
     const backRoute = location.pathname.replace(addTaskModalPageRoute.getUrl({ projectId }), '')
     navigate(backRoute)
 
-  }, [navigate, location])
+  }, [navigate, location, projectId])
 
   if (location === undefined || projectId === undefined)
     return <div />

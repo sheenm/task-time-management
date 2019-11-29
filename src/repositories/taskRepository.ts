@@ -5,6 +5,7 @@ import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'
+const startIndex = 1
 
 export class TaskRepository implements ITaskRepository {
 
@@ -71,9 +72,9 @@ export class TaskRepository implements ITaskRepository {
     return this.localStorage.getNumber(taskIndexKey)
       .then(index => {
         if (index === undefined) {
-          this.localStorage.setNumber(taskIndexKey, 1)
+          this.localStorage.setNumber(taskIndexKey, startIndex)
 
-          return 1
+          return startIndex
         }
 
         return index

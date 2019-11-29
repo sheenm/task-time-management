@@ -38,7 +38,7 @@ export function useLoading<T>({ load, dependencies = [], then, error }: IUseLoad
       )
 
     return () => { didCancel = true }
-  }, [...dependencies])
+  }, [...dependencies])// eslint-disable-line
 
   return loadingState
 }

@@ -34,7 +34,7 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
 
     projectRepo.save(changedProject)
       .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
-  }, [project, projectRepo])
+  }, [project, projectRepo, dispatch])
 
   if (project === undefined)
     return <Callout intent={Intent.DANGER}>

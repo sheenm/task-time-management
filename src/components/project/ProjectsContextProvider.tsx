@@ -13,7 +13,7 @@ interface IRenameProjectAction {
 }
 
 interface IAddProjectAction {
-  type: 'ADD_PROJECT',
+  type: 'ADD_PROJECT'
   project: IProject
 }
 

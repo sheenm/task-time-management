@@ -20,7 +20,7 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
     setTaskTitle(e.target.value), [])
 
-  const createTask = React.useCallback(() => {
+  const createTask = () => {
     const task: WithoutId<ITask> = {
       projectId,
       title: taskTitle
@@ -31,12 +31,12 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
         dispatch({ type: 'ADD_TASK', task: { ...task, id } })
         closeModal()
       })
-  }, [tasksRepo, projectId, taskTitle])
+  }
 
-  const onEnterPressed = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter')
       createTask()
-  }, [createTask])
+  }
 
   // not found or did not load yet
   const project = stateProjects.get(projectId)

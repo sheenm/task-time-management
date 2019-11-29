@@ -1,6 +1,5 @@
 import '../addDays'
 
-// tslint:disable: no-magic-numbers
 describe('AddDays.test', () => {
   it.each(
     [

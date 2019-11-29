@@ -18,7 +18,7 @@ interface IChangeTimestampAction {
 }
 
 interface ICreateTimestampAction {
-  type: 'CREATE_TIMESTAMP',
+  type: 'CREATE_TIMESTAMP'
   timestamp: ITimestamp
 }
 
