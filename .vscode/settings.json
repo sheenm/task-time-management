@@ -4,11 +4,11 @@
     "javascriptreact",
     {
       "language": "typescript",
-      "autoFix": false
+      "autoFix": true
     },
     {
       "language": "typescriptreact",
-      "autoFix": false
+      "autoFix": true
     }
   ],
   "typescript.tsdk": "node_modules/typescript/lib"

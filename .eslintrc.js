@@ -1,12 +1,5 @@
-// @typescript-eslint/camelcase
-
-// https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/member-delimiter-style.md
-
+// TODO figure out if I need member ordering rule
 // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/member-ordering.md
-
-// @typescript-eslint/strict-boolean-expressions
-// @typescript-eslint/space-before-function-paren
-// @typescript-eslint/typedef
 
 module.exports = {
   parser: '@typescript-eslint/parser',
@@ -28,7 +21,7 @@ module.exports = {
       'warn',
       'stroustrup',
       {
-        'allowSingleLine': true
+        allowSingleLine: true
       }
     ],
     '@typescript-eslint/class-name-casing': 'warn',
@@ -45,7 +38,13 @@ module.exports = {
     //     'private': '^_'
     //   }
     // ],
-    '@typescript-eslint/no-magic-numbers': 'warn',
+    'no-magic-numbers': 'off',
+    '@typescript-eslint/no-magic-numbers': ['warn', {
+      ignoreNumericLiteralTypes: true,
+      ignoreReadonlyClassProperties: true,
+      ignoreEnums: true,
+      ignoreArrayIndexes: true
+    }],
     '@typescript-eslint/no-namespace': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unnecessary-condition': ['warn', {
@@ -74,25 +73,27 @@ module.exports = {
     '@typescript-eslint/type-annotation-spacing': [
       'warn',
       {
-        'before': false,
-        'after': true,
-        'overrides': {
-          'arrow': {
-            'before': true,
-            'after': true
+        before: false,
+        after: true,
+        overrides: {
+          arrow: {
+            before: true,
+            after: true
           }
         }
       }
     ],
     '@typescript-eslint/unified-signatures': 'warn',
-    "@typescript-eslint/member-delimiter-style": [
-      "warn",
+    '@typescript-eslint/member-delimiter-style': [
+      'warn',
       {
-        "multiline": {
-          "delimiter": "none",
-          "requireLast": false
+        multiline: {
+          delimiter: 'none',
+          requireLast: false
         }
       }
-    ]
+    ],
+    '@typescript-eslint/space-before-function-paren': ['warn', 'never'],
+    '@typescript-eslint/typedef': 'off'
   }
 }
