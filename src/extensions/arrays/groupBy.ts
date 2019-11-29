@@ -1,5 +1,4 @@
 declare global {
-  // tslint:disable-next-line: interface-name
   interface Array<T> {
     extGroupBy<TKey extends string | number>(predicate: (obj: T) => TKey): Record<string | number, T[]>
   }
@@ -8,7 +7,6 @@ declare global {
 if (Array.prototype.extGroupBy === undefined) {
   // eslint-disable-next-line
   Array.prototype.extGroupBy = function (predicate) {
-    // tslint:disable-next-line: no-invalid-this
     return groupBy(this)(predicate)
   }
 }

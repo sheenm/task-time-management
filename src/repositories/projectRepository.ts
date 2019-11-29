@@ -5,6 +5,7 @@ import { LocalStorageRepository } from 'repositories/localStorageRepository'
 
 const projectsKey = 'projects'
 const projectIndexKey = 'projects.index'
+const startIndex = 1
 
 export class ProjectRepository implements IProjectRepository {
 
@@ -56,9 +57,9 @@ export class ProjectRepository implements IProjectRepository {
     return this.localStorage.getNumber(projectIndexKey)
       .then(index => {
         if (index === undefined) {
-          this.localStorage.setNumber(projectIndexKey, 1)
+          this.localStorage.setNumber(projectIndexKey, startIndex)
 
-          return 1
+          return startIndex
         }
 
         return index

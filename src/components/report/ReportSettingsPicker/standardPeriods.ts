@@ -1,4 +1,3 @@
-
 import { ITimestamp } from 'app/businessObjects'
 import { IStandardPeriods } from 'app/report'
 import 'extensions/datetime/addDays'
@@ -13,7 +12,7 @@ export const standardPeriods: IStandardPeriods = {
   yesterday: {
     title: 'Yesterday',
     filterFunction: (timestamps) => {
-      const yesterday = new Date().extAddDays(-1)
+      const yesterday = new Date().extAddDays(-1) // eslint-disable-line
 
       return filterByDay(yesterday, timestamps)
     }

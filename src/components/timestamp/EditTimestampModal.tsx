@@ -118,5 +118,5 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
   </Dialog>
 }
 
-const formatDate = (date: Date | undefined) => (date === undefined ? "" : date.toLocaleString())
+const formatDate = (date: Date | undefined) => (date === undefined ? '' : date.toLocaleString())
 const parseDate = (str: string) => new Date(Date.parse(str))

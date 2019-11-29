@@ -1,6 +1,5 @@
 import '../discardTime'
 
-// tslint:disable: no-magic-numbers
 describe('DiscardTime.test', () => {
   it('should discard time from date', () => {
 

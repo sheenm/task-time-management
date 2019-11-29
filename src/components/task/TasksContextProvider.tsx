@@ -9,12 +9,12 @@ interface ILoadTasksAction {
 
 interface IRenameTaskAction {
   type: 'RENAME_TASK'
-  id: number,
+  id: number
   newTitle: string
 }
 
 interface IAddTaskAction {
-  type: 'ADD_TASK',
+  type: 'ADD_TASK'
   task: ITask
 }
 

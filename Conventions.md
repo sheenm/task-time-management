@@ -1,4 +1,4 @@
-This file contains code conventions for this project (not including tsconfig.json/tslint.json)
+This file contains code conventions for this project (not including tsconfig.json/.eslintrc.js)
 
 # useReducer hook
 
@@ -46,4 +46,4 @@ const reducer = (state: ITimestamp[], action: ActionTypes) => {
 
 # Extending built-in prototypes
 
-- Must use prefix `ext` to explitly show that this is an extension method and to avoid future problems if js will later implement method with the same name
+- Must use prefix `ext` to explicitly show that this is an extension method and to avoid future problems if js will later implement method with the same name

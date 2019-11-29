@@ -1,7 +1,6 @@
 import '../discardTime'
 import '../isEqual'
 
-// tslint:disable: no-magic-numbers
 describe('IsEqual.test', () => {
 
   it('should pass equality', () => {

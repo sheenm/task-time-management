@@ -44,7 +44,7 @@ function getDateTimeDiff(start: Date, end?: Date) {
     }
     else {
       end = new Date(start)
-      // tslint:disable-next-line: no-magic-numbers
+      // eslint-disable-next-line
       end.setHours(23, 59, 59)
     }
 

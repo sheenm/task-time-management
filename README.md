@@ -29,7 +29,7 @@ Congragulations! Now you can
 - [Storybook](https://storybook.js.org/) - development environment for UI components
 - [Jest](https://jestjs.io/) - Javascript testing framework
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - simple and complete React DOM testing utilities that encourage good testing practices
-- [TSLint](https://palantir.github.io/tslint/) - Typescript linter (should change to typescript-eslint)
+- [ESLint](https://github.com/eslint/eslint) - Javascript/Typescript linter
 - [BlueprintJs](https://blueprintjs.com/) - React-based UI toolkit for the web.
 
 ## Project navigator
