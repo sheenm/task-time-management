@@ -20,7 +20,7 @@ export const ReportTimestampsGroup: React.FC<IProps> = ({ timestamps, taskName }
     <thead>
       <tr>
         <th className={styles.commentColumn}>comment</th>
-        <th>time</th>
+        <th>time(H:M)</th>
       </tr>
     </thead>
     <tbody>

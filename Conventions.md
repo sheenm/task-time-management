@@ -43,7 +43,3 @@ const reducer = (state: ITimestamp[], action: ActionTypes) => {
   }
 }
 ```
-
-# Extending built-in prototypes
-
-- Must use prefix `ext` to explicitly show that this is an extension method and to avoid future problems if js will later implement method with the same name

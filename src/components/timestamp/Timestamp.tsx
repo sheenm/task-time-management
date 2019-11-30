@@ -1,5 +1,6 @@
 import { ITimestamp } from 'app/businessObjects'
 import { TimestampPresenter } from 'components/timestamp/TimestampPresenter'
+import { formatDistanceStrict } from 'date-fns/fp'
 import React from 'react'
 
 interface IProps {
@@ -19,13 +20,5 @@ export const Timestamp: React.FC<IProps> = ({ remove, timestamp, changeComment }
 }
 
 function getTimestampDatetime(start: Date, end?: Date) {
-  const timeStart = start.toLocaleString()
-
-  if (end === undefined)
-    return timeStart
-
-  if (start.extIsDayEqual(end))
-    return timeStart + ' - ' + end.toLocaleTimeString()
-  else
-    return timeStart + ' - ' + end.toLocaleString()
+  return formatDistanceStrict(end || new Date())(start)
 }
