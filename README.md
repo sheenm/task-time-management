@@ -24,7 +24,6 @@ Congragulations! Now you can
 
 - [React](https://reactjs.org/) - amazing Javascript library for building user interfaces
 - [Reach Router](https://reach.tech/router) - Router for React built with accessibility in mind
-- [JSS](https://cssinjs.org/) - CSS in JS Library
 - [Typescript](http://www.typescriptlang.org/) - Typed superset of Javasript
 - [Storybook](https://storybook.js.org/) - development environment for UI components
 - [Jest](https://jestjs.io/) - Javascript testing framework

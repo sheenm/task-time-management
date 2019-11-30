@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 520px) {
+    display: grid;
+    grid-template-columns: [date] minmax(200px, auto) [text] minmax(100px, 1fr) [actions] minmax(4rem, auto);
+    align-items: center;
+    column-gap: 1rem;
+    padding: 0 .4rem;
+  }
+}
+.date {
+  grid-column: date;
+  margin: 0;
+}
+.text {
+  grid-column: text;
+}
+.actions {
+  grid-column: actions;
+}

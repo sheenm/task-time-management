@@ -1,0 +1,11 @@
+.link {
+  margin-bottom: 1rem;
+}
+
+.main {
+  @media screen and (min-width: 600px) {
+    display: grid;
+    column-gap: 1rem;
+    grid-template-columns: 300px 1fr;
+  }
+}

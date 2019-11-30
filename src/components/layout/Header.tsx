@@ -4,19 +4,10 @@ import { Wrapper } from 'components/layout/Wrapper'
 import { reportsPageRoute } from 'components/pages/ReportsPage'
 import { trackerPageRoute } from 'components/pages/TrackerPage'
 import * as React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './Header.module.scss'
 
-const styles = {
-  navbar: {
-    paddingLeft: 0
-  }
-}
-
-interface IProps extends WithStyles<typeof styles> {
-}
-
-const HeaderInner: React.FC<IProps> = ({ classes }) => {
-  return <Navbar className={classes.navbar}>
+export const Header: React.FC = () => {
+  return <Navbar className={styles.navbar}>
     <Wrapper>
       <NavbarGroup>
         <Link to={trackerPageRoute.getUrl()}>
@@ -34,5 +25,3 @@ const HeaderInner: React.FC<IProps> = ({ classes }) => {
     </Wrapper>
   </Navbar >
 }
-
-export const Header = injectSheet(styles)(HeaderInner)
