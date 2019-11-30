@@ -1,13 +1,11 @@
-import { ITimestamp } from 'app/dto'
+import { ITimestamp } from 'app/businessObjects'
 import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
+import { subDays } from 'date-fns/fp'
 
 describe('StandardPeriod.test', () => {
   const today = new Date()
-  const yesterday = new Date()
-  yesterday.setDate(yesterday.getDate() - 1)
-  const twoDaysAgo = new Date()
-  // eslint-disable-next-line
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
+  const yesterday = subDays(1)(today)
+  const twoDaysAgo = subDays(1)(yesterday)
 
   const todayTimestamp: ITimestamp = {
     comment: '',
