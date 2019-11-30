@@ -5,6 +5,7 @@ import { reportsPageRoute } from 'pages/ReportsPage'
 import { ProjectsList } from 'components/project/ProjectsList'
 import * as React from 'react'
 import styles from './Header.module.scss'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 export const Header: React.FC = () => {
   return <Navbar className={styles.navbar}>
@@ -22,6 +23,9 @@ export const Header: React.FC = () => {
         <Link to={reportsPageRoute.getUrl()}>
           <Button minimal tabIndex={-1} icon='document'>Report</Button>
         </Link>
+      </NavbarGroup>
+      <NavbarGroup align='right'>
+        <ThemeSwitcher />
       </NavbarGroup>
     </Wrapper>
   </Navbar >

@@ -1,3 +1,5 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+
 .link {
-  color: #000;
+  color: $pt-text-color;
 }

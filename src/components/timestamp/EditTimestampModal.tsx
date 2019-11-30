@@ -1,6 +1,7 @@
-import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { Button, Classes, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 import { ITimestamp } from 'app/businessObjects'
+import { ThemedDialog } from 'components/layout/ThemedDialog'
 import { ServiceContext } from 'components/services/ServiceContext'
 import React from 'react'
 import { TimestampsContext } from './TimestampsContextProvider'
@@ -76,7 +77,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
   if (timestamp.taskId === defaultTaskId)
     return <div />
 
-  return <Dialog
+  return <ThemedDialog
     title='Changing timestamp'
     isOpen={true}
     onClose={closeModal}
@@ -115,7 +116,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
         </Button>
       </div>
     </section>
-  </Dialog>
+  </ThemedDialog>
 }
 
 const formatDate = (date: Date | undefined) => (date === undefined ? '' : date.toLocaleString())

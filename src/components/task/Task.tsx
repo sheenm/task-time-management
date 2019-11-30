@@ -20,8 +20,8 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
   const taskTimestamps = [...stateTimestamps.values()].filter(x => x.taskId === task.id)
 
   React.useEffect(() => {
-    const activetimestamp = taskTimestamps.find(x => x.datetimeEnd === undefined)
-    setStartedTimestamp(activetimestamp)
+    const activeTimestamp = taskTimestamps.find(x => x.datetimeEnd === undefined)
+    setStartedTimestamp(activeTimestamp)
   }, [taskTimestamps])
 
   const createChangeCommentFn = React.useCallback((timestamp: ITimestamp) => {

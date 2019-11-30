@@ -1,4 +1,5 @@
-import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { Button, Classes, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { ThemedDialog } from 'components/layout/ThemedDialog'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { ServiceContext } from 'components/services/ServiceContext'
 import React from 'react'
@@ -32,7 +33,7 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
       createProject()
   }
 
-  return <Dialog
+  return <ThemedDialog
     title='Adding a project'
     isOpen={true}
     onClose={closeModal}
@@ -56,5 +57,5 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
         </Button>
       </div>
     </section>
-  </Dialog>
+  </ThemedDialog>
 }
