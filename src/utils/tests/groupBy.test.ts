@@ -1,4 +1,4 @@
-import '../groupBy'
+import { groupBy } from '../groupBy'
 
 interface ITestingItem {
   id: number
@@ -30,7 +30,7 @@ describe('GroupBy.test', () => {
       [{ items: [], groupsCount: 0 }]
     ]
   )('should correctly group by id', ({ items, groupsCount }) => {
-    const groupByResult = items.extGroupBy(x => x.id)
+    const groupByResult = groupBy(items)(x => x.id)
 
     expect(Object.keys(groupByResult).length).toBe(groupsCount)
   })
@@ -42,13 +42,13 @@ describe('GroupBy.test', () => {
       [{ items: [item1, item2, item3], groupsCount: 2 }]
     ]
   )('should correctly group by value', ({ items, groupsCount }) => {
-    const groupByResult = items.extGroupBy(x => x.someValue)
+    const groupByResult = groupBy(items)(x => x.someValue)
 
     expect(Object.keys(groupByResult).length).toBe(groupsCount)
   })
 
   it('should correctly group by non exising field', () => {
-    const groupByResult = [item1, item2, item3].extGroupBy(() => 'grouping expression')
+    const groupByResult = groupBy([item1, item2, item3])(() => 'grouping expression')
     expect(Object.keys(groupByResult).length).toBe(1)
   })
 })

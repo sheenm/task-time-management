@@ -1,9 +1,10 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import { ReportTimestampsGroup } from 'components/report/ReportTimestampsGroup'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
-import 'extensions/arrays/groupBy'
+import { differenceInMinutes } from 'date-fns/fp'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
+import { groupBy } from 'utils/groupBy'
 
 interface IProps {
   period: StandardPeriodNames
@@ -22,7 +23,7 @@ export const Report: React.FC<IProps> = ({ period }) => {
   if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading throbber</h1>
 
-  const groupedBy = timestamps.extGroupBy(x => x.taskTitle)
+  const groupedBy = groupBy(timestamps)(x => x.taskTitle)
 
   return <>
     {Object.keys(groupedBy).map(y => <ReportTimestampsGroup key={y}
@@ -37,23 +38,9 @@ export const Report: React.FC<IProps> = ({ period }) => {
 }
 
 function getDateTimeDiff(start: Date, end?: Date) {
-  if (end === undefined || !start.extIsDayEqualOrGreater(end)) {
-    const now = new Date()
-    if (start.extIsDayEqual(now)) {
-      end = now
-    }
-    else {
-      end = new Date(start)
-      // eslint-disable-next-line
-      end.setHours(23, 59, 59)
-    }
+  const fullMinutes = differenceInMinutes(start)(end || new Date())
+  const hours = Math.floor(fullMinutes / 60) // eslint-disable-line @typescript-eslint/no-magic-numbers
+  const minutes = fullMinutes % 60 // eslint-disable-line @typescript-eslint/no-magic-numbers
 
-  }
-
-  const diff = new Date(end.getTime() - start.getTime())
-  const millisecondsInHour = 3600000
-  const hours = diff.getTime() / millisecondsInHour
-  const precisionDigits = 2
-
-  return hours.toFixed(precisionDigits).toString()
+  return `${hours}:${minutes}`
 }

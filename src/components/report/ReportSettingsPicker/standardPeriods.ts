@@ -1,8 +1,6 @@
 import { ITimestamp } from 'app/businessObjects'
 import { IStandardPeriods } from 'app/report'
-import 'extensions/datetime/addDays'
-import 'extensions/datetime/discardTime'
-import 'extensions/datetime/isEqual'
+import { addDays, startOfDay, isBefore, isSameDay, isWithinInterval, endOfDay } from 'date-fns/fp'
 
 export const standardPeriods: IStandardPeriods = {
   today: {
@@ -12,7 +10,7 @@ export const standardPeriods: IStandardPeriods = {
   yesterday: {
     title: 'Yesterday',
     filterFunction: (timestamps) => {
-      const yesterday = new Date().extAddDays(-1) // eslint-disable-line
+      const yesterday = addDays(-1)(new Date()) // eslint-disable-line
 
       return filterByDay(yesterday, timestamps)
     }
@@ -27,14 +25,14 @@ export const standardPeriods: IStandardPeriods = {
       for (const timestamp of timestamps) {
         const currentDateStart = new Date(timestamp.datetimeStart)
 
-        if (today.extIsDayEqual(currentDateStart))
+        if (isSameDay(today)(currentDateStart))
           continue
 
         if (lastTimestampBesideTodays === undefined)
           lastTimestampBesideTodays = timestamp
 
         const lastDateStart = new Date(lastTimestampBesideTodays.datetimeStart)
-        if (currentDateStart.extIsDayEqualOrGreater(lastDateStart))
+        if (isBefore(lastDateStart)(startOfDay(currentDateStart)))
           lastTimestampBesideTodays = timestamp
       }
 
@@ -54,10 +52,8 @@ function filterByDay(day: Date, timestamps: ITimestamp[]) {
 }
 
 function filter(day: Date, timestamp: ITimestamp) {
-  const dateStart = new Date(timestamp.datetimeStart)
-    .extDiscardTime()
-  // if datetimeEnd is undefined it will give you now
-  const dateEnd = new Date(timestamp.datetimeEnd || new Date())
-
-  return day.extIsDayEqualOrGreater(dateStart) && dateEnd.extIsDayEqualOrGreater(day)
+  return isWithinInterval({
+    start: startOfDay(timestamp.datetimeStart),
+    end: endOfDay(timestamp.datetimeEnd || new Date())
+  })(day)
 }
