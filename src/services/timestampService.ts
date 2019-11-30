@@ -1,17 +1,17 @@
 import { Dictionary, ITimestamp, WithoutId } from 'app/businessObjects'
 import { ITimestampDto } from 'app/dto'
 import { StandardPeriodNames } from 'app/report'
-import { ITimestampRepository } from 'app/repositories'
+import { ITimestampService } from 'app/services'
 import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
-import { LocalStorageRepository } from 'repositories/localStorageRepository'
+import { LocalStorageService } from 'services/localStorageService'
 
 const timestampsKey = 'timestamps'
 const timestampIndexKey = 'timestamps.index'
 const startIndex = 1
 
-export class TimestampRepository implements ITimestampRepository {
+export class TimestampService implements ITimestampService {
 
-  private readonly localStorage = new LocalStorageRepository()
+  private readonly localStorage = new LocalStorageService()
 
   public get(taskId: number): Promise<Dictionary<ITimestamp>> {
     return this.getAll()

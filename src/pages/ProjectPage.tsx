@@ -2,11 +2,11 @@ import { Callout, Intent } from '@blueprintjs/core'
 import { RouteComponentProps, Router } from '@reach/router'
 import { IProject } from 'app/businessObjects'
 import { IRoute } from 'app/routes'
-import { AddProjectModalPage, addProjectModalPageRoute } from 'components/pages/AddProjectModalPage'
-import { AddTaskModalPage, addTaskModalPageRoute } from 'components/pages/AddTaskModalPage'
+import { AddProjectModalPage, addProjectModalPageRoute } from 'pages/AddProjectModalPage'
+import { AddTaskModalPage, addTaskModalPageRoute } from 'pages/AddTaskModalPage'
 import { Project } from 'components/project/Project'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import { TasksContextProvider } from 'components/task/TasksContextProvider'
 import { TimestampsContextProvider } from 'components/timestamp/TimestampsContextProvider'
 import React from 'react'
@@ -23,7 +23,7 @@ interface IProps {
 
 export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }) => {
   const { stateProjects, dispatch } = React.useContext(ProjectsContext)
-  const { projectRepo } = React.useContext(RepositoryContext)
+  const { projectService } = React.useContext(ServiceContext)
   const project = stateProjects.get(Number(projectId))
 
   const rename = React.useCallback((newTitle: string) => {
@@ -32,9 +32,9 @@ export const ProjectPage: React.FC<RouteComponentProps<IProps>> = ({ projectId }
 
     const changedProject: IProject = { ...project, title: newTitle }
 
-    projectRepo.save(changedProject)
+    projectService.save(changedProject)
       .then(() => dispatch({ type: 'RENAME_PROJECT', id: project.id, newTitle }))
-  }, [project, projectRepo, dispatch])
+  }, [project, projectService, dispatch])
 
   if (project === undefined)
     return <Callout intent={Intent.DANGER}>

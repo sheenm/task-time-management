@@ -1,15 +1,15 @@
 import { Dictionary, ITask, WithoutId } from 'app/businessObjects'
 import { ITaskDto } from 'app/dto'
-import { ITaskRepository } from 'app/repositories'
-import { LocalStorageRepository } from 'repositories/localStorageRepository'
+import { ITaskService } from 'app/services'
+import { LocalStorageService } from 'services/localStorageService'
 
 const tasksKey = 'tasks'
 const taskIndexKey = 'tasks.index'
 const startIndex = 1
 
-export class TaskRepository implements ITaskRepository {
+export class TaskService implements ITaskService {
 
-  private readonly localStorage = new LocalStorageRepository()
+  private readonly localStorage = new LocalStorageService()
 
   public get(projectId: number): Promise<Dictionary<ITask>> {
     return this.getAll()
@@ -85,5 +85,4 @@ export class TaskRepository implements ITaskRepository {
     return this.getCurrentIndex()
       .then(index => this.localStorage.setNumber(taskIndexKey, ++index))
   }
-
 }

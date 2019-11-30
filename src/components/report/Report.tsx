@@ -1,6 +1,6 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import { ReportTimestampsGroup } from 'components/report/ReportTimestampsGroup'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import { differenceInMinutes } from 'date-fns/fp'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
@@ -13,9 +13,9 @@ interface IProps {
 export const Report: React.FC<IProps> = ({ period }) => {
 
   const [timestamps, setTimestamps] = React.useState<IReportTimestamp[]>([])
-  const { reportRepo } = React.useContext(RepositoryContext)
+  const { reportService } = React.useContext(ServiceContext)
   const loadingState = useLoading({
-    load: () => reportRepo.get(period),
+    load: () => reportService.get(period),
     dependencies: [period],
     then: setTimestamps
   })

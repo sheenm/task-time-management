@@ -1,25 +1,21 @@
 import { Router } from '@reach/router'
-import { Header } from 'components/layout/Header'
-import { Wrapper } from 'components/layout/Wrapper'
-import { NotFoundPage } from 'components/pages/NotFoundPage'
-import { ReportsPage, reportsPageRoute } from 'components/pages/ReportsPage'
-import { TrackerPage, trackerPageRoute } from 'components/pages/TrackerPage'
+import { NotFoundPage } from 'pages/NotFoundPage'
+import { ReportsPage, reportsPageRoute } from 'pages/ReportsPage'
+import { TrackerPage, trackerPageRoute } from 'pages/TrackerPage'
 import 'index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from 'serviceWorker'
+import { ProjectsContextProvider } from 'components/project/ProjectsContextProvider'
 
 const App: React.FC = () => {
-  return <>
-    <Header />
-    <Wrapper marginTop='1rem'>
-      <Router>
-        <TrackerPage path={trackerPageRoute.template} />
-        <ReportsPage path={reportsPageRoute.template} />
-        <NotFoundPage default />
-      </Router>
-    </Wrapper>
-  </>
+  return <ProjectsContextProvider>
+    <Router>
+      <TrackerPage path={trackerPageRoute.template} />
+      <ReportsPage path={reportsPageRoute.template} />
+      <NotFoundPage default />
+    </Router>
+  </ProjectsContextProvider>
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

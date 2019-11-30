@@ -1,16 +1,17 @@
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, Router } from '@reach/router'
 import { StandardPeriodNames } from 'app/report'
 import { IRoute } from 'app/routes'
-import { NotFoundPage } from 'components/pages/NotFoundPage'
-import { reportsPageRoute } from 'components/pages/ReportsPage'
+import { NotFoundPage } from 'pages/NotFoundPage'
+import { reportsPageRoute } from 'pages/ReportsPage'
 import { Report } from 'components/report/Report'
 import { ReportSettingsPicker } from 'components/report/ReportSettingsPicker'
 import { standardPeriods } from 'components/report/ReportSettingsPicker/standardPeriods'
 import React from 'react'
+import { AddProjectModalPage, addProjectModalPageRoute } from './AddProjectModalPage'
 
 export const reportPageRoute: IRoute<string> = {
-  template: ':period',
-  getUrl: (period) => `/${reportsPageRoute.getUrl()}/${period}`
+  template: ':period/*',
+  getUrl: (period) => `${reportsPageRoute.getUrl()}${period}`
 }
 
 interface IProps {
@@ -27,5 +28,9 @@ export const ReportPage: React.FC<RouteComponentProps<IProps>> = ({ period }) =>
   return <>
     <ReportSettingsPicker period={period as StandardPeriodNames} />
     <Report period={period as StandardPeriodNames} />
+
+    <Router>
+      <AddProjectModalPage path={addProjectModalPageRoute.template} />
+    </Router>
   </>
 }

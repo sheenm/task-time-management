@@ -1,13 +1,13 @@
 import { Dictionary, ITask, ITimestamp } from 'app/businessObjects'
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
-import { TaskRepository } from 'repositories/taskRepository'
-import { TimestampRepository } from 'repositories/timestampRepository'
+import { TaskService } from 'services/taskService'
+import { TimestampService } from 'services/timestampService'
 
-export class ReportsRepository {
+export class ReportsService {
 
   public async get(period: StandardPeriodNames): Promise<IReportTimestamp[]> {
-    const timestampsRepo = new TimestampRepository()
-    const tasksRepo = new TaskRepository()
+    const timestampsRepo = new TimestampService()
+    const tasksRepo = new TaskService()
 
     const timestamps = await timestampsRepo.getWithPeriod(period)
     const tasks = await tasksRepo.getByIds(timestamps.map(x => x.taskId))

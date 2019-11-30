@@ -1,7 +1,7 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 import { ITimestamp } from 'app/businessObjects'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import React from 'react'
 import { TimestampsContext } from './TimestampsContextProvider'
 
@@ -12,7 +12,7 @@ interface IProps {
 
 export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }) => {
   const { stateTimestamps, dispatch } = React.useContext(TimestampsContext)
-  const { timestampsRepo } = React.useContext(RepositoryContext)
+  const { timestampsService } = React.useContext(ServiceContext)
   const defaultTaskId = -1
 
   const timestamp = stateTimestamps.get(timestampId) || {
@@ -59,7 +59,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
       datetimeEnd: dateState.end
     }
 
-    timestampsRepo.save(changedTimestamp)
+    timestampsService.save(changedTimestamp)
       .then(() => {
         dispatch({ type: 'CHANGE_TIMESTAMP', changedTimestamp })
 

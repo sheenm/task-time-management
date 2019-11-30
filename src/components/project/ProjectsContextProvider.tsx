@@ -1,6 +1,8 @@
 import { Dictionary, IProject } from 'app/businessObjects'
 import React from 'react'
 import { neverReached } from 'utils/neverReached'
+import { ServiceContext } from 'components/services/ServiceContext'
+import { useLoading } from 'hooks/useLoading'
 
 interface ILoadProjectsAction {
   type: 'LOAD_PROJECTS'
@@ -56,6 +58,12 @@ export const ProjectsContext = React.createContext<IProjectsContext>({
 
 export const ProjectsContextProvider: React.FC = ({ children }) => {
   const [stateProjects, dispatch] = React.useReducer(reducer, new Map())
+
+  const { projectService } = React.useContext(ServiceContext)
+  useLoading({
+    load: () => projectService.get(),
+    then: projects => dispatch({ type: 'LOAD_PROJECTS', projects })
+  })
 
   return <ProjectsContext.Provider value={{ stateProjects, dispatch }}>
     {children}

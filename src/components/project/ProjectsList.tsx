@@ -1,32 +1,22 @@
-import { MenuDivider, UL } from '@blueprintjs/core'
-import { Link } from '@reach/router'
-import { projectPageRoute } from 'components/pages/ProjectPage'
-import { AddProjectLink } from 'components/project/AddProjectLink'
+import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
-import { useLoading } from 'hooks/useLoading'
 import React from 'react'
+import { AddProjectLink } from './AddProjectLink'
+import { projectPageRoute } from 'pages/ProjectPage'
+import { Link } from '@reach/router'
 import styles from './ProjectsList.module.scss'
 
 export const ProjectsList: React.FC = () => {
-  const { stateProjects, dispatch } = React.useContext(ProjectsContext)
-  const { projectRepo } = React.useContext(RepositoryContext)
-  const loadingState = useLoading({
-    load: () => projectRepo.get(),
-    then: projects => dispatch({ type: 'LOAD_PROJECTS', projects })
-  })
+  const { stateProjects } = React.useContext(ProjectsContext)
 
-  if (loadingState === 'Loading')
-    return <h1>todo loading 10. Data loading trobber</h1>
 
-  return <UL className={styles.ul}>
-    <li>
-      <AddProjectLink />
-    </li>
+  return <Menu>
+    {[...stateProjects.values()].map((proj) =>
+      <Link key={proj.id} to={projectPageRoute.getUrl(proj.id)} className={styles.link} >
+        <MenuItem text={proj.title} />
+      </Link>)}
+
     <MenuDivider />
-    {[...stateProjects.values()].map(x => <li key={x.id}>
-      <Link to={projectPageRoute.getUrl(x.id)}>{x.title}</Link>
-    </li>
-    )}
-  </UL>
+    <AddProjectLink />
+  </Menu>
 }

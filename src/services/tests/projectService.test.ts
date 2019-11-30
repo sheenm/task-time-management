@@ -1,58 +1,58 @@
-import { IProject } from "app/dto"
-import { ProjectRepository } from "repositories/projectRepository"
+import { IProject } from 'app/businessObjects'
+import { ProjectService } from 'services/projectService'
 
 beforeEach(() => {
   window.localStorage.clear()
 })
 
-describe('project repository get() tests', () => {
+describe('project service get() tests', () => {
 
-  it('when repository is empty returns empty, not null', async () => {
-    const repository = new ProjectRepository()
-    const projects = await repository.get()
+  it('when service is empty returns empty, not null', async () => {
+    const service = new ProjectService()
+    const projects = await service.get()
 
     expect([...projects.values()]).toEqual([])
   })
 
 })
 
-describe('project repository add() tests', () => {
+describe('project service add() tests', () => {
 
   it('can add item', async () => {
     expect.assertions(1)
-    const repository = new ProjectRepository()
+    const service = new ProjectService()
 
-    await repository.add({
+    await service.add({
       title: 'some title'
     })
 
-    const projects = await repository.get()
+    const projects = await service.get()
 
     expect(projects.size).toEqual(1)
   })
 })
 
-describe('project repository save() tests', () => {
+describe('project service save() tests', () => {
 
   it('can save existing item', async () => {
     const assertionsCount = 3
 
     expect.assertions(assertionsCount)
-    const repository = new ProjectRepository()
+    const service = new ProjectService()
 
-    const id = await repository.add({
+    const id = await service.add({
       title: 'some title'
     })
 
-    const projects = await repository.get()
+    const projects = await service.get()
     // we're sure that it's not undefined or the test will fail anyways
     const project = projects.get(id) as IProject
     const newTitle = 'newTitle'
     project.title = newTitle
 
-    await repository.save(project)
+    await service.save(project)
 
-    const changedProjects = await repository.get()
+    const changedProjects = await service.get()
     expect(changedProjects.size).toBe(1)
 
     const changedProject = changedProjects.get(id) as IProject
@@ -62,44 +62,44 @@ describe('project repository save() tests', () => {
 
   it('when item is not found it will not be saved', async () => {
     expect.assertions(1)
-    const repository = new ProjectRepository()
+    const service = new ProjectService()
 
-    await repository.save({
+    await service.save({
       id: 1,
       title: 'some title'
     })
 
-    const projects = await repository.get()
+    const projects = await service.get()
     expect(projects.size).toBe(0)
   })
 })
 
-describe('project repository delete() tests', () => {
+describe('project service delete() tests', () => {
 
   it('when item is not found it will not delete', async () => {
     expect.assertions(1)
-    const repository = new ProjectRepository()
+    const service = new ProjectService()
 
-    const addResult = await repository.add({
+    const addResult = await service.add({
       title: 'some title'
     })
 
-    await repository.delete(addResult + 1)
-    const projects = await repository.get()
+    await service.delete(addResult + 1)
+    const projects = await service.get()
 
     expect(projects.size).toEqual(1)
   })
 
   it('will delete project', async () => {
     expect.assertions(1)
-    const repository = new ProjectRepository()
+    const service = new ProjectService()
 
-    const addResult = await repository.add({
+    const addResult = await service.add({
       title: 'some title'
     })
 
-    await repository.delete(addResult)
-    const projects = await repository.get()
+    await service.delete(addResult)
+    const projects = await service.get()
 
     expect(projects.size).toBe(0)
   })

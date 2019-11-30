@@ -1,8 +1,8 @@
-declare module 'app/repositories' {
+declare module 'app/services' {
   import { Dictionary, IProject, ITask, ITimestamp, WithoutId } from 'app/businessObjects'
   import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 
-  interface IRepository<T> {
+  interface IService<T> {
     get: (itemId: number) => Promise<Dictionary<T>>
 
     add: (item: WithoutId<T>) => Promise<number>
@@ -12,22 +12,22 @@ declare module 'app/repositories' {
     delete: (itemId: number) => Promise<void>
   }
 
-  interface ITimestampRepository extends IRepository<ITimestamp> {
+  interface ITimestampService extends IService<ITimestamp> {
     public getAll(): Promise<Dictionary<ITimestamp>>
   }
-  interface ITaskRepository extends IRepository<ITask> { }
-  interface IProjectRepository extends IRepository<IProject> {
+  interface ITaskService extends IService<ITask> { }
+  interface IProjectService extends IService<IProject> {
     get: () => Promise<Dictionary<IProject>>
   }
 
-  interface IReportRepository {
+  interface IReportService {
     get: (period: StandardPeriodNames) => Promise<IReportTimestamp[]>
   }
 
-  interface IRepositoryContext {
-    timestampsRepo: ITimestampRepository
-    tasksRepo: ITaskRepository
-    projectRepo: IProjectRepository
-    reportRepo: IReportRepository
+  interface IServiceContext {
+    timestampsService: ITimestampService
+    tasksService: ITaskService
+    projectService: IProjectService
+    reportService: IReportService
   }
 }
