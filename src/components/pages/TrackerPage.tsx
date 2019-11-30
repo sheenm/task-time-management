@@ -6,32 +6,19 @@ import { TrackerPageDefault } from 'components/pages/TrackerPageDefault'
 import { ProjectsContextProvider } from 'components/project/ProjectsContextProvider'
 import { ProjectsList } from 'components/project/ProjectsList'
 import React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './TrackerPage.module.scss'
 
 export const trackerPageRoute: IStaticRoute = {
   template: '/*',
   getUrl: () => '/'
 }
 
-const styles = {
-  main: {
-    '@media (min-width:600px)': {
-      display: 'grid',
-      gridColumnGap: '1rem',
-      gridTemplateColumns: '300px 1fr',
-    }
-  },
-  link: {
-    marginBottom: '1rem'
-  }
-}
+interface IProps extends RouteComponentProps { }
 
-interface IProps extends RouteComponentProps, WithStyles<typeof styles> { }
-
-export const TrackerPageInner: React.FC<IProps> = ({ classes }) => {
+export const TrackerPage: React.FC<IProps> = () => {
 
   return <ProjectsContextProvider>
-    <main role='main' className={classes.main}>
+    <main role='main' className={styles.main}>
       <aside>
         <ProjectsList />
       </aside>
@@ -45,5 +32,3 @@ export const TrackerPageInner: React.FC<IProps> = ({ classes }) => {
     </main>
   </ProjectsContextProvider >
 }
-
-export const TrackerPage = injectSheet(styles)(TrackerPageInner)

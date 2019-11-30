@@ -2,33 +2,9 @@ import { Button, ButtonGroup, Card, EditableText, Elevation } from '@blueprintjs
 import { Link } from '@reach/router'
 import { editTimestampModalPageRoute } from 'components/pages/EditTimestampModalPage'
 import * as React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './TimestampPresenter.module.scss'
 
-const styles = {
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    '@media (min-width: 520px)': {
-      display: 'grid',
-      gridTemplateColumns: '[date] minmax(200px, auto) [text] minmax(100px, 1fr) [actions] minmax(4rem, auto)',
-      alignItems: 'center',
-      gridColumnGap: '1rem',
-      padding: '0 .4rem',
-    }
-  },
-  date: {
-    gridColumn: 'date',
-    margin: 0
-  },
-  text: {
-    gridColumn: 'text',
-  },
-  actions: {
-    gridColumn: 'actions'
-  }
-}
-
-export interface ITimestampPresenterProps extends WithStyles<typeof styles> {
+export interface ITimestampPresenterProps {
   dateTime: string
   comment: string
   remove: () => void
@@ -36,7 +12,7 @@ export interface ITimestampPresenterProps extends WithStyles<typeof styles> {
   changeComment: (newComment: string) => void
 }
 
-const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, ...props }) => {
+export const TimestampPresenter: React.FC<ITimestampPresenterProps> = (props) => {
   const [comment, setComment] = React.useState(props.comment)
 
   React.useEffect(() => {
@@ -45,10 +21,10 @@ const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, 
 
   const onConfirm = () => props.changeComment(comment)
 
-  return <Card elevation={Elevation.ZERO} className={classes.card}>
-    <p className={classes.date}>{props.dateTime}</p>
+  return <Card elevation={Elevation.ZERO} className={styles.card}>
+    <p className={styles.date}>{props.dateTime}</p>
     <EditableText confirmOnEnterKey onConfirm={onConfirm} value={comment} onChange={setComment} />
-    <ButtonGroup className={classes.actions} minimal>
+    <ButtonGroup className={styles.actions} minimal>
       <Link to={editTimestampModalPageRoute.getUrl({ timestampId: props.id })}>
         <Button icon='edit' title='Edit timestamp' />
       </Link>
@@ -56,5 +32,3 @@ const TimestampPresenterInner: React.FC<ITimestampPresenterProps> = ({ classes, 
     </ButtonGroup>
   </Card>
 }
-
-export const TimestampPresenter = injectSheet(styles)(TimestampPresenterInner)

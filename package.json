@@ -8,7 +8,6 @@
     "@reach/router": "^1.2.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-jss": "^10.0.0",
     "react-scripts": "^3.0.0",
     "typescript": "^3.4.1"
   },
@@ -30,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "babel-loader": "^8.0.5",
+    "node-sass": "^4.13.0",
     "react-test-renderer": "^16.8.6"
   },
   "scripts": {

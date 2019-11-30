@@ -6,18 +6,9 @@ import { ProjectsContext } from 'components/project/ProjectsContextProvider'
 import { RepositoryContext } from 'components/repositories/RepositoryContext'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './ProjectsList.module.scss'
 
-const styles = {
-  ul: {
-    listStyle: 'none',
-    padding: 0
-  }
-}
-
-interface IProps extends WithStyles<typeof styles> { }
-
-const ProjectsListInner: React.FC<IProps> = ({ classes }) => {
+export const ProjectsList: React.FC = () => {
   const { stateProjects, dispatch } = React.useContext(ProjectsContext)
   const { projectRepo } = React.useContext(RepositoryContext)
   const loadingState = useLoading({
@@ -28,7 +19,7 @@ const ProjectsListInner: React.FC<IProps> = ({ classes }) => {
   if (loadingState === 'Loading')
     return <h1>todo loading 10. Data loading trobber</h1>
 
-  return <UL className={classes.ul}>
+  return <UL className={styles.ul}>
     <li>
       <AddProjectLink />
     </li>
@@ -39,5 +30,3 @@ const ProjectsListInner: React.FC<IProps> = ({ classes }) => {
     )}
   </UL>
 }
-
-export const ProjectsList = injectSheet(styles)(ProjectsListInner)

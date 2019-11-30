@@ -1,36 +1,24 @@
 import { Button, EditableText, H2 } from '@blueprintjs/core'
 import { AddTaskLink } from 'components/task/AddTaskLink'
 import * as React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './ProjectPresenter.module.scss'
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: '1rem'
-  },
-  text: {
-    flex: 1
-  }
-}
-
-interface IProps extends WithStyles<typeof styles> {
+interface IProps {
   projectId: number
   title: string
   onTitleChanged: (title: string) => void
 }
 
-const ProjectPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
+export const ProjectPresenter: React.FC<IProps> = (props) => {
 
-  return <section className={classes.container}>
+  return <section className={styles.container}>
     <H2>
       <EditableText
         confirmOnEnterKey
         onConfirm={props.onTitleChanged}
         defaultValue={props.title}
         multiline
-        className={classes.text}
+        className={styles.text}
       />
     </H2>
     <AddTaskLink projectId={props.projectId}>
@@ -38,5 +26,3 @@ const ProjectPresenterInner: React.FC<IProps> = ({ classes, ...props }) => {
     </AddTaskLink>
   </section>
 }
-
-export const ProjectPresenter = injectSheet(styles)(ProjectPresenterInner)

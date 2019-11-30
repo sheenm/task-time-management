@@ -1,21 +1,8 @@
 import { HTMLTable } from '@blueprintjs/core'
 import React from 'react'
-import injectSheet, { WithStyles } from 'react-jss'
+import styles from './ReportTimestampsGroup.module.scss'
 
-const styles = {
-  table: {
-    width: '100%'
-  },
-  caption: {
-    textAlign: 'left',
-    fontSize: '1.3rem'
-  },
-  commentColumn: {
-    width: '100%'
-  }
-}
-
-interface IProps extends WithStyles<typeof styles> {
+interface IProps {
   taskName: string
 
   timestamps: Array<{
@@ -26,23 +13,21 @@ interface IProps extends WithStyles<typeof styles> {
 
 }
 
-const ReportTimestampsGroupInner: React.FC<IProps> = ({ classes, timestamps, taskName }) => {
+export const ReportTimestampsGroup: React.FC<IProps> = ({ timestamps, taskName }) => {
 
-  return <HTMLTable bordered className={classes.table} condensed>
-    <caption className={classes.caption}>{taskName}</caption>
+  return <HTMLTable bordered className={styles.table} condensed>
+    <caption className={styles.caption}>{taskName}</caption>
     <thead>
       <tr>
-        <th className={classes.commentColumn}>comment</th>
+        <th className={styles.commentColumn}>comment</th>
         <th>time</th>
       </tr>
     </thead>
     <tbody>
       {timestamps.map(x => <tr key={x.id}>
-        <td className={classes.commentColumn}>{x.comment}</td>
+        <td className={styles.commentColumn}>{x.comment}</td>
         <td>{x.dateTime}</td>
       </tr>)}
     </tbody>
   </HTMLTable>
 }
-
-export const ReportTimestampsGroup = injectSheet(styles)(ReportTimestampsGroupInner)
