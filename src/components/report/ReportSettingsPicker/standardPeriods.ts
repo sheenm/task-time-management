@@ -23,7 +23,7 @@ export const standardPeriods: IStandardPeriods = {
       const today = new Date()
 
       for (const timestamp of timestamps) {
-        const currentDateStart = new Date(timestamp.datetimeStart)
+        const currentDateStart = timestamp.datetimeStart
 
         if (isSameDay(today)(currentDateStart))
           continue
@@ -31,8 +31,8 @@ export const standardPeriods: IStandardPeriods = {
         if (lastTimestampBesideTodays === undefined)
           lastTimestampBesideTodays = timestamp
 
-        const lastDateStart = new Date(lastTimestampBesideTodays.datetimeStart)
-        if (isBefore(lastDateStart)(startOfDay(currentDateStart)))
+        const lastDateStart = lastTimestampBesideTodays.datetimeStart
+        if (isBefore(startOfDay(currentDateStart))(lastDateStart))
           lastTimestampBesideTodays = timestamp
       }
 

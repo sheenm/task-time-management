@@ -11,5 +11,8 @@
       "autoFix": true
     }
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "npm.packageManager": "yarn",
+  "eslint.packageManager": "yarn",
+  "tslint.packageManager": "yarn"
 }
