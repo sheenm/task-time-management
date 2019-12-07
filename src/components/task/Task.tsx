@@ -9,9 +9,10 @@ import React from 'react'
 interface IProps {
   task: ITask
   rename: (newTitle: string) => void
+  className: string
 }
 
-export const Task: React.FC<IProps> = ({ task, rename }) => {
+export const Task: React.FC<IProps> = ({ task, rename, className }) => {
   const [isOpen, toggleOpen] = useToggle(false)
   const { stateTimestamps, dispatch } = React.useContext(TimestampsContext)
   const { timestampsService } = React.useContext(ServiceContext)
@@ -86,6 +87,7 @@ export const Task: React.FC<IProps> = ({ task, rename }) => {
     toggleOpen={toggleOpen}
     isStarted={startedTimestamp !== undefined}
     toggleTaskStart={toggleTaskStart}
+    className={className}
   >
     {taskTimestamps.map(x =>
       <Timestamp

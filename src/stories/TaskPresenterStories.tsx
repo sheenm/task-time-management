@@ -11,6 +11,7 @@ storiesOf('TaskPresenter', module)
       isOpen={false}
       toggleOpen={linkTo('TaskPresenter', 'unfolded')}
       isStarted={false}
+      className=''
       toggleTaskStart={linkTo('TaskPresenter', 'folded started')}
       title='23451 - Create presenter components for this app'
       changeTitle={action('new title: ')}
@@ -33,6 +34,7 @@ storiesOf('TaskPresenter', module)
       toggleOpen={linkTo('TaskPresenter', 'unfolded started')}
       isStarted
       toggleTaskStart={linkTo('TaskPresenter', 'folded')}
+      className=''
       title='23451 - Create presenter components for this app'
       changeTitle={action('new title: ')}
     />
@@ -55,6 +57,7 @@ storiesOf('TaskPresenter', module)
       isStarted={false}
       toggleTaskStart={linkTo('TaskPresenter', 'unfolded started')}
       title='23451 - Create presenter components for this app'
+      className=''
       changeTitle={action('new title: ')}
     >
       <TimestampPresenter
@@ -93,6 +96,7 @@ storiesOf('TaskPresenter', module)
         isStarted
         toggleTaskStart={linkTo('TaskPresenter', 'unfolded')}
         title='23451 - Create presenter components for this app'
+        className=''
         changeTitle={action('new title: ')}>
         <TimestampPresenter
           dateTime='26.3 Tue 21:57 - 22:18 (0:22)'

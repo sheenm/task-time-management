@@ -11,11 +11,12 @@ interface IProps {
     comment: string
   }>
 
+  className?: string
 }
 
-export const ReportTimestampsGroup: React.FC<IProps> = ({ timestamps, taskName }) => {
+export const ReportTimestampsGroup: React.FC<IProps> = ({ timestamps, taskName, className = '' }) => {
 
-  return <HTMLTable bordered className={styles.table} condensed>
+  return <HTMLTable bordered className={`${styles.table} ${className}`} condensed>
     <caption className={styles.caption}>{taskName}</caption>
     <thead>
       <tr>

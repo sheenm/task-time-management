@@ -1,3 +1,4 @@
+import { Classes } from '@blueprintjs/core'
 import { IProject, ITask } from 'app/businessObjects'
 import { ProjectPresenter } from 'components/project/ProjectPresenter'
 import { ServiceContext } from 'components/services/ServiceContext'
@@ -36,8 +37,7 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
     }
   }, [dispatch, tasksService])
 
-  if (loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading')
-    return <h1>todo loading 10. Data loading trobber</h1>
+  const loadingClass = loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading' ? Classes.SKELETON : ''
 
   return <>
     <ProjectPresenter
@@ -45,8 +45,6 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       onTitleChanged={rename}
       projectId={project.id}
     />
-    {[...stateTasks.values()].map(x =>
-      <Task key={x.id} task={x} rename={createRenameFn(x)} />
-    )}
+    {[...stateTasks.values()].map(x => <Task className={loadingClass} key={x.id} task={x} rename={createRenameFn(x)} />)}
   </>
 }
