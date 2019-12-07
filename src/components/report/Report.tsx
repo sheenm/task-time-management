@@ -1,10 +1,11 @@
 import { IReportTimestamp, StandardPeriodNames } from 'app/report'
 import { ReportTimestampsGroup } from 'components/report/ReportTimestampsGroup'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import { differenceInMinutes } from 'date-fns/fp'
 import { useLoading } from 'hooks/useLoading'
 import React from 'react'
 import { groupBy } from 'utils/groupBy'
+import { Classes } from '@blueprintjs/core'
 
 interface IProps {
   period: StandardPeriodNames
@@ -13,20 +14,19 @@ interface IProps {
 export const Report: React.FC<IProps> = ({ period }) => {
 
   const [timestamps, setTimestamps] = React.useState<IReportTimestamp[]>([])
-  const { reportRepo } = React.useContext(RepositoryContext)
+  const { reportService } = React.useContext(ServiceContext)
   const loadingState = useLoading({
-    load: () => reportRepo.get(period),
+    load: () => reportService.get(period),
     dependencies: [period],
     then: setTimestamps
   })
 
-  if (loadingState === 'Loading')
-    return <h1>todo loading 10. Data loading throbber</h1>
-
+  const loadingClass = loadingState === 'Loading' ? Classes.SKELETON : ''
   const groupedBy = groupBy(timestamps)(x => x.taskTitle)
 
   return <>
     {Object.keys(groupedBy).map(y => <ReportTimestampsGroup key={y}
+      className={loadingClass}
       taskName={y}
       timestamps={groupedBy[y].map(x => ({
         id: x.id,

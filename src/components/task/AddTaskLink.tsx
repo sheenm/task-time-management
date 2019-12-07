@@ -1,5 +1,5 @@
 import { Link } from '@reach/router'
-import { addTaskModalPageRoute } from 'components/pages/AddTaskModalPage'
+import { addTaskModalPageRoute } from 'pages/AddTaskModalPage'
 import React from 'react'
 
 interface IProps {

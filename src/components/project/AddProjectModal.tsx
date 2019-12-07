@@ -1,6 +1,7 @@
-import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { Button, Classes, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { ThemedDialog } from 'components/layout/ThemedDialog'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import React from 'react'
 
 interface IProps {
@@ -9,7 +10,7 @@ interface IProps {
 
 export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
   const [projectTitle, setProjectTitle] = React.useState('')
-  const { projectRepo } = React.useContext(RepositoryContext)
+  const { projectService } = React.useContext(ServiceContext)
   const { dispatch } = React.useContext(ProjectsContext)
 
   const onTitleChanged = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) =>
@@ -20,7 +21,7 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
       title: projectTitle
     }
 
-    projectRepo.add(project)
+    projectService.add(project)
       .then(id => {
         dispatch({ type: 'ADD_PROJECT', project: { ...project, id } })
         closeModal()
@@ -32,7 +33,7 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
       createProject()
   }
 
-  return <Dialog
+  return <ThemedDialog
     title='Adding a project'
     isOpen={true}
     onClose={closeModal}
@@ -56,5 +57,5 @@ export const AddProjectModal: React.FC<IProps> = ({ closeModal }) => {
         </Button>
       </div>
     </section>
-  </Dialog>
+  </ThemedDialog>
 }

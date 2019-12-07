@@ -1,4 +1,5 @@
-.ul {
-  list-style: none;
-  padding: 0;
+@import "~@blueprintjs/core/lib/scss/variables";
+
+.link {
+  color: $pt-text-color;
 }

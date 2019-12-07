@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Card, EditableText, Elevation } from '@blueprintjs/core'
 import { Link } from '@reach/router'
-import { editTimestampModalPageRoute } from 'components/pages/EditTimestampModalPage'
+import { editTimestampModalPageRoute } from 'pages/EditTimestampModalPage'
 import * as React from 'react'
 import styles from './TimestampPresenter.module.scss'
 

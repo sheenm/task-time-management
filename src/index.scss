@@ -1,0 +1,16 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+$pt-dark-link-color: $white;
+
+@import '../node_modules/@blueprintjs/core/src/blueprint.scss';
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
+@import '../node_modules/normalize.css/normalize.css';
+
+#root {
+  min-height: 100vh;
+}
+
+#root.#{$ns}-dark  {
+  background-color: $pt-dark-app-background-color;
+}
+
+

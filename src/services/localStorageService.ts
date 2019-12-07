@@ -1,4 +1,4 @@
-export class LocalStorageRepository {
+export class LocalStorageService {
   private readonly storage = new Map<string, string>()
 
   public getNumber(key: string): Promise<number | undefined> {

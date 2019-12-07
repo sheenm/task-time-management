@@ -1,6 +1,7 @@
+import { Classes } from '@blueprintjs/core'
 import { IProject, ITask } from 'app/businessObjects'
 import { ProjectPresenter } from 'components/project/ProjectPresenter'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import { Task } from 'components/task/Task'
 import { TasksContext } from 'components/task/TasksContextProvider'
 import { TimestampsContext } from 'components/timestamp/TimestampsContextProvider'
@@ -15,29 +16,28 @@ interface IProps {
 export const Project: React.FC<IProps> = ({ project, rename }) => {
   const { stateTasks, dispatch } = React.useContext(TasksContext)
   const timestampsContext = React.useContext(TimestampsContext)
-  const { tasksRepo, timestampsRepo } = React.useContext(RepositoryContext)
+  const { tasksService, timestampsService } = React.useContext(ServiceContext)
 
   const loadingTasksState = useLoading({
-    load: () => tasksRepo.get(project.id),
+    load: () => tasksService.get(project.id),
     then: tasks => dispatch({ type: 'LOAD_TASKS', tasks }),
     dependencies: [project]
   })
 
   const loadingTimestampsState = useLoading({
-    load: () => timestampsRepo.getAll(),
+    load: () => timestampsService.getAll(),
     then: timestamps => timestampsContext.dispatch({ type: 'LOAD_TIMESTAMPS', timestamps })
   })
 
   const createRenameFn = React.useCallback((task: ITask) => {
     return (newTitle: string) => {
       const changedTask: ITask = { ...task, title: newTitle }
-      tasksRepo.save(changedTask)
+      tasksService.save(changedTask)
         .then(() => dispatch({ type: 'RENAME_TASK', id: task.id, newTitle }))
     }
-  }, [tasksRepo, dispatch])
+  }, [dispatch, tasksService])
 
-  if (loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading')
-    return <h1>todo loading 10. Data loading trobber</h1>
+  const loadingClass = loadingTasksState === 'Loading' || loadingTimestampsState === 'Loading' ? Classes.SKELETON : ''
 
   return <>
     <ProjectPresenter
@@ -45,8 +45,6 @@ export const Project: React.FC<IProps> = ({ project, rename }) => {
       onTitleChanged={rename}
       projectId={project.id}
     />
-    {[...stateTasks.values()].map(x =>
-      <Task key={x.id} task={x} rename={createRenameFn(x)} />
-    )}
+    {[...stateTasks.values()].map(x => <Task className={loadingClass} key={x.id} task={x} rename={createRenameFn(x)} />)}
   </>
 }

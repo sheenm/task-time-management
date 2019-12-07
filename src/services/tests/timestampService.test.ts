@@ -1,50 +1,50 @@
-import { ITimestamp } from "app/dto"
-import { TimestampRepository } from "repositories/timestampRepository"
+import { ITimestamp } from 'app/businessObjects'
+import { TimestampService } from 'services/timestampService'
 
 beforeEach(() => {
   window.localStorage.clear()
 })
 
-describe('timestamp repository get() tests', () => {
+describe('timestamp service get() tests', () => {
 
-  it('when repository is empty returns empty, not null', async () => {
-    const repository = new TimestampRepository()
-    const timestamps = await repository.get(1)
+  it('when service is empty returns empty, not null', async () => {
+    const service = new TimestampService()
+    const timestamps = await service.get(1)
 
     expect([...timestamps.values()]).toEqual([])
   })
 })
 
-describe('timestamp repository add tests', () => {
+describe('timestamp service add tests', () => {
 
   it('can add item', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampRepository()
+    const service = new TimestampService()
     const taskId = 1
 
-    await repository.add({
+    await service.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: undefined,
       datetimeStart: new Date()
     })
 
-    const timestamps = await repository.get(taskId)
+    const timestamps = await service.get(taskId)
     expect(timestamps.size).toBe(1)
   })
 })
 
-describe('timestamp repository save() tests', () => {
+describe('timestamp service save() tests', () => {
 
   it('can add item and change it', async () => {
     const assertionsCount = 2
     expect.assertions(assertionsCount)
     const taskId = 2
 
-    const repository = new TimestampRepository()
+    const service = new TimestampService()
 
-    const id = await repository.add({
+    const id = await service.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: undefined,
@@ -52,24 +52,24 @@ describe('timestamp repository save() tests', () => {
     })
 
     // we're sure that it's not undefined so I put here as ITimestamp
-    const timestamp = (await repository.get(taskId)).get(id) as ITimestamp
+    const timestamp = (await service.get(taskId)).get(id) as ITimestamp
 
     timestamp.comment = 'new comment'
-    await repository.save(timestamp)
+    await service.save(timestamp)
 
-    const timestampFromRepository = (await repository.get(taskId)).get(id) as ITimestamp
+    const timestampFromservice = (await service.get(taskId)).get(id) as ITimestamp
 
-    expect(timestamp.comment).toBe(timestampFromRepository.comment)
-    expect(timestamp).not.toBe(timestampFromRepository)
+    expect(timestamp.comment).toBe(timestampFromservice.comment)
+    expect(timestamp).not.toBe(timestampFromservice)
   })
 
   it('if item not found will not save it', async () => {
     expect.assertions(1)
     const taskId = 5
 
-    const repository = new TimestampRepository()
+    const service = new TimestampService()
 
-    await repository.save({
+    await service.save({
       id: 1,
       comment: 'some comment',
       taskId,
@@ -77,30 +77,30 @@ describe('timestamp repository save() tests', () => {
       datetimeStart: new Date()
     })
 
-    const timestamps = await repository.get(taskId)
+    const timestamps = await service.get(taskId)
 
     expect(timestamps.size).toEqual(0)
   })
 })
 
-describe('timestamp repository delete() tests', () => {
+describe('timestamp service delete() tests', () => {
 
   it('will delete timestamp', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampRepository()
+    const service = new TimestampService()
     const taskId = 3
 
-    const id = await repository.add({
+    const id = await service.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: undefined,
       datetimeStart: new Date()
     })
 
-    await repository.delete(id)
+    await service.delete(id)
 
-    const timestamps = await repository.get(taskId)
+    const timestamps = await service.get(taskId)
 
     expect(timestamps.size).toEqual(0)
   })
@@ -108,20 +108,20 @@ describe('timestamp repository delete() tests', () => {
   it('will not delete if did not find timestamp', async () => {
     expect.assertions(1)
 
-    const repository = new TimestampRepository()
+    const service = new TimestampService()
     const taskId = 4
     const someRandomTimestampId = 10
 
-    await repository.add({
+    await service.add({
       comment: 'some comment',
       taskId,
       datetimeEnd: undefined,
       datetimeStart: new Date()
     })
 
-    await repository.delete(someRandomTimestampId)
+    await service.delete(someRandomTimestampId)
 
-    const timestampsLength = (await repository.get(taskId)).size
+    const timestampsLength = (await service.get(taskId)).size
 
     expect(timestampsLength).toEqual(1)
 

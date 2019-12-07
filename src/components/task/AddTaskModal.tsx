@@ -1,7 +1,8 @@
-import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { Button, Classes, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 import { ITask, WithoutId } from 'app/businessObjects'
+import { ThemedDialog } from 'components/layout/ThemedDialog'
 import { ProjectsContext } from 'components/project/ProjectsContextProvider'
-import { RepositoryContext } from 'components/repositories/RepositoryContext'
+import { ServiceContext } from 'components/services/ServiceContext'
 import { TasksContext } from 'components/task/TasksContextProvider'
 import React from 'react'
 
@@ -13,7 +14,7 @@ interface IProps {
 export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
 
   const [taskTitle, setTaskTitle] = React.useState('')
-  const { tasksRepo } = React.useContext(RepositoryContext)
+  const { tasksService } = React.useContext(ServiceContext)
   const { dispatch } = React.useContext(TasksContext)
   const { stateProjects } = React.useContext(ProjectsContext)
 
@@ -26,7 +27,7 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
       title: taskTitle
     }
 
-    tasksRepo.add(task)
+    tasksService.add(task)
       .then((id) => {
         dispatch({ type: 'ADD_TASK', task: { ...task, id } })
         closeModal()
@@ -43,7 +44,7 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
   if (project === undefined)
     return <div />
 
-  return <Dialog
+  return <ThemedDialog
     title='Adding a task'
     isOpen={true}
     onClose={closeModal}
@@ -67,5 +68,5 @@ export const AddTaskModal: React.FC<IProps> = ({ closeModal, projectId }) => {
         </Button>
       </div>
     </section>
-  </Dialog>
+  </ThemedDialog>
 }

@@ -1,62 +1,62 @@
-import { ITask } from "app/dto"
-import { TaskRepository } from "repositories/taskRepository"
+import { ITask } from 'app/businessObjects'
+import { TaskService } from 'services/taskService'
 
 beforeEach(() => {
   window.localStorage.clear()
 })
 
-describe('task repository get() tests', () => {
+describe('task service get() tests', () => {
 
-  it('when repository is empty returns empty, not null', async () => {
-    const repository = new TaskRepository()
+  it('when service is empty returns empty, not null', async () => {
+    const service = new TaskService()
     const projectId = 1
-    const tasks = await repository.get(projectId)
+    const tasks = await service.get(projectId)
 
     expect([...tasks.values()]).toEqual([])
   })
 })
 
-describe('task repository add() tests', () => {
+describe('task service add() tests', () => {
 
   it('can add item', async () => {
     expect.assertions(1)
-    const repository = new TaskRepository()
+    const service = new TaskService()
     const projectId = 2
 
-    await repository.add({
+    await service.add({
       projectId,
       title: 'some title'
     })
 
-    const tasks = await repository.get(projectId)
+    const tasks = await service.get(projectId)
 
     expect(tasks.size).toEqual(1)
   })
 })
 
-describe('task repository save() tests', () => {
+describe('task service save() tests', () => {
 
   it('can save existing item', async () => {
     const assertionsCount = 3
 
     expect.assertions(assertionsCount)
-    const repository = new TaskRepository()
+    const service = new TaskService()
     const projectId = 3
 
-    const id = await repository.add({
+    const id = await service.add({
       projectId,
       title: 'some title'
     })
 
-    const tasks = await repository.get(projectId)
+    const tasks = await service.get(projectId)
     // we're sure that it's not undefined or it will fail the test
     const task = tasks.get(id) as ITask
     const newTitle = 'newTitle'
     task.title = newTitle
 
-    await repository.save(task)
+    await service.save(task)
 
-    const changedTasks = await repository.get(projectId)
+    const changedTasks = await service.get(projectId)
     expect(changedTasks.size).toBe(1)
 
     const changedTask = changedTasks.get(id) as ITask
@@ -66,50 +66,50 @@ describe('task repository save() tests', () => {
 
   it('when item is not found it will not be saved', async () => {
     expect.assertions(1)
-    const repository = new TaskRepository()
+    const service = new TaskService()
     const projectId = 4
 
-    await repository.save({
+    await service.save({
       id: 1,
       projectId,
       title: 'some title'
     })
 
-    const tasks = await repository.get(projectId)
+    const tasks = await service.get(projectId)
     expect(tasks.size).toBe(0)
   })
 })
 
-describe('tasks repository delete() tests', () => {
+describe('tasks service delete() tests', () => {
 
   it('when item is not found it will not delete', async () => {
     expect.assertions(1)
-    const repository = new TaskRepository()
+    const service = new TaskService()
     const projectId = 5
 
-    const addResult = await repository.add({
+    const addResult = await service.add({
       projectId,
       title: 'some title'
     })
 
-    await repository.delete(addResult + 1)
-    const tasks = await repository.get(projectId)
+    await service.delete(addResult + 1)
+    const tasks = await service.get(projectId)
 
     expect(tasks.size).toEqual(1)
   })
 
   it('will delete task', async () => {
     expect.assertions(1)
-    const repository = new TaskRepository()
+    const service = new TaskService()
     const projectId = 6
 
-    const addResult = await repository.add({
+    const addResult = await service.add({
       projectId,
       title: 'some title'
     })
 
-    await repository.delete(addResult)
-    const tasks = await repository.get(projectId)
+    await service.delete(addResult)
+    const tasks = await service.get(projectId)
 
     expect(tasks.size).toBe(0)
   })

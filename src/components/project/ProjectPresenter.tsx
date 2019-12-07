@@ -15,8 +15,8 @@ export const ProjectPresenter: React.FC<IProps> = (props) => {
     <H2>
       <EditableText
         confirmOnEnterKey
-        onConfirm={props.onTitleChanged}
-        defaultValue={props.title}
+        value={props.title}
+        onChange={props.onTitleChanged}
         multiline
         className={styles.text}
       />

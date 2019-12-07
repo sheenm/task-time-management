@@ -6,7 +6,7 @@ Does 1 thing and does it well. Helps you to track your time you spent on project
 
 While building this project I aim to maintain as much of accessebility as I can. The project can be navigated with keyboard only. Also, all dialogs has its own routes so you can safely reload your page or open it in a new tab and you will not lose your dialogs 😎
 
-Now this project doesn't have any server so it simply saves data to browser's local storage (temporary, and the code may not be optimized in repositories)
+Now this project doesn't have any server so it simply saves data to browser's local storage (temporary, and the code may not be optimized in services)
 
 ## Getting started
 
@@ -34,14 +34,12 @@ Congragulations! Now you can
 ## Project navigator
 
 - `components` - React components
-- `extensions` - extension methods for built-in types
+- `pages` - React components used in page navigation.
 - `hooks` - reusable React hooks
-- `repositories` - repositories with data for the app
+- `services` - services which helps to access data
 - `stories` - stories for storybook
 - `typings` - d.ts modules for typing app
 - `utils` - utility functions
-
-The `components` folder divided by business logic. The Exception is pages folder. It contains components used in page navigation. This way I can quickly see what pages exist in the project and also I can quickly switch to other router-library if needed
 
 ## Documentation
 

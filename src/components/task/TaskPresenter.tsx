@@ -13,12 +13,13 @@ interface IProps {
   isStarted: boolean
   toggleTaskStart: () => void
   children?: Array<React.ReactElement<ITimestampPresenterProps>> | React.ReactElement<ITimestampPresenterProps>
+  className: string
 }
 
 export const TaskPresenter: React.FC<IProps> = (props) => {
 
   return (
-    <Card elevation={Elevation.ZERO} className={styles.card}>
+    <Card elevation={Elevation.ZERO} className={`${styles.card} ${props.className}`}>
       <EditableText confirmOnEnterKey onConfirm={props.changeTitle} defaultValue={props.title} className={styles.text} />
       <ButtonGroup className={styles.actions} minimal>
         <ToggleOpenPresenter isOpen={props.isOpen} onFoldChanged={props.toggleOpen} contentTitle='timestamps' />
