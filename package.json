@@ -17,7 +17,7 @@
     "@storybook/addon-actions": "^5.3.4",
     "@storybook/addon-info": "^5.3.4",
     "@storybook/addon-links": "^5.3.4",
-    "@storybook/react": "^5.0.5",
+    "@storybook/react": "^5.3.4",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^9.0.1",
     "@testing-library/react-hooks": "^3.2.1",
