@@ -31,7 +31,7 @@
     "@typescript-eslint/parser": "^2.9.0",
     "babel-loader": "^8.0.5",
     "node-sass": "^4.13.0",
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^16.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
