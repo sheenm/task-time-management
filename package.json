@@ -28,7 +28,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/storybook__addon-info": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
-    "@typescript-eslint/parser": "^2.9.0",
+    "@typescript-eslint/parser": "^2.22.0",
     "babel-loader": "^8.0.5",
     "node-sass": "^4.13.0",
     "react-test-renderer": "^16.8.6"
