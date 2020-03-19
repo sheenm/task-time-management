@@ -7,7 +7,7 @@
     "@blueprintjs/datetime": "^3.9.0",
     "@reach/router": "^1.2.1",
     "date-fns": "^2.8.1",
-    "react": "^16.8.5",
+    "react": "^16.13.1",
     "react-dom": "^16.8.5",
     "react-scripts": "^3.0.0",
     "typescript": "^3.4.1"
