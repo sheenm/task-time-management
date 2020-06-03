@@ -21,7 +21,7 @@ export const Task: React.FC<IProps> = ({ task, rename, className }) => {
   const taskTimestamps = [...stateTimestamps.values()].filter(x => x.taskId === task.id)
 
   React.useEffect(() => {
-    const activeTimestamp = taskTimestamps.find(x => x.datetimeEnd === undefined)
+    const activeTimestamp = taskTimestamps.find(x => x.datetimeEnd === null)
     setStartedTimestamp(activeTimestamp)
   }, [taskTimestamps])
 
@@ -51,7 +51,7 @@ export const Task: React.FC<IProps> = ({ task, rename, className }) => {
 
     const withoutId: WithoutId<ITimestamp> = {
       comment: '',
-      datetimeEnd: undefined,
+      datetimeEnd: null,
       datetimeStart: new Date(),
       taskId: task.id
     }

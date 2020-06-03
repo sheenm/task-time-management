@@ -4,7 +4,7 @@ declare module 'app/dto' {
     id: number
     taskId: number
     datetimeStart: string
-    datetimeEnd?: string
+    datetimeEnd: string | null
     comment: string
   }
 

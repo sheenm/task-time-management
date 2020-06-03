@@ -1,5 +1,5 @@
 import { Button, Classes, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
-import { DateRangeInput } from '@blueprintjs/datetime'
+import { DateRangeInput, DateRange } from '@blueprintjs/datetime'
 import { ITimestamp } from 'app/businessObjects'
 import { ThemedDialog } from 'components/layout/ThemedDialog'
 import { ServiceContext } from 'components/services/ServiceContext'
@@ -21,7 +21,7 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
     datetimeStart: new Date(),
     id: timestampId,
     taskId: defaultTaskId,
-    datetimeEnd: undefined
+    datetimeEnd: null
   }
 
   React.useEffect(() => {
@@ -41,8 +41,8 @@ export const EditTimestampModal: React.FC<IProps> = ({ timestampId, closeModal }
     end: timestamp.datetimeEnd
   })
 
-  const changeDates = React.useCallback(([start, end]: [Date | undefined, Date | undefined]) => {
-    if (start === undefined)
+  const changeDates = React.useCallback(([start, end]: DateRange) => {
+    if (start == null)
       return
 
     setDateState({

@@ -19,6 +19,6 @@ export const Timestamp: React.FC<IProps> = ({ remove, timestamp, changeComment }
   />
 }
 
-function getTimestampDatetime(start: Date, end?: Date) {
+function getTimestampDatetime(start: Date, end?: Date | null) {
   return formatDistanceStrict(end || new Date())(start)
 }

@@ -97,8 +97,8 @@ export class TimestampService implements ITimestampService {
   }
 
   private convertFromDto(dto: ITimestampDto): ITimestamp {
-    const datetimeEnd = dto.datetimeEnd === undefined
-      ? undefined
+    const datetimeEnd = dto.datetimeEnd == null
+      ? null
       : new Date(dto.datetimeEnd)
 
     return {

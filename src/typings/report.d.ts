@@ -14,7 +14,7 @@ declare module 'app/report' {
   interface IReportTimestamp {
     id: number
     datetimeStart: Date
-    datetimeEnd?: Date
+    datetimeEnd: Date | null
     comment: string
     taskTitle: string
   }

@@ -37,7 +37,7 @@ export const Report: React.FC<IProps> = ({ period }) => {
   </>
 }
 
-function getDateTimeDiff(start: Date, end?: Date) {
+function getDateTimeDiff(start: Date, end?: Date | null) {
   const fullMinutes = differenceInMinutes(start)(end || new Date())
   const hours = Math.floor(fullMinutes / 60) // eslint-disable-line @typescript-eslint/no-magic-numbers
   const minutes = fullMinutes % 60 // eslint-disable-line @typescript-eslint/no-magic-numbers

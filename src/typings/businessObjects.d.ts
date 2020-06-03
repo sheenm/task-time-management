@@ -9,7 +9,7 @@ declare module 'app/businessObjects' {
     id: number
     taskId: number
     datetimeStart: Date
-    datetimeEnd?: Date
+    datetimeEnd: Date | null
     comment: string
   }
 
